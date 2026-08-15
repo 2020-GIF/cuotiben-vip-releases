@@ -1,6 +1,6 @@
 {
-  "versionCode": 12,
-  "versionName": "1.5.2",
-  "apkUrl": "https://cdn.jsdelivr.net/gh/2020-GIF/cuotiben-vip-releases@v1.5.2/cuotiben-vip-v1.5.2.apk",
-  "note": "检查更新自动切换国内镜像线路，下载失败自动换源重试"
+  "versionCode": 13,
+  "versionName": "1.5.3",
+  "apkUrl": "https://cdn.jsdelivr.net/gh/2020-GIF/cuotiben-vip-releases@v1.5.3/cuotiben-vip-v1.5.3.apk",
+  "note": "考点标签规范化：AI 只从公考考点库取名；激活码仅限使用一次"
 }

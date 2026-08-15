@@ -297,7 +297,7 @@ body.dark #cb-topbar{background:linear-gradient(120deg,#1d2748,#2c3a6e 60%,#3748
   <div class="cb-card"><div class="cb-sec-hd"><h2>🧭 题型 × 错因</h2></div><div id="cb-stats-cause"></div></div>
   <div class="cb-card"><div class="cb-sec-hd"><h2>📈 复习趋势 (30天)</h2></div><div class="cb-chart-wrap"><canvas id="cb-chart-trend"></canvas></div></div>
   <div class="cb-card"><div class="cb-sec-hd"><h2>🎯 掌握等级分布</h2></div><div id="cb-mastery-dist"></div></div>
-  <div class="cb-card"><div class="cb-sec-hd"><h2>🏷 高频知识点标签</h2></div><div id="cb-stats-kw"></div></div>
+  <div class="cb-card"><div class="cb-sec-hd"><h2>🏷 考点标签</h2></div><div id="cb-stats-kw"></div></div>
   <div class="cb-card"><div class="cb-sec-hd"><h2>📋 最近复习</h2></div><div id="cb-review-log" style="font-size:0.78rem;max-height:180px;overflow-y:auto"></div></div>
 </section>
 <section id="cb-view-settings" class="cb-view">
@@ -310,7 +310,7 @@ body.dark #cb-topbar{background:linear-gradient(120deg,#1d2748,#2c3a6e 60%,#3748
     <div class="cb-setting"><h3>🔔 提醒</h3><label>每日提醒时间</label><input type="time" id="cb-set-remind" value="08:00"></div>
     <div class="cb-setting"><h3>💬 反馈与帮助</h3><div style="display:flex;gap:6px;margin-top:6px"><button class="cb-btn pri" id="cb-btn-feedback-open" style="font-size:0.8rem;padding:6px 12px">✍️ 写反馈</button></div><p style="font-size:0.7rem;color:var(--text2);margin-top:4px">意见会直接发送给开发者邮箱</p></div>
     <div class="cb-setting"><h3>🔄 更新</h3><div style="display:flex;gap:6px;margin-top:6px"><button class="cb-btn pri" id="cb-btn-update" style="font-size:0.8rem;padding:6px 12px">🔍 检查更新</button></div><p style="font-size:0.7rem;color:var(--text2);margin-top:4px">点击检查最新版本，发现新版本后自动下载并引导安装</p></div>
-    <button class="cb-btn gold wide" id="cb-btn-save-set">💾 保存设置</button><p style="font-size:0.7rem;color:var(--text2);margin-top:8px">当前版本：1.5.2（考岸错题本）</p></div>
+    <button class="cb-btn gold wide" id="cb-btn-save-set">💾 保存设置</button><p style="font-size:0.7rem;color:var(--text2);margin-top:8px">当前版本：1.5.3（考岸错题本）</p></div>
 </section>
 </main>
 <nav id="cb-nav">
@@ -410,9 +410,28 @@ var QTYPES={
   "申论":["归纳概括","综合分析","提出对策","贯彻执行","文章写作"],
   "面试":["综合分析","计划组织","应急应变","人际关系","自我认知","其他面试"]
 };
+var KPOINTS={
+  "常识判断":["时政","法律常识","经济常识","人文历史","科技常识","地理国情","管理公文","党史党建","职业道德"],
+  "言语理解与表达":["逻辑填空","语境分析","实词辨析","成语辨析","关联词语","主旨概括","意图判断","细节理解","标题填入","语句排序","语句衔接","下文推断"],
+  "数量关系":["工程问题","行程问题","利润问题","排列组合","概率问题","容斥原理","最值问题","年龄问题","几何问题","数字推理","方程问题","不定方程","浓度问题","统筹问题"],
+  "判断推理":["位置规律","样式规律","属性规律","数量规律","空间重构","平面拼合","定义判断","全同关系","包含关系","交叉关系","并列关系","语义关系","语法关系","对应关系","翻译推理","假言命题","真假推理","加强削弱","日常结论","解释评价"],
+  "资料分析":["现期与基期","增长率","增长量","比重","平均数","倍数与翻番","年均增长","隔年增长","混合增长率","两期比重","平均数增长率","拉动增长","贡献率","综合分析"],
+  "申论":["归纳概括","综合分析","提出对策","贯彻执行","文章写作","审题立意","要点加工"],
+  "面试":["综合分析","计划组织","应急应变","人际关系","自我认知","言语表达"]
+};
+function kwLibText(){
+  var h="";for(var m in KPOINTS)h+=m+"："+KPOINTS[m].join("、")+"\n";return h;
+}
+function normKeywords(mod,arr){
+  if(!Array.isArray(arr))return [];
+  var pool=KPOINTS[mod]||[],out=[];
+  for(var i=0;i<arr.length;i++){var k=String(arr[i]||"").trim();if(k&&pool.indexOf(k)>=0&&out.indexOf(k)<0)out.push(k);if(out.length>=3)break}
+  if(!out.length){for(var j=0;j<arr.length&&out.length<3;j++){var k2=String(arr[j]||"").trim();if(k2&&out.indexOf(k2)<0)out.push(k2)}}
+  return out;
+}
 var examQs=[], examAns={}, examTimer=null, examSec=0;
 var kwFilter="";
-var APP_VERSION_CODE=12; var APP_VERSION_NAME="1.5.2";
+var APP_VERSION_CODE=13; var APP_VERSION_NAME="1.5.3";
 
 // ===== VIEW SWITCH =====
 function sv(v){
@@ -935,7 +954,7 @@ async function genTextAnalysis(){
   var lp=document.querySelector("#cb-text-loading p");
   await genAnalysisFor(tc.api,tc.key,tc.model,lp,function(){if(lp)lp.textContent="AI 正在识别题目…";renderTextAI()});
 }
-var TEXT_PROMPT='你是公务员考试(省考/国考)错题识别与题型归类专家。下面用户粘贴了文字题目，可能包含多道题。请逐题识别并严格按JSON数组返回，不要任何解释。\n\n硬性要求：\n1. 题干和全部选项必须逐字转录，禁止概括、改写或编造，看不清的字用“□”。\n2. answer：只有原文明确标注正确答案（如“答案：B”）才填字母，否则一律填null，禁止猜测。\n3. difficulty：只填整数1、2、3。\n4. 没有依据的analysis填null。\n\n每项字段：\nmodule：只能是常识判断/言语理解与表达/数量关系/判断推理/资料分析/申论/面试之一\nquestionType：只能从标准库选择：常识判断(政治常识/法律常识/经济常识/人文历史/科技生活/地理国情/管理公文)、言语理解与表达(逻辑填空/片段阅读/语句表达/文章阅读)、数量关系(数学运算/数字推理)、判断推理(图形推理/定义判断/类比推理/逻辑判断/事件排序)、资料分析(增长相关/比重相关/平均数与倍数/综合分析)、申论(归纳概括/综合分析/提出对策/贯彻执行/文章写作)、面试(综合分析/计划组织/应急应变/人际关系/自我认知)\nanswerFormat：单选/多选/判断/不定项/案例分析/公文写作/大作文/其他\nquestion：完整题干和全部选项\nanswer：原文明确标注的答案，否则null\nanalysis：简要解析，无依据null\ndifficulty：整数1或2或3\nsource：真题/模拟题/专项练习/未知\nerrorCause：知识点不熟/粗心大意/理解偏差/时间不够/审题错误/其他\nkeywords：知识点标签数组，最多3个\n\n【判定规则】\n1. 图形、九宫格、折纸盒、找规律→判断推理-图形推理；先给定义再选符合项→定义判断；词语对→类比推理；论点论据→逻辑判断。\n2. 填空→言语理解与表达-逻辑填空；问主旨/意图/细节/推断→片段阅读；语句排序/填空→语句表达。\n3. 数字运算/方程/行程/工程/排列组合/概率→数量关系-数学运算；数字序列找规律→数字推理。\n4. 统计表/图/百分比/倍数/平均数→资料分析，按考点归入增长相关/比重相关/平均数与倍数/综合分析。\n5. 申论按设问归类；面试按测评要素归类。';
+var TEXT_PROMPT='你是公务员考试(省考/国考)错题识别与题型归类专家。下面用户粘贴了文字题目，可能包含多道题。请逐题识别并严格按JSON数组返回，不要任何解释。\n\n硬性要求：\n1. 题干和全部选项必须逐字转录，禁止概括、改写或编造，看不清的字用“□”。\n2. answer：只有原文明确标注正确答案（如“答案：B”）才填字母，否则一律填null，禁止猜测。\n3. difficulty：只填整数1、2、3。\n4. 没有依据的analysis填null。\n\n每项字段：\nmodule：只能是常识判断/言语理解与表达/数量关系/判断推理/资料分析/申论/面试之一\nquestionType：只能从标准库选择：常识判断(政治常识/法律常识/经济常识/人文历史/科技生活/地理国情/管理公文)、言语理解与表达(逻辑填空/片段阅读/语句表达/文章阅读)、数量关系(数学运算/数字推理)、判断推理(图形推理/定义判断/类比推理/逻辑判断/事件排序)、资料分析(增长相关/比重相关/平均数与倍数/综合分析)、申论(归纳概括/综合分析/提出对策/贯彻执行/文章写作)、面试(综合分析/计划组织/应急应变/人际关系/自我认知)\nanswerFormat：单选/多选/判断/不定项/案例分析/公文写作/大作文/其他\nquestion：完整题干和全部选项\nanswer：原文明确标注的答案，否则null\nanalysis：简要解析，无依据null\ndifficulty：整数1或2或3\nsource：真题/模拟题/专项练习/未知\nerrorCause：知识点不熟/粗心大意/理解偏差/时间不够/审题错误/其他\nkeywords：只能从下方【考点库】该模块的考点中选择，最多3个，禁止自造名称、禁止带“高频/重点”等修饰词\n\n【判定规则】\n1. 图形、九宫格、折纸盒、找规律→判断推理-图形推理；先给定义再选符合项→定义判断；词语对→类比推理；论点论据→逻辑判断。\n2. 填空→言语理解与表达-逻辑填空；问主旨/意图/细节/推断→片段阅读；语句排序/填空→语句表达。\n3. 数字运算/方程/行程/工程/排列组合/概率→数量关系-数学运算；数字序列找规律→数字推理。\n4. 统计表/图/百分比/倍数/平均数→资料分析，按考点归入增长相关/比重相关/平均数与倍数/综合分析。\n5. 申论按设问归类；面试按测评要素归类。';
 async function textRecognition(){
   var txt=document.getElementById("cb-text-inp").value.trim();
   if(!txt){toast("请先粘贴题目文字");return}
@@ -945,12 +964,13 @@ async function textRecognition(){
   document.getElementById("cb-text-loading").style.display="";
   document.getElementById("cb-text-results").style.display="none";
   try{
-    var data=await callTextAI(api,ak,model,TEXT_PROMPT+'\n\n【用户粘贴的题目】\n'+txt+'\n\n只返回JSON数组。');
+    var textPrompt=TEXT_PROMPT+'\n\n【考点库】\n'+kwLibText();
+    var data=await callTextAI(api,ak,model,textPrompt+'\n\n【用户粘贴的题目】\n'+txt+'\n\n只返回JSON数组。');
     var ct=data.choices&&data.choices[0]?data.choices[0].message.content:"[]";
     ct=ct.replace(/```json/g,"").replace(/```/g,"").trim();
     var parsed=JSON.parse(ct);
     if(!Array.isArray(parsed)) throw new Error((parsed&&parsed.error)||"返回格式不正确，请重试");
-    aiR=parsed.map(function(x){var m=normMod(x.module);return {module:m,questionType:normQtype(m,x.questionType),answerFormat:AF_TYPES.indexOf(x.answerFormat)>=0?x.answerFormat:AF_TYPES[0],question:x.question||"",answer:x.answer||"",analysis:x.analysis||"",visualDescription:null,difficulty:[1,2,3].indexOf(x.difficulty)>=0?x.difficulty:2,source:x.source||"未知",errorCause:normCause(x.errorCause),keywords:Array.isArray(x.keywords)?x.keywords.slice(0,3):[]};});
+    aiR=parsed.map(function(x){var m=normMod(x.module);return {module:m,questionType:normQtype(m,x.questionType),answerFormat:AF_TYPES.indexOf(x.answerFormat)>=0?x.answerFormat:AF_TYPES[0],question:x.question||"",answer:x.answer||"",analysis:x.analysis||"",visualDescription:null,difficulty:[1,2,3].indexOf(x.difficulty)>=0?x.difficulty:2,source:x.source||"未知",errorCause:normCause(x.errorCause),keywords:normKeywords(m,x.keywords)};});
     aiPhoto="";
     renderTextAI();
     document.getElementById("cb-text-loading").style.display="";
@@ -1024,7 +1044,8 @@ async function analyzePhoto(){
     var lp0=document.querySelector("#cb-ai-loading p"); if(lp0) lp0.textContent="正在优化图片…";
     var processed=await preprocessImage(photoUrl); aiPhoto=processed;
     if(lp0) lp0.textContent="AI 正在识别错题…";
-    var prompt='你是公务员考试(省考/国考)错题识别与题型归类专家。请分析这张试卷/练习照片，逐题识别所有错题，严格按JSON数组返回，不要任何解释。\n\n【最高优先：忽略手写与批改】\n照片上可能混有黑色签字笔手写字、红色批改（打叉、画圈、打勾、评分、签名、改错字）。手写内容和批改痕迹都不是题目本身：只逐字转录印刷体题干与选项，绝对禁止把手写字、批改字当成题目或答案转录；被手写覆盖看不清的印刷字用“□”代替，禁止臆测。红笔勾选/圈注仅用于判断 answer 字段，其内容不转录。\n\n【最重硬性要求】\n1. 题目必须逐字转录，禁止概括、改写或编造；看不清的字用“□”代替。\n2. 选项必须完整转录A/B/C/D原文；图形题的题干写“（图形题，原图见附图）”，图形细节写进visualDescription。\n3. 答案answer：只有图片中明确标注了正确答案（如“答案：B”、红色勾选、批改对勾）才填选项字母；否则一律填null，绝对禁止猜测。\n4. 难度difficulty：只能填整数1、2或3。\n5. 没有依据的解析analysis填null。\n\n数组每项字段：\nmodule：只能是常识判断/言语理解与表达/数量关系/判断推理/资料分析/申论/面试之一\nquestionType：具体题型，只能从下列标准库选择：常识判断(政治常识/法律常识/经济常识/人文历史/科技生活/地理国情/管理公文)、言语理解与表达(逻辑填空/片段阅读/语句表达/文章阅读)、数量关系(数学运算/数字推理)、判断推理(图形推理/定义判断/类比推理/逻辑判断/事件排序)、资料分析(增长相关/比重相关/平均数与倍数/综合分析)、申论(归纳概括/综合分析/提出对策/贯彻执行/文章写作)、面试(综合分析/计划组织/应急应变/人际关系/自我认知)\nanswerFormat：单选/多选/判断/不定项/案例分析/公文写作/大作文/其他\nquestion：逐字转录的完整题干和全部选项，图形题写“（图形题，原图见附图）”\nvisualDescription：图形推理/统计图/表格的详细视觉描述（图形的形状、数量、位置、方向、颜色；表格按行列完整转录全部数据），纯文字题填null\nanswer：图片中明确标注的正确答案字母，否则null\nanalysis：简要解析，无依据填null\ndifficulty：整数1或2或3\nsource：真题/模拟题/专项练习/未知\nerrorCause：知识点不熟/粗心大意/理解偏差/时间不够/审题错误/其他\nkeywords：知识点标签数组，最多3个，例如["假言命题","逆否命题"]\n\n【判定规则】\n1. 图形、九宫格、折纸盒、找规律→判断推理-图形推理；先给定义再选符合项→定义判断；一对或多对词语→类比推理；论点论据推出结论→逻辑判断。\n2. 空缺词语填空→言语理解与表达-逻辑填空；问主旨/意图/细节/推断→片段阅读；语句排序或语句填空→语句表达。\n3. 数字运算、方程、行程、工程、排列组合、概率→数量关系-数学运算；数字序列找规律→数字推理。\n4. 统计表/统计图/百分比/倍数/平均数→资料分析，按考点归入增长相关/比重相关/平均数与倍数/综合分析。\n5. 【资料分析数字铁律】表格和图表必须逐行逐列读取数字，完整转录进visualDescription（格式如“年份/指标:数值”），保留小数点、百分号、负号、单位；数字必须与图片完全一致，禁止估算、四舍五入、漏写、编造；看不清的数字写“□”。题干引用的所有数值同样逐字转录。\n6. 申论小题按设问归类，写文章→文章写作。\n7. 面试题按测评要素归类。\n\n如果图片模糊无法识别，返回{"error":"图片无法识别"}。';
+    var prompt='你是公务员考试(省考/国考)错题识别与题型归类专家。请分析这张试卷/练习照片，逐题识别所有错题，严格按JSON数组返回，不要任何解释。\n\n【最高优先：忽略手写与批改】\n照片上可能混有黑色签字笔手写字、红色批改（打叉、画圈、打勾、评分、签名、改错字）。手写内容和批改痕迹都不是题目本身：只逐字转录印刷体题干与选项，绝对禁止把手写字、批改字当成题目或答案转录；被手写覆盖看不清的印刷字用“□”代替，禁止臆测。红笔勾选/圈注仅用于判断 answer 字段，其内容不转录。\n\n【最重硬性要求】\n1. 题目必须逐字转录，禁止概括、改写或编造；看不清的字用“□”代替。\n2. 选项必须完整转录A/B/C/D原文；图形题的题干写“（图形题，原图见附图）”，图形细节写进visualDescription。\n3. 答案answer：只有图片中明确标注了正确答案（如“答案：B”、红色勾选、批改对勾）才填选项字母；否则一律填null，绝对禁止猜测。\n4. 难度difficulty：只能填整数1、2或3。\n5. 没有依据的解析analysis填null。\n\n数组每项字段：\nmodule：只能是常识判断/言语理解与表达/数量关系/判断推理/资料分析/申论/面试之一\nquestionType：具体题型，只能从下列标准库选择：常识判断(政治常识/法律常识/经济常识/人文历史/科技生活/地理国情/管理公文)、言语理解与表达(逻辑填空/片段阅读/语句表达/文章阅读)、数量关系(数学运算/数字推理)、判断推理(图形推理/定义判断/类比推理/逻辑判断/事件排序)、资料分析(增长相关/比重相关/平均数与倍数/综合分析)、申论(归纳概括/综合分析/提出对策/贯彻执行/文章写作)、面试(综合分析/计划组织/应急应变/人际关系/自我认知)\nanswerFormat：单选/多选/判断/不定项/案例分析/公文写作/大作文/其他\nquestion：逐字转录的完整题干和全部选项，图形题写“（图形题，原图见附图）”\nvisualDescription：图形推理/统计图/表格的详细视觉描述（图形的形状、数量、位置、方向、颜色；表格按行列完整转录全部数据），纯文字题填null\nanswer：图片中明确标注的正确答案字母，否则null\nanalysis：简要解析，无依据填null\ndifficulty：整数1或2或3\nsource：真题/模拟题/专项练习/未知\nerrorCause：知识点不熟/粗心大意/理解偏差/时间不够/审题错误/其他\nkeywords：只能从下方【考点库】该模块的考点中选择，最多3个，禁止自造名称、禁止带“高频/重点”等修饰词\n\n【判定规则】\n1. 图形、九宫格、折纸盒、找规律→判断推理-图形推理；先给定义再选符合项→定义判断；一对或多对词语→类比推理；论点论据推出结论→逻辑判断。\n2. 空缺词语填空→言语理解与表达-逻辑填空；问主旨/意图/细节/推断→片段阅读；语句排序或语句填空→语句表达。\n3. 数字运算、方程、行程、工程、排列组合、概率→数量关系-数学运算；数字序列找规律→数字推理。\n4. 统计表/统计图/百分比/倍数/平均数→资料分析，按考点归入增长相关/比重相关/平均数与倍数/综合分析。\n5. 【资料分析数字铁律】表格和图表必须逐行逐列读取数字，完整转录进visualDescription（格式如“年份/指标:数值”），保留小数点、百分号、负号、单位；数字必须与图片完全一致，禁止估算、四舍五入、漏写、编造；看不清的数字写“□”。题干引用的所有数值同样逐字转录。\n6. 申论小题按设问归类，写文章→文章写作。\n7. 面试题按测评要素归类。\n\n如果图片模糊无法识别，返回{"error":"图片无法识别"}。';
+    prompt=prompt+'\n\n【考点库】\n'+kwLibText();
     var maxTok=provider==="glm"?2048:4096;
     var bodyObj={model:model,messages:[{role:"user",content:[{type:"text",text:prompt},{type:"image_url",image_url:{url:processed}}]}],max_tokens:maxTok,temperature:0.1};
     var data;
@@ -1043,7 +1064,7 @@ async function analyzePhoto(){
       return {module:m,questionType:normQtype(m,x.questionType),answerFormat:AF_TYPES.indexOf(x.answerFormat)>=0?x.answerFormat:AF_TYPES[0],
         question:x.question||"",answer:x.answer||"",analysis:x.analysis||"",visualDescription:x.visualDescription||null,
         difficulty:[1,2,3].indexOf(x.difficulty)>=0?x.difficulty:2,source:x.source||"未知",errorCause:normCause(x.errorCause),
-        keywords:Array.isArray(x.keywords)?x.keywords.slice(0,3):[]};
+        keywords:normKeywords(m,x.keywords)};
     });
     renderAI();
     if(aiR.length){
@@ -1300,7 +1321,7 @@ function saveAI(){
       qtype:(QTYPES[m]||["其他"]).indexOf(r.questionType)>=0?r.questionType:(QTYPES[m]||["其他"])[0],
       qfmt:AF_TYPES.indexOf(r.answerFormat)>=0?r.answerFormat:AF_TYPES[0],
       diff:[1,2,3].indexOf(r.difficulty)>=0?r.difficulty:2,
-      src:r.source||"未知",cause:r.errorCause||"",verify:r.answer?"已核对":"待核对",kw:r.keywords||[],img:r.img||aiPhoto||null,notes:(r.analysis||"")+(r.keywords&&r.keywords.length?("\n知识点："+r.keywords.join("、")):""),lv:0,ef:2.5,iv:1,nr:now.toISOString(),rep:0,hist:[],ct:now.toISOString(),lr:null,ut:now.toISOString()
+      src:r.source||"未知",cause:r.errorCause||"",verify:r.answer?"已核对":"待核对",kw:r.keywords||[],img:r.img||aiPhoto||null,notes:(r.analysis||"")+(r.keywords&&r.keywords.length?("\n考点："+r.keywords.join("、")):""),lv:0,ef:2.5,iv:1,nr:now.toISOString(),rep:0,hist:[],ct:now.toISOString(),lr:null,ut:now.toISOString()
     },function(){n++});
   }
   toast("已保存 "+n+" 道错题"); resetPhotoUI(); sv("dashboard"); setTimeout(doBackup,400); sbQueueSync();
@@ -1365,7 +1386,7 @@ function rstat(){
     document.getElementById("cb-stats-cause").innerHTML=chh||'<div class="cb-empty">暂无错因数据</div>';
     var kh=''; var karr=Object.keys(kws).map(function(k){return {k:k,c:kws[k]}}).sort(function(a,b){return b.c-a.c}).slice(0,18);
     for(var j=0;j<karr.length;j++){kh+='<span onclick="filterByKw(\''+karr[j].k.replace(/'/g,"\\'")+'\')" style="display:inline-block;background:rgba(184,134,11,0.12);color:#8a6d1a;border-radius:12px;padding:3px 10px;margin:0 6px 6px 0;font-size:0.76rem;cursor:pointer">'+karr[j].k+' ×'+karr[j].c+'</span>'}
-    document.getElementById("cb-stats-kw").innerHTML=kh||'<div class="cb-empty">暂无知识点标签</div>';
+    document.getElementById("cb-stats-kw").innerHTML=kh||'<div class="cb-empty">暂无考点标签</div>';
   });
 }
 
@@ -1821,6 +1842,9 @@ var VIP_ALPH="23456789ABCDEFGHJKLMNPQRSTUVWXYZ";
 function vipHash(s){var h=0x811c9dc5;for(var i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,0x01000193)}return h>>>0}
 function vipB32(v,len){var out="";for(var i=0;i<len;i++){out=VIP_ALPH.charAt(v%32)+out;v=Math.floor(v/32)}return out}
 function vipInfo(){try{var v=JSON.parse(localStorage.getItem("cb_vip")||"null");return v&&typeof v==="object"?v:null}catch(e){return null}}
+function usedCodes(){try{return JSON.parse(localStorage.getItem("cb_used_codes")||"[]")}catch(e){return[]}}
+function codeWasUsed(code){return usedCodes().indexOf(code)>=0}
+function markCodeUsed(code){var a=usedCodes();if(a.indexOf(code)<0){a.push(code);localStorage.setItem("cb_used_codes",JSON.stringify(a))}}
 function isVip(){var v=vipInfo();if(!v)return false;if(v.expires&&Date.now()>v.expires){localStorage.removeItem("cb_vip");return false}return true}
 function vipDaysLeft(){var v=vipInfo();if(!v)return 0;if(!v.expires)return -1;return Math.max(0,Math.ceil((v.expires-Date.now())/86400000))}
 var NEWBIE_QUOTA=15, DAILY_FREE=3, DAILY_CAP=200;
@@ -1867,10 +1891,12 @@ function vipActivate(){
     if(!(q>0&&q<=100000)){toast("次数额度无效");return}
     var kh=vipHash(q+"-"+km[2]+"-"+VIP_SECRET);
     if(vipB32(kh%1048576,4)!==km[3]){toast("激活码无效，请核对后重试");return}
+    if(codeWasUsed(code)){toast("该激活码已被使用，无法重复激活");return}
     var first=localStorage.getItem("cb_first_purchase")!=="1";
     var bonus=first?10:0;
     localStorage.setItem("cb_perm_quota",String(permQuota()+q+bonus));
     if(first)localStorage.setItem("cb_first_purchase","1");
+    markCodeUsed(code);
     document.getElementById("cb-vip-code").value="";
     vipPaint();
     toast("🎉 识图额度到账 +"+(q+bonus)+" 次"+(bonus?"（含首充赠送 10 次）":""));
@@ -1883,8 +1909,10 @@ function vipActivate(){
   var h=vipHash(days+"-"+m[2]+"-"+VIP_SECRET);
   var chk=vipB32(h%1048576,4);
   if(chk!==m[3]){toast("激活码无效，请核对后重试");return}
+  if(codeWasUsed(code)){toast("该激活码已被使用，无法重复激活");return}
   var exp=days===9999?null:Date.now()+days*86400000;
   localStorage.setItem("cb_vip",JSON.stringify({expires:exp,days:days,code:code,at:Date.now()}));
+  markCodeUsed(code);
   document.getElementById("cb-vip-code").value="";
   vipPaint();
   toast(days===9999?"🎉 永久会员激活成功":"🎉 会员激活成功，有效期 "+days+" 天");
@@ -1922,7 +1950,7 @@ function vipShopOpen(){
     }
     h+='<p style="font-size:0.72rem;color:#dd6b20;margin:6px 0">🎁 首充任意档位额外赠送 10 次永久额度</p>';
     h+='<details style="margin-top:4px"><summary style="font-size:0.72rem;color:var(--text2);cursor:pointer">📖 使用规则</summary><ol style="font-size:0.7rem;color:var(--text2);margin:6px 0 0;padding-left:16px;line-height:1.8"><li>新用户注册赠送 15 次永久识图额度</li><li>每日打卡领取 3 次免费额度，当日 24 点清零、不可累积</li><li>扣费顺序：优先当日免费额度，耗尽后扣除付费永久额度</li><li>仅拍照识图扣费，手动文字录入不计次数；识别失败不扣费</li><li>账号每日识图总上限 200 次；付费额度永久有效</li></ol></details>';
-    h+='<p style="font-size:0.7rem;color:var(--text2);margin:6px 0 0">点击「购买」后按提示添加开发者 QQ 咨询付款，付款后发放激活码，额度累加。</p>';
+    h+='<p style="font-size:0.7rem;color:var(--text2);margin:6px 0 0">点击「购买」后按提示添加开发者 QQ 咨询付款，付款后发放激活码。每个激活码仅限使用一次，请在常用设备上激活。</p>';
     host.innerHTML=h;
   }
   var m=document.getElementById("cb-vip-shop"); if(m)m.style.display="flex";
@@ -2074,7 +2102,7 @@ function bindEvents(){
   el=document.getElementById("cb-btn-close-print"); if(el) el.addEventListener("click",function(){document.getElementById("cb-exam-print").style.display="none";document.getElementById("cb-exam-config").style.display=""});
   // Settings
   el=document.getElementById("cb-btn-save-set"); if(el) el.addEventListener("click",saveSettings);
-  (function(){var sc=document.querySelector("#cb-view-settings .cb-card"); if(sc&&!document.getElementById("cb-vip-status")){var div=document.createElement("div");div.className="cb-setting";div.innerHTML='<h3>👑 额度与激活</h3><div id="cb-vip-status" style="font-size:0.8rem;margin-bottom:6px"></div><div style="display:flex;gap:6px"><input type="text" id="cb-vip-code" placeholder="输入激活码，如 KAB-500-XXXXXXXX-XXXX" style="flex:1;border:1px solid var(--border);border-radius:8px;padding:8px;font-size:0.8rem"><button class="cb-btn gold" id="cb-btn-vip-activate" style="font-size:0.8rem;padding:6px 12px">激活</button></div><p style="font-size:0.72rem;color:var(--text2);margin:6px 0 0">新用户赠 15 次永久识图额度；每日打卡领 3 次当日免费额度。购买次数包：点下方「查看套餐与购买」，点击购买后按提示添加开发者 QQ 咨询付款；首充任意档位额外赠 10 次，激活后额度累加。</p>';var first=sc.querySelector(".cb-setting");if(first)sc.insertBefore(div,first);else sc.appendChild(div)}})();
+  (function(){var sc=document.querySelector("#cb-view-settings .cb-card"); if(sc&&!document.getElementById("cb-vip-status")){var div=document.createElement("div");div.className="cb-setting";div.innerHTML='<h3>👑 额度与激活</h3><div id="cb-vip-status" style="font-size:0.8rem;margin-bottom:6px"></div><div style="display:flex;gap:6px"><input type="text" id="cb-vip-code" placeholder="输入激活码，如 KAB-500-XXXXXXXX-XXXX" style="flex:1;border:1px solid var(--border);border-radius:8px;padding:8px;font-size:0.8rem"><button class="cb-btn gold" id="cb-btn-vip-activate" style="font-size:0.8rem;padding:6px 12px">激活</button></div><p style="font-size:0.72rem;color:var(--text2);margin:6px 0 0">新用户赠 15 次永久识图额度；每日打卡领 3 次当日免费额度。购买次数包：点下方「查看套餐与购买」，点击购买后按提示添加开发者 QQ 咨询付款；首充任意档位额外赠 10 次。每个激活码仅限使用一次，请在常用设备上激活。</p>';var first=sc.querySelector(".cb-setting");if(first)sc.insertBefore(div,first);else sc.appendChild(div)}})();
   (function(){if(!document.getElementById("cb-vip-modal")){var d=document.createElement("div");d.innerHTML='<div id="cb-vip-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.72);z-index:330;align-items:center;justify-content:center;padding:16px;box-sizing:border-box"><div style="background:var(--card);border-radius:12px;padding:18px;width:100%;max-width:400px"><div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px"><h3 style="margin:0">🔒 需要次数额度</h3><button id="cb-vip-close" style="border:none;background:none;cursor:pointer;font-size:1rem;color:var(--text2)">✕</button></div><p id="cb-vip-msg" style="font-size:0.85rem;margin:0 0 10px"></p><ul style="font-size:0.78rem;color:var(--text2);margin:0 0 12px;padding-left:16px"><li>AI 拍照识别 / 文字批量识别 / 解题解析</li><li>Supabase 多设备云同步</li><li>组卷导出含答案解析 PDF</li></ul><div style="display:flex;gap:8px"><button class="cb-btn gold" id="cb-vip-gosettings" style="flex:1">查看购买方案</button><button class="cb-btn ghost" id="cb-vip-later" style="flex:1">先不用</button></div></div></div>';document.body.appendChild(d.firstChild)}})();
   el=document.getElementById("cb-btn-vip-activate"); if(el) el.addEventListener("click",vipActivate);
   el=document.getElementById("cb-vip-close"); if(el) el.addEventListener("click",closeVipModal);
@@ -2084,7 +2112,7 @@ function bindEvents(){
   el=document.getElementById("cb-qq-close"); if(el) el.addEventListener("click",closeQqModal);
   el=document.getElementById("cb-qq-later"); if(el) el.addEventListener("click",closeQqModal);
   el=document.getElementById("cb-qq-copy"); if(el) el.addEventListener("click",copyQq);
-  (function(){if(!document.getElementById("cb-vip-shop")){var d=document.createElement("div");d.innerHTML='<div id="cb-vip-shop" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.72);z-index:335;align-items:center;justify-content:center;padding:16px;box-sizing:border-box"><div style="background:var(--card);border-radius:12px;padding:16px;width:100%;max-width:440px;max-height:86vh;overflow:auto"><div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px"><h3 style="margin:0">🤖 次数包套餐</h3><button id="cb-shop-close" style="border:none;background:none;cursor:pointer;font-size:1rem;color:var(--text2)">✕</button></div><div id="cb-shop-tiers"></div><p style="font-size:0.72rem;color:var(--text2);margin:8px 0 0">购买：点击套餐按钮后，按提示添加开发者 QQ 咨询付款；付款后发放激活码，激活后额度累加。</p><button class="cb-btn ghost" id="cb-shop-activate" style="width:100%;margin-top:8px">已有激活码？去激活</button></div></div>';document.body.appendChild(d.firstChild)}})();
+  (function(){if(!document.getElementById("cb-vip-shop")){var d=document.createElement("div");d.innerHTML='<div id="cb-vip-shop" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.72);z-index:335;align-items:center;justify-content:center;padding:16px;box-sizing:border-box"><div style="background:var(--card);border-radius:12px;padding:16px;width:100%;max-width:440px;max-height:86vh;overflow:auto"><div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px"><h3 style="margin:0">🤖 次数包套餐</h3><button id="cb-shop-close" style="border:none;background:none;cursor:pointer;font-size:1rem;color:var(--text2)">✕</button></div><div id="cb-shop-tiers"></div><p style="font-size:0.72rem;color:var(--text2);margin:8px 0 0">购买：点击套餐按钮后，按提示添加开发者 QQ 咨询付款；付款后发放激活码。每个激活码仅限使用一次，请在常用设备上激活。</p><button class="cb-btn ghost" id="cb-shop-activate" style="width:100%;margin-top:8px">已有激活码？去激活</button></div></div>';document.body.appendChild(d.firstChild)}})();
   (function(){if(!document.getElementById("cb-onboard")){var d=document.createElement("div");d.innerHTML='<div id="cb-onboard" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.82);z-index:340;align-items:center;justify-content:center;padding:16px;box-sizing:border-box"><div style="background:var(--card);border-radius:14px;padding:20px;width:100%;max-width:430px"><div id="cb-onboard-step" style="min-height:210px"></div><div style="display:flex;gap:8px;margin-top:12px"><button id="cb-onboard-prev" class="cb-btn ghost" style="flex:0 0 auto">上一步</button><button id="cb-onboard-next" class="cb-btn pri" style="flex:1">下一步</button></div><div id="cb-onboard-agree" style="display:none;margin-top:10px"><label style="display:flex;align-items:center;gap:6px;font-size:0.75rem"><input type="checkbox" id="cb-onboard-check"> 我已阅读并同意 <a href="#" id="cb-onboard-privacy" style="color:var(--pri)">《隐私政策》</a></label><button class="cb-btn gold wide" id="cb-onboard-start" style="margin-top:8px" disabled>🚀 开始使用</button></div></div></div>';document.body.appendChild(d.firstChild)}})();
   (function(){if(!document.getElementById("cb-privacy-modal")){var d=document.createElement("div");d.innerHTML='<div id="cb-privacy-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.72);z-index:345;align-items:center;justify-content:center;padding:16px;box-sizing:border-box"><div style="background:var(--card);border-radius:12px;padding:16px;width:100%;max-width:480px;max-height:84vh;overflow:auto"><div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px"><h3 style="margin:0">隐私政策与免责声明</h3><button id="cb-privacy-close" style="border:none;background:none;cursor:pointer;font-size:1rem;color:var(--text2)">✕</button></div><div style="font-size:0.76rem;line-height:1.7;color:var(--text2)"><p>1. 数据存储：错题、图片、打卡记录默认仅保存在本机，不会上传给开发者。</p><p>2. 云同步：仅当你主动配置 Supabase 并开启同步时，数据才存储到你自己的 Supabase 项目。</p><p>3. AI 识别：你提交的图片或文字会发送给内置 AI 服务用于识别，请遵守其服务条款。</p><p>4. 反馈：使用「写反馈」时，内容会通过邮件发送给开发者用于改进产品。</p><p>5. 本应用不收集设备信息、通讯录、位置等无关信息。</p><p>6. 免责声明：解析由 AI 生成，仅供参考，不构成答题或考试结果承诺，请以官方教材和答案为准。</p><p>7. 额度：次数包激活码的购买与使用规则以购买时约定为准，请妥善保管激活码。</p></div><button class="cb-btn ghost" id="cb-privacy-got" style="width:100%;margin-top:8px">我知道了</button></div></div>';document.body.appendChild(d.firstChild)}})();
   el=document.getElementById("cb-shop-close"); if(el) el.addEventListener("click",vipShopClose);
