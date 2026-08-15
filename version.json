@@ -1,6 +1,6 @@
 {
-  "versionCode": 6,
-  "versionName": "1.2.1",
-  "apkUrl": "https://raw.githubusercontent.com/2020-GIF/cuotiben-vip-releases/main/cuotiben-vip-v1.2.1.apk",
-  "note": "修复检查更新无响应：增加即时提示与 15 秒超时，失败自动打开下载页"
+  "versionCode": 7,
+  "versionName": "1.2.2",
+  "apkUrl": "https://raw.githubusercontent.com/2020-GIF/cuotiben-vip-releases/main/cuotiben-vip-v1.2.2.apk",
+  "note": "应用更名「考岸错题本」并更换原创图标；识别结果新增错因显示与选择"
 }

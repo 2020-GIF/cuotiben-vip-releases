@@ -7,10 +7,10 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="theme-color" content="#1a365d">
 <link rel="manifest" href="manifest.json">
-<title>公考错题本</title>
+<title>考岸错题本</title>
 <style>
 /* ============================================================
-   公考错题本 — 公务员考试风 深蓝+金
+   考岸错题本 — 公务员考试风 深蓝+金
    All class names: cb-* (cuotiben) prefix
    ============================================================ */
 :root {
@@ -252,11 +252,11 @@ body.dark #cb-topbar{background:linear-gradient(120deg,#1d2748,#2c3a6e 60%,#3748
 @media (min-width:768px){body{padding-top:70px}#cb-topbar{max-width:760px;border-radius:0 0 18px 18px}#cb-nav{max-width:740px}}
 </style>
 
-<meta name="apple-mobile-web-app-title" content="错题本">
-<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 512 512%22%3E%3Cdefs%3E%3ClinearGradient id=%22g%22%3E%3Cstop offset=%220%25%22 style=%22stop-color:%231a365d%22/%3E%3Cstop offset=%22100%25%22 style=%22stop-color:%232a4a7f%22/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width=%22512%22 height=%22512%22 rx=%22100%22 fill=%22url(%23g)%22/%3E%3Ctext x=%22256%22 y=%22340%22 font-size=%22280%22 text-anchor=%22middle%22 fill=%22%23d4a843%22 font-family=%22sans-serif%22 font-weight=%22bold%22%3E错%3C/text%3E%3C/svg%3E">
+<meta name="apple-mobile-web-app-title" content="考岸错题本">
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 48 48%22%3E%3Crect width=%2248%22 height=%2248%22 rx=%2210%22 fill=%22%23253C7D%22/%3E%3Ccircle cx=%2224%22 cy=%2216%22 r=%2210%22 fill=%22%23F3C34F%22/%3E%3Cpath d=%22M11.5 21 24 16.5v16L11.5 36.5Z%22 fill=%22%23F4F7FF%22/%3E%3Cpath d=%22M36.5 21 24 16.5v16L36.5 36.5Z%22 fill=%22%23C9DAF8%22/%3E%3Cpath d=%22M18.5 28.6l3.7 4 8-9%22 fill=%22none%22 stroke=%22%23E3942C%22 stroke-width=%223.2%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22/%3E%3C/svg%3E">
 </head>
 <body>
-<nav id="cb-topbar"><h1>🏛 公考错题本·会员版</h1><div style="display:flex;align-items:center;gap:8px"><button id="cb-btn-review-top" class="cb-btn-sm">📋 复习 <span id="cb-badge-due" class="cb-badge">0</span></button><button id="cb-btn-cloud" class="cb-btn-sm" title="云同步">☁️</button><button id="cb-btn-settings" class="cb-btn-sm" style="font-size:1rem">⚙</button></div></nav>
+<nav id="cb-topbar"><h1>⛵ 考岸错题本</h1><div style="display:flex;align-items:center;gap:8px"><button id="cb-btn-review-top" class="cb-btn-sm">📋 复习 <span id="cb-badge-due" class="cb-badge">0</span></button><button id="cb-btn-cloud" class="cb-btn-sm" title="云同步">☁️</button><button id="cb-btn-settings" class="cb-btn-sm" style="font-size:1rem">⚙</button></div></nav>
 <main id="cb-main">
 <section id="cb-view-dashboard" class="cb-view active">
   <div id="cb-plan" class="cb-plan" style="display:none"><div class="cb-plan-title">📋 今日复习计划</div><div class="cb-plan-stats" id="cb-plan-content"></div><button class="cb-plan-btn" id="cb-btn-start-plan">开始复习 →</button></div>
@@ -311,7 +311,7 @@ body.dark #cb-topbar{background:linear-gradient(120deg,#1d2748,#2c3a6e 60%,#3748
     <div class="cb-setting"><h3>🔔 提醒</h3><label>每日提醒时间</label><input type="time" id="cb-set-remind" value="08:00"></div>
     <div class="cb-setting"><h3>💬 反馈与帮助</h3><div style="display:flex;gap:6px;margin-top:6px"><button class="cb-btn pri" id="cb-btn-feedback-open" style="font-size:0.8rem;padding:6px 12px">✍️ 写反馈</button></div><p style="font-size:0.7rem;color:var(--text2);margin-top:4px">意见会直接发送给开发者邮箱，或提交到 GitHub Issues</p></div>
     <div class="cb-setting"><h3>🔄 更新</h3><div style="display:flex;gap:6px;margin-top:6px"><button class="cb-btn pri" id="cb-btn-update" style="font-size:0.8rem;padding:6px 12px">🔍 检查更新</button></div><p style="font-size:0.7rem;color:var(--text2);margin-top:4px">点击检查最新版本，发现新版本后自动下载并引导安装</p></div>
-    <button class="cb-btn gold wide" id="cb-btn-save-set">💾 保存设置</button><p style="font-size:0.7rem;color:var(--text2);margin-top:8px">当前版本：1.9.3（公考错题本+默认反馈邮箱版）</p></div>
+    <button class="cb-btn gold wide" id="cb-btn-save-set">💾 保存设置</button><p style="font-size:0.7rem;color:var(--text2);margin-top:8px">当前版本：1.2.2（考岸错题本）</p></div>
 </section>
 </main>
 <nav id="cb-nav">
@@ -328,7 +328,7 @@ body.dark #cb-topbar{background:linear-gradient(120deg,#1d2748,#2c3a6e 60%,#3748
 <div id="cb-modal" class="cb-modal" style="display:none"><div class="cb-modal-inner"><div class="cb-modal-head"><h3 id="cb-modal-title"></h3><button class="cb-modal-close" id="cb-modal-close">✕</button></div><div class="cb-modal-body"><div style="margin-bottom:8px"><b>题目</b></div><div id="cb-modal-q" style="font-size:0.9rem;line-height:1.7;margin-bottom:10px;white-space:pre-wrap"></div><div style="margin-bottom:4px"><b>答案</b></div><div id="cb-modal-a" style="font-size:0.9rem;line-height:1.7;padding:8px;background:#f0fff4;border-radius:6px;white-space:pre-wrap"></div><div id="cb-modal-notes-wrap" style="display:none;margin-top:8px"><div style="margin-bottom:2px"><b>备注</b></div><div id="cb-modal-notes" style="font-size:0.85rem;color:var(--text2)"></div></div><div id="cb-modal-meta" style="font-size:0.75rem;color:var(--text2);margin-top:8px;display:flex;gap:10px;flex-wrap:wrap"></div></div><div class="cb-modal-foot"><button class="cb-btn ghost" id="cb-modal-crop" style="font-size:0.8rem;display:none">✂️ 裁剪图片</button><button class="cb-btn ghost" id="cb-modal-verify" style="font-size:0.8rem;display:none">✔ 标记已核对</button><button class="cb-btn ghost" id="cb-modal-reset" style="font-size:0.8rem">🔄 重置进度</button><button class="cb-btn danger" id="cb-modal-delete" style="font-size:0.8rem">🗑 删除</button></div></div></div>
 
 <script>
-// 公考错题本 v4 - all-in-one
+// 考岸错题本 v4 - all-in-one
 var MODS=["常识判断","言语理解与表达","数量关系","判断推理","资料分析","申论","面试"];
 var MOD_CLASS={"常识判断":"cs","言语理解与表达":"yy","数量关系":"sl","判断推理":"pd","资料分析":"zl","申论":"slun","面试":"ms"};
 function modCls(m){return MOD_CLASS[m]||"cs"}
@@ -362,7 +362,7 @@ function dbDayAll(cb){var t=gDB.transaction("day","readonly");var r=t.objectStor
 function doBackup(cb){
   dbAll(function(e,all){
     if(e){toast("备份失败");if(cb)cb(e);return}
-    var d={app:"公考错题本",version:"1.5",time:new Date().toISOString(),items:all};
+    var d={app:"考岸错题本",version:"1.5",time:new Date().toISOString(),items:all};
     var json=JSON.stringify(d);
     var name="错题本备份_"+dk(new Date())+".json";
     if(window.Android&&window.Android.exportBackup){
@@ -401,6 +401,7 @@ function srsCalc(q,rating){
 var cv="dashboard", rq=[], ri=0, rs=[0,0,0,0,0], cr=-1;
 var aiR=[], photoUrl="", aiPhoto="", photoOrig="";
 var AF_TYPES=["单选","多选","判断","不定项","案例分析","公文写作","大作文","其他"];
+var CAUSES=["知识点不熟","粗心大意","理解偏差","时间不够","审题错误","其他"];
 var QTYPES={
   "常识判断":["政治常识","法律常识","经济常识","人文历史","科技生活","地理国情","管理公文","其他常识"],
   "言语理解与表达":["逻辑填空","片段阅读","语句表达","文章阅读","其他言语"],
@@ -412,7 +413,7 @@ var QTYPES={
 };
 var examQs=[], examAns={}, examTimer=null, examSec=0;
 var kwFilter="";
-var APP_VERSION_CODE=6; var APP_VERSION_NAME="1.2.1";
+var APP_VERSION_CODE=7; var APP_VERSION_NAME="1.2.2";
 
 // ===== VIEW SWITCH =====
 function sv(v){
@@ -796,7 +797,7 @@ function clearAll(){
 }
 function exportHTML(){
   dbAll(function(e,all){ if(e||!all.length){toast("无数据");return}
-    var h='<!DOCTYPE html><html><head><meta charset="UTF-8"><title>公考错题本·导出</title><style>body{font-family:"PingFang SC","Microsoft YaHei",sans-serif;max-width:800px;margin:0 auto;padding:20px}h1{color:#1a365d;border-bottom:3px solid #d4a843;padding-bottom:8px}.qb{page-break-inside:avoid;margin:14px 0;padding:12px;border:1px solid #e2e8f0;border-radius:8px}.qm{display:inline-block;padding:2px 8px;border-radius:4px;color:#fff;font-size:11px;font-weight:700}.qt{line-height:1.7;margin:6px 0}.qa{padding:8px;background:#f0fff4;border-radius:4px;color:#276749}@media print{body{padding:0}}</style></head><body><h1>📚 公考错题本</h1><p style="color:#718096">'+new Date().toLocaleString()+' · '+all.length+' 题</p>';
+    var h='<!DOCTYPE html><html><head><meta charset="UTF-8"><title>考岸错题本·导出</title><style>body{font-family:"PingFang SC","Microsoft YaHei",sans-serif;max-width:800px;margin:0 auto;padding:20px}h1{color:#1a365d;border-bottom:3px solid #d4a843;padding-bottom:8px}.qb{page-break-inside:avoid;margin:14px 0;padding:12px;border:1px solid #e2e8f0;border-radius:8px}.qm{display:inline-block;padding:2px 8px;border-radius:4px;color:#fff;font-size:11px;font-weight:700}.qt{line-height:1.7;margin:6px 0}.qa{padding:8px;background:#f0fff4;border-radius:4px;color:#276749}@media print{body{padding:0}}</style></head><body><h1>📚 考岸错题本</h1><p style="color:#718096">'+new Date().toLocaleString()+' · '+all.length+' 题</p>';
     for(var i=0;i<all.length;i++){var q=all[i]; h+='<div class="qb"><div class="qm" style="background:'+LVL_COLORS[q.lv||0]+'">'+q.mod+' · L'+(q.lv||0)+'</div><div class="qt">'+(q.q||"").replace(/</g,"&lt;").replace(/>/g,"&gt;")+'</div><div class="qa"><b>答案：</b>'+(q.a||"").replace(/</g,"&lt;").replace(/>/g,"&gt;")+'</div></div>'; }
     h+='</body></html>'; var b=new Blob([h],{type:"text/html;charset=utf-8"}); var a=document.createElement("a");
     a.href=URL.createObjectURL(b); a.download="cuotiben_"+dk(new Date())+".html"; a.click(); toast("已导出可打印HTML");
@@ -986,16 +987,19 @@ function renderTextAI(){
     var r=aiR[i],m=MODS.indexOf(r.module)>=0?r.module:MODS[0];
     var qt=(QTYPES[m]||["其他"]).indexOf(r.questionType)>=0?r.questionType:(QTYPES[m]||["其他"])[0];
     var af=AF_TYPES.indexOf(r.answerFormat)>=0?r.answerFormat:AF_TYPES[0];
+    var cause=CAUSES.indexOf(r.errorCause)>=0?r.errorCause:"其他";
     h+='<div class="cb-ai-card"><div class="cb-ai-head"><span class="cb-mod '+modCls(m)+'">'+m+'</span><span style="font-size:0.7rem;'+(r.answer?'color:#38a169':'color:#dd6b20')+'">'+(r.answer?'答案已填':'答案待核对')+'</span><button onclick="toggleTEdit('+i+')" style="background:none;border:none;cursor:pointer;font-size:0.8rem;color:var(--pri)">✏️ 编辑</button><button onclick="removeT('+i+')" style="background:none;border:none;cursor:pointer;font-size:0.8rem;color:#a0aec0">✕</button></div><div style="font-size:0.82rem;line-height:1.6;margin-bottom:6px;white-space:pre-wrap">'+(r.question||"").replace(/</g,"&lt;")+'</div>';
     if(r.answer) h+='<div style="font-size:0.78rem;color:#2f855a;margin-bottom:6px;white-space:pre-wrap">答案：'+(r.answer||"").replace(/</g,"&lt;")+'</div>';
     if(r.analysis) h+='<div style="font-size:0.76rem;color:#718096;margin-bottom:6px;white-space:pre-wrap">解析：'+(r.analysis||"").replace(/</g,"&lt;")+'</div>';
     if(r.keywords&&r.keywords.length) h+='<div style="font-size:0.72rem;margin-bottom:6px">'+r.keywords.map(function(k){return '<span style="display:inline-block;background:rgba(184,134,11,0.12);color:#8a6d1a;border-radius:10px;padding:1px 8px;margin:0 4px 4px 0">'+k+'</span>'}).join("")+'</div>';
+    h+='<div style="font-size:0.76rem;color:#8a6d1a;background:rgba(184,134,11,0.1);border-radius:6px;padding:4px 8px;margin-bottom:6px">🔍 错因：'+cause+'</div>';
     h+='<div id="cb-t-edit-'+i+'" style="display:none;margin-bottom:8px;border-top:1px dashed var(--border);padding-top:8px"><label style="font-size:0.72rem;color:var(--text2)">题目</label><textarea class="e-q" rows="3" style="width:100%;box-sizing:border-box;border:1px solid var(--border);border-radius:8px;padding:6px;font-size:0.8rem;margin-bottom:6px">'+esc(r.question)+'</textarea><label style="font-size:0.72rem;color:var(--text2)">答案</label><input class="e-a" value="'+escAttr(r.answer)+'" style="width:100%;box-sizing:border-box;border:1px solid var(--border);border-radius:8px;padding:6px;font-size:0.8rem;margin-bottom:6px"><label style="font-size:0.72rem;color:var(--text2)">解析</label><textarea class="e-x" rows="4" style="width:100%;box-sizing:border-box;border:1px solid var(--border);border-radius:8px;padding:6px;font-size:0.8rem">'+esc(r.analysis)+'</textarea><div style="margin-top:6px"><button onclick="applyTEdit('+i+')" class="cb-btn pri" style="font-size:0.8rem;padding:4px 12px">保存修改</button></div></div>';
     h+='<div style="display:flex;gap:4px;flex-wrap:wrap">';
     h+='<select onchange="aiR['+i+'].module=this.value;updTQtype('+i+',this.value)">'; for(var j=0;j<MODS.length;j++) h+='<option'+(MODS[j]===m?' selected':'')+'>'+MODS[j]+'</option>'; h+='</select>';
     h+='<select id="cb-t-qt-'+i+'" onchange="aiR['+i+'].questionType=this.value">'+qtypeOptions(m,qt)+'</select>';
     h+='<select onchange="aiR['+i+'].answerFormat=this.value">'; for(var k=0;k<AF_TYPES.length;k++) h+='<option'+(AF_TYPES[k]===af?' selected':'')+'>'+AF_TYPES[k]+'</option>'; h+='</select>';
     h+='<select onchange="aiR['+i+'].difficulty=parseInt(this.value)"><option value="1"'+(r.difficulty==1?' selected':'')+'>简单</option><option value="2"'+(r.difficulty==2?' selected':'')+'>中等</option><option value="3"'+(r.difficulty==3?' selected':'')+'>困难</option></select>';
+    h+='<select onchange="aiR['+i+'].errorCause=this.value">'; for(var c=0;c<CAUSES.length;c++) h+='<option'+(CAUSES[c]===cause?' selected':'')+'>'+CAUSES[c]+'</option>'; h+='</select>';
     h+='</div></div>';
   }
   list.innerHTML=h;
@@ -1095,6 +1099,7 @@ function renderAI(){
     var r=aiR[i],m=MODS.indexOf(r.module)>=0?r.module:MODS[0];
     var qt=(QTYPES[m]||["其他"]).indexOf(r.questionType)>=0?r.questionType:(QTYPES[m]||["其他"])[0];
     var af=AF_TYPES.indexOf(r.answerFormat)>=0?r.answerFormat:AF_TYPES[0];
+    var cause=CAUSES.indexOf(r.errorCause)>=0?r.errorCause:"其他";
     h+='<div class="cb-ai-card"><div class="cb-ai-head"><span class="cb-mod '+modCls(m)+'">'+m+'</span><span style="font-size:0.7rem;'+(r.answer?'color:#38a169':'color:#dd6b20')+'">'+(r.answer?'答案已填':'答案待核对')+'</span><button onclick="toggleAIEdit('+i+')" style="background:none;border:none;cursor:pointer;font-size:0.8rem;color:var(--pri)">✏️ 编辑</button><button onclick="openCropForAI('+i+')" style="background:none;border:none;cursor:pointer;font-size:0.8rem;color:var(--pri)">✂️ 裁剪</button><button onclick="removeAI('+i+')" style="background:none;border:none;cursor:pointer;font-size:0.8rem;color:#a0aec0">✕</button></div>';
     if(r.img) h+='<img src="'+r.img+'" style="width:100%;max-height:160px;object-fit:contain;border:1px solid var(--border);border-radius:8px;margin-bottom:6px">';
     h+='<div style="font-size:0.82rem;line-height:1.6;margin-bottom:6px;white-space:pre-wrap">'+(r.question||"").replace(/</g,"&lt;")+'</div>';
@@ -1102,12 +1107,14 @@ function renderAI(){
     if(r.analysis) h+='<div style="font-size:0.76rem;color:#718096;margin-bottom:6px;white-space:pre-wrap">解析：'+(r.analysis||"").replace(/</g,"&lt;")+'</div>';
     if(r.visualDescription) h+='<div style="font-size:0.76rem;color:#4a5568;background:#edf2f7;padding:6px 8px;border-radius:6px;margin-bottom:6px;white-space:pre-wrap">图形/图表：'+(r.visualDescription||"").replace(/</g,"&lt;")+'</div>';
     if(r.keywords&&r.keywords.length) h+='<div style="font-size:0.72rem;margin-bottom:6px">'+r.keywords.map(function(k){return '<span style="display:inline-block;background:rgba(184,134,11,0.12);color:#8a6d1a;border-radius:10px;padding:1px 8px;margin:0 4px 4px 0">'+k+'</span>'}).join("")+'</div>';
+    h+='<div style="font-size:0.76rem;color:#8a6d1a;background:rgba(184,134,11,0.1);border-radius:6px;padding:4px 8px;margin-bottom:6px">🔍 错因：'+cause+'</div>';
     h+='<div id="cb-ai-edit-'+i+'" style="display:none;margin-bottom:8px;border-top:1px dashed var(--border);padding-top:8px"><label style="font-size:0.72rem;color:var(--text2)">题目</label><textarea class="e-q" rows="3" style="width:100%;box-sizing:border-box;border:1px solid var(--border);border-radius:8px;padding:6px;font-size:0.8rem;margin-bottom:6px">'+esc(r.question)+'</textarea><label style="font-size:0.72rem;color:var(--text2)">答案</label><input class="e-a" value="'+escAttr(r.answer)+'" placeholder="答案，不确定可留空" style="width:100%;box-sizing:border-box;border:1px solid var(--border);border-radius:8px;padding:6px;font-size:0.8rem;margin-bottom:6px"><label style="font-size:0.72rem;color:var(--text2)">解析</label><textarea class="e-x" rows="4" style="width:100%;box-sizing:border-box;border:1px solid var(--border);border-radius:8px;padding:6px;font-size:0.8rem">'+esc(r.analysis)+'</textarea><div style="margin-top:6px"><button onclick="applyAIEdit('+i+')" class="cb-btn pri" style="font-size:0.8rem;padding:4px 12px">保存修改</button></div></div>';
     h+='<div style="display:flex;gap:4px;flex-wrap:wrap">';
     h+='<select onchange="aiR['+i+'].module=this.value;updAIQtype('+i+',this.value)">'; for(var j=0;j<MODS.length;j++) h+='<option'+(MODS[j]===m?' selected':'')+'>'+MODS[j]+'</option>'; h+='</select>';
     h+='<select id="cb-ai-qt-'+i+'" onchange="aiR['+i+'].questionType=this.value">'+qtypeOptions(m,qt)+'</select>';
     h+='<select onchange="aiR['+i+'].answerFormat=this.value">'; for(var k=0;k<AF_TYPES.length;k++) h+='<option'+(AF_TYPES[k]===af?' selected':'')+'>'+AF_TYPES[k]+'</option>'; h+='</select>';
     h+='<select onchange="aiR['+i+'].difficulty=parseInt(this.value)"><option value="1"'+(r.difficulty==1?' selected':'')+'>简单</option><option value="2"'+(r.difficulty==2?' selected':'')+'>中等</option><option value="3"'+(r.difficulty==3?' selected':'')+'>困难</option></select>';
+    h+='<select onchange="aiR['+i+'].errorCause=this.value">'; for(var c=0;c<CAUSES.length;c++) h+='<option'+(CAUSES[c]===cause?' selected':'')+'>'+CAUSES[c]+'</option>'; h+='</select>';
     h+='</div></div>';
   }
   list.innerHTML=h;
@@ -1510,7 +1517,7 @@ function checkUpdate(){
       if(window.Android&&window.Android.downloadApk){
         toast("发现新版本 "+info.versionName+"，开始下载…",2600);
         window.__dlDone=function(ok,msg){window.__dlDone=null;if(ok){toast("更新包已下载，请按系统提示安装",3000)}else{toast(msg,6000)}};
-        window.Android.downloadApk(info.apkUrl,"公考错题本-"+info.versionName+".apk");
+        window.Android.downloadApk(info.apkUrl,"考岸错题本-"+info.versionName+".apk");
       }else{
         try{window.open("https://github.com/2020-GIF/cuotiben-vip-releases/releases/latest")}catch(e){}
         toast("发现新版本 "+info.versionName+"，已打开下载页面",3000);
@@ -1536,8 +1543,8 @@ function sendFeedbackMail(){
   var b=fbBody(); if(!b) return;
   var mail=(localStorage.getItem("cb_feedback_email")||"2840542949@qq.com").trim();
   if(!mail){toast("请先在设置中填写反馈邮箱");return}
-  if(window.Android&&window.Android.sendMail){window.Android.sendMail(mail,"公考错题本反馈",b)}
-  else{location.href="mailto:"+mail+"?subject="+encodeURIComponent("公考错题本反馈")+"&body="+encodeURIComponent(b)}
+  if(window.Android&&window.Android.sendMail){window.Android.sendMail(mail,"考岸错题本反馈",b)}
+  else{location.href="mailto:"+mail+"?subject="+encodeURIComponent("考岸错题本反馈")+"&body="+encodeURIComponent(b)}
   closeFeedback(); toast("已打开邮件应用");
 }
 function sendFeedbackGh(){
@@ -1549,7 +1556,7 @@ function sendFeedbackGh(){
 
 // ===== CLOUD SYNC (Supabase) =====
 var SB_SQL=[
-"-- 公考错题本 · 云同步建表（在 Supabase SQL Editor 整段运行一次）",
+"-- 考岸错题本 · 云同步建表（在 Supabase SQL Editor 整段运行一次）",
 "create table if not exists public.cb_sync (",
 "  id text primary key,",
 "  kind text not null default 'q',",
@@ -1843,7 +1850,7 @@ function vipShopBuy(days){
   var t=document.getElementById("cb-fb-text"); if(t)t.value="【购买会员】我想购买："+p.name+"（¥"+p.price+"）\n请告诉我付款方式，谢谢。";
 }
 var OB_STEPS=[
- {t:"👋 欢迎使用公考错题本·会员版",h:"把错题拍下来，AI 自动识别题型并生成速解解析；错题按记忆曲线安排复习；一键组卷，可打印或导出 PDF。"},
+ {t:"👋 欢迎使用考岸错题本",h:"把错题拍下来，AI 自动识别题型并生成速解解析；错题按记忆曲线安排复习；一键组卷，可打印或导出 PDF。"},
  {t:"🔑 第 1 步 · 配置 AI Key",h:"设置 → AI 识别：服务商选「智谱 GLM-4V」，粘贴你自己的 API Key 并保存。会员解锁的是功能，API 费用由你的 Key 承担。"},
  {t:"☁️ 第 2 步 · 云同步（可选）",h:"设置 → 云同步：按教程在 Supabase 免费建项目，填入 Project URL 和 anon key，即可在手机/平板/电脑同步数据。"},
  {t:"👑 第 3 步 · 激活会员",h:"设置 → 会员中心：查看套餐与购买；AI 识别有 5 次免费试用。激活码付款后由开发者发放。"}
@@ -1879,8 +1886,8 @@ function checkNotify(){
   localStorage.setItem("cb_notify_last",td);
   dbDue(function(e,due){ if(e||!due.length) return;
     var msg="今日有 "+due.length+" 道错题待复习！";
-    if(window.Android&&window.Android.notify){window.Android.notify("📚 公考错题本",msg);return}
-    if("Notification" in window&&Notification.permission==="granted"){new Notification("📚 公考错题本",{body:msg})}
+    if(window.Android&&window.Android.notify){window.Android.notify("📚 考岸错题本",msg);return}
+    if("Notification" in window&&Notification.permission==="granted"){new Notification("📚 考岸错题本",{body:msg})}
   });
 }
 
