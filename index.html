@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
@@ -204,7 +204,7 @@ body {
   <div id="cb-tab-manual"><form class="cb-form cb-card" id="cb-form-add"><h2>录入错题</h2><label>模块</label><div class="cb-chips" id="cb-add-chips"></div><label for="cb-inp-q">题目</label><textarea id="cb-inp-q" rows="3" placeholder="输入题目…" required></textarea><label for="cb-inp-a">答案 / 解析</label><textarea id="cb-inp-a" rows="3" placeholder="输入正确答案…" required></textarea><div class="cb-form-row"><div class="cb-form-col"><label>题型</label><select id="cb-inp-qtype"></select></div><div class="cb-form-col"><label>答题形式</label><select id="cb-inp-fmt"><option>单选</option><option>多选</option><option>判断</option><option>不定项</option><option>案例分析</option><option>公文写作</option><option>大作文</option><option>其他</option></select></div></div><div class="cb-form-row"><div class="cb-form-col"><label>难度</label><select id="cb-inp-diff"><option value="1">⭐</option><option value="2">⭐⭐</option><option value="3">⭐⭐⭐</option></select></div><div class="cb-form-col"><label>来源</label><select id="cb-inp-src"><option>未知</option><option>真题</option><option>模拟题</option><option>专项练习</option></select></div></div><div class="cb-form-row"><div class="cb-form-col"><label>错因</label><select id="cb-inp-cause"><option>知识点不熟</option><option>粗心大意</option><option>理解偏差</option><option>时间不够</option><option>审题错误</option><option>其他</option></select></div></div><div style="display:flex;gap:8px;margin-top:12px"><button type="submit" class="cb-btn pri">💾 保存</button><button type="button" class="cb-btn ghost" id="cb-btn-cancel-add">取消</button></div></form></div>
   <div id="cb-tab-photo" style="display:none"><div class="cb-card"><div id="cb-photo-up"><div style="display:flex;gap:10px;margin-bottom:12px"><div id="cb-photo-camera" class="cb-photo-up" style="flex:1;cursor:pointer"><div class="cb-pu-icon">📷</div><p>拍照</p><p style="font-size:0.65rem;color:#a0aec0">直接用相机拍试卷</p></div><div id="cb-photo-gallery" class="cb-photo-up" style="flex:1;cursor:pointer"><div class="cb-pu-icon">🖼</div><p>相册</p><p style="font-size:0.65rem;color:#a0aec0">从相册选择照片</p></div></div><p style="text-align:center;font-size:0.72rem;color:var(--text2)">AI 能识别红笔✗、圈注○、手写批改的错题</p><p style="text-align:center;font-size:0.66rem;color:#a0aec0;margin-top:4px">⚠️ 需先在设置中配置 AI 服务商（通义千问VL 推荐）</p></div><input type="file" id="cb-photo-inp" accept="image/*" capture="environment" style="display:none"><div id="cb-photo-pv" class="cb-photo-pv" style="display:none"><img id="cb-photo-img" src="" alt="预览"><button class="cb-photo-rm" id="cb-photo-rm">✕</button></div><button class="cb-btn gold wide" id="cb-btn-analyze" style="display:none">🔍 开始识别</button><div id="cb-ai-loading" style="display:none;text-align:center;padding:20px"><div class="cb-spinner"></div><p style="font-size:0.8rem;color:var(--text2);margin-top:8px">AI 正在识别错题...</p></div><div id="cb-ai-results" style="display:none"><div class="cb-sec-hd"><h2 id="cb-ai-count">识别结果</h2></div><div id="cb-ai-list"></div><button class="cb-btn pri wide" id="cb-btn-save-ai" style="margin-top:8px">💾 全部保存</button></div></div></div>
 </section>
-<div id="cb-tab-text" style="display:none"><div class="cb-card"><h2>📝 文字批量识别</h2><p style="font-size:0.75rem;color:var(--text2);margin-bottom:8px">粘贴一题或多题（含选项），AI 会自动归类并生成花生十三解析</p><textarea id="cb-text-inp" rows="9" placeholder="粘贴题目文字，可一次粘贴多题…" style="width:100%;box-sizing:border-box;border:1px solid var(--border);border-radius:8px;padding:10px;font-size:0.85rem"></textarea><button class="cb-btn gold wide" id="cb-btn-text-rec" style="margin-top:10px">🔍 开始识别</button><div id="cb-text-loading" style="display:none;text-align:center;padding:20px"><div class="cb-spinner"></div><p style="font-size:0.8rem;color:var(--text2);margin-top:8px">AI 正在识别题目…</p></div><div id="cb-text-results" style="display:none;margin-top:12px"><div class="cb-sec-hd"><h2 id="cb-text-count">识别结果</h2></div><div id="cb-text-list"></div><button class="cb-btn pri wide" id="cb-btn-text-save" style="margin-top:8px">💾 全部保存</button></div></div></div>
+<div id="cb-tab-text" style="display:none"><div class="cb-card"><h2>📝 文字批量识别</h2><p style="font-size:0.75rem;color:var(--text2);margin-bottom:8px">粘贴一题或多题（含选项），AI 会自动归类并生成速解解析</p><textarea id="cb-text-inp" rows="9" placeholder="粘贴题目文字，可一次粘贴多题…" style="width:100%;box-sizing:border-box;border:1px solid var(--border);border-radius:8px;padding:10px;font-size:0.85rem"></textarea><button class="cb-btn gold wide" id="cb-btn-text-rec" style="margin-top:10px">🔍 开始识别</button><div id="cb-text-loading" style="display:none;text-align:center;padding:20px"><div class="cb-spinner"></div><p style="font-size:0.8rem;color:var(--text2);margin-top:8px">AI 正在识别题目…</p></div><div id="cb-text-results" style="display:none;margin-top:12px"><div class="cb-sec-hd"><h2 id="cb-text-count">识别结果</h2></div><div id="cb-text-list"></div><button class="cb-btn pri wide" id="cb-btn-text-save" style="margin-top:8px">💾 全部保存</button></div></div></div>
 <section id="cb-view-manage" class="cb-view">
   <div class="cb-filters"><input type="text" id="cb-filter-search" placeholder="🔍 搜索题目..."><select id="cb-filter-mod"><option value="">全部模块</option></select><select id="cb-filter-qtype"><option value="">全部题型</option></select><select id="cb-filter-verify"><option value="">全部核对状态</option><option value="已核对">已核对</option><option value="待核对">待核对</option></select><select id="cb-filter-level"><option value="">全部等级</option></select><button class="cb-btn ghost" id="cb-btn-verify-all" style="font-size:0.72rem;padding:4px 8px">✔ 批量标记已核对</button><span id="cb-filter-kw-active" style="display:none;font-size:0.75rem;background:rgba(184,134,11,0.12);color:#8a6d1a;border-radius:12px;padding:3px 8px;align-self:center">标签：<b id="cb-filter-kw-name"></b> <button onclick="clearKwFilter()" style="border:none;background:none;cursor:pointer;color:#8a6d1a;font-weight:700">✕</button></span></div>
   <div id="cb-manage-list"><div class="cb-empty">暂无题目</div></div>
@@ -239,8 +239,8 @@ body {
     <div class="cb-setting"><h3>🎯 目标</h3><label>每日目标题数</label><input type="number" id="cb-set-goal" min="0" value="50"></div>
     <div class="cb-setting"><h3>🎨 外观</h3><label style="display:flex;align-items:center;gap:8px;margin-bottom:8px"><input type="checkbox" id="cb-set-dark"> 深色模式</label><label>字号</label><select id="cb-set-font"><option value="14">小</option><option value="16" selected>中</option><option value="18">大</option></select></div>
     <div class="cb-setting"><h3>🔔 提醒</h3><label>每日提醒时间</label><input type="time" id="cb-set-remind" value="08:00"></div>
-    <div class="cb-setting"><h3>💬 反馈与帮助</h3><label>反馈邮箱（可选）</label><input type="text" id="cb-set-feedback-email" placeholder="2840542949@qq.com"><div style="display:flex;gap:6px;margin-top:6px"><button class="cb-btn pri" id="cb-btn-feedback-open" style="font-size:0.8rem;padding:6px 12px">✍️ 写反馈</button></div><p style="font-size:0.7rem;color:var(--text2);margin-top:4px">意见会通过邮件发到你的邮箱，或提交到 GitHub Issues</p></div>
-    <div class="cb-setting"><h3>🔄 更新</h3><label>更新源地址（version.json）</label><input type="text" id="cb-set-update" placeholder="https://.../version.json"><div style="display:flex;gap:6px;margin-top:6px"><button class="cb-btn pri" id="cb-btn-update" style="font-size:0.8rem;padding:6px 12px">🔍 检查更新</button></div><p style="font-size:0.7rem;color:var(--text2);margin-top:4px">版本号大于当前版本时，自动下载新 APK 并引导安装</p></div>
+    <div class="cb-setting"><h3>💬 反馈与帮助</h3><div style="display:flex;gap:6px;margin-top:6px"><button class="cb-btn pri" id="cb-btn-feedback-open" style="font-size:0.8rem;padding:6px 12px">✍️ 写反馈</button></div><p style="font-size:0.7rem;color:var(--text2);margin-top:4px">意见会直接发送给开发者邮箱，或提交到 GitHub Issues</p></div>
+    <div class="cb-setting"><h3>🔄 更新</h3><div style="display:flex;gap:6px;margin-top:6px"><button class="cb-btn pri" id="cb-btn-update" style="font-size:0.8rem;padding:6px 12px">🔍 检查更新</button></div><p style="font-size:0.7rem;color:var(--text2);margin-top:4px">点击检查最新版本，发现新版本后自动下载并引导安装</p></div>
     <button class="cb-btn gold wide" id="cb-btn-save-set">💾 保存设置</button><p style="font-size:0.7rem;color:var(--text2);margin-top:8px">当前版本：1.9.3（公考错题本+默认反馈邮箱版）</p></div>
 </section>
 </main>
@@ -342,7 +342,7 @@ var QTYPES={
 };
 var examQs=[], examAns={}, examTimer=null, examSec=0;
 var kwFilter="";
-var APP_VERSION_CODE=2; var APP_VERSION_NAME="1.0.1";
+var APP_VERSION_CODE=3; var APP_VERSION_NAME="1.0.2";
 
 // ===== VIEW SWITCH =====
 function sv(v){
@@ -829,7 +829,7 @@ function nativeAI(url,ak,bodyObj){
     setTimeout(function(){if(window.__nativeAiResult){window.__nativeAiResult=null;reject(new Error("请求超时，请检查网络后重试"))}},120000);
   });
 }
-var HS13='你按照花生十三公考技巧生成错题解析，先识别题型再给方法，资料分析/数量关系必须给出速算过程，必须给出易错点，禁止只给答案。\n\n【资料分析·ABRX】A=现期量，B=基期量，R=增长率，X=增长量；B=A/(1+R)；X=B×R=A×R/(1+R)；R=(A-B)/B。速算：①截位直除——选项首位不同截2位、首位同次位不同截3位；②415份数法——现期:增量=(100+R):R，每份=现期/(100+R)，增量=每份×R；③假设分配——已知基期求现期A=B×(1+R)。比重升降看部分R与整体R谁大；比重差=(部分/整体)×(部分R-整体R)/(1+部分R)，单位是百分点；平均数增长率=(总量R-份数R)/(1+份数R)；“是几倍”=A/B，“多几倍”=A/B-1。\n\n【数量关系】工程：总量=效率×时间，给时间赋总量为最小公倍数，给效率比直接赋值。行程：相遇=速度和×时间，追及=速度差×时间，顺水=船速+水速，逆水=船速-水速。利润：利润率=利润/成本，售价=成本×(1+利润率)，可赋成本=100。排列组合：有序用A、无序用C，相邻捆绑、不相邻插空。概率：至少一个=1-都不发生。容斥两集合：A+B-AB=总-都不。年龄差不变；牛吃草先求草长速度=(N1T1-N2T2)/(T1-T2)；鸡兔同笼先假设全鸡。\n\n【言语理解】逻辑填空找语境对应：转折反义、并列近义、递进加深、解释同义；再辨语素差异、程度轻重、感情色彩、固定搭配。片段阅读找中心句：总分看首句、分总看尾句、转折/递进/因果后是重点；答案必须含主题词，问题+对策时优先选对策。细节题防偷换概念、时态、范围、语气、无中生有、正反颠倒。语句排序：代词开头不做首句，总结/对策做尾句，关联词与指代词捆绑。\n\n【判断推理·图形】规律优先级：元素相同→位置(平移/旋转/翻转)，元素相似→样式(叠加/求同/求异/黑白加)，元素不同→数量(点线角面素)，都不行→属性(对称/曲直/封闭)；一笔画看奇点=0或2；折纸盒看相对面(Z字两端)不能同时出现；常记对称轴数量(正方形4、等边三角形3)。定义判断：抓主体/客体/目的/方式/条件/原因/结果八要素逐一比对。类比推理：逻辑关系(全同/包含/组成/交叉/并列/矛盾/反对)、语义(近义/反义/褒贬)、语法(主谓/动宾/偏正)、对应(功能/材料/职业/工具/因果/象征)，多选符合时做二级辨析(方向/程度/范围)。逻辑判断：如果A那么B→A→B；只有A才B→B→A；A是B的前提→B→A；逆否等价；肯前必肯后、否后必否前；加强力度=否论点>搭桥>论据>举例；削弱力度=否论点>拆桥>另有他因>举例；矛盾关系一真一假，反对关系至少一假或至少一真。朴素逻辑用表格/列表/假设/排除。\n\n【常识判断】用排除法，含“一定/所有/必须”的绝对化表述多为错，优先回想高频时政、法律、党史考点。\n\n【申论】审题→找点→加工→书写；单一题归纳概括、综合题按“是什么-为什么-怎么办”、公文注意格式、大作文用五段三分式或递进式：立意+结构+分论点+素材，不写整篇范文。\n\n【输出格式】\n【题型识别】一句话点明题型\n【解题思路】分步骤\n【速算/速解】资料和数量必写，其它模块写速解技巧\n【易错点】至少1条\n【答案】答案或“需人工核对”';
+var HS13='你按照公考行测速解技巧生成错题解析，先识别题型再给方法，资料分析/数量关系必须给出速算过程，必须给出易错点，禁止只给答案。\n\n【资料分析·ABRX】A=现期量，B=基期量，R=增长率，X=增长量；B=A/(1+R)；X=B×R=A×R/(1+R)；R=(A-B)/B。速算：①截位直除——选项首位不同截2位、首位同次位不同截3位；②415份数法——现期:增量=(100+R):R，每份=现期/(100+R)，增量=每份×R；③假设分配——已知基期求现期A=B×(1+R)。比重升降看部分R与整体R谁大；比重差=(部分/整体)×(部分R-整体R)/(1+部分R)，单位是百分点；平均数增长率=(总量R-份数R)/(1+份数R)；“是几倍”=A/B，“多几倍”=A/B-1。\n\n【数量关系】工程：总量=效率×时间，给时间赋总量为最小公倍数，给效率比直接赋值。行程：相遇=速度和×时间，追及=速度差×时间，顺水=船速+水速，逆水=船速-水速。利润：利润率=利润/成本，售价=成本×(1+利润率)，可赋成本=100。排列组合：有序用A、无序用C，相邻捆绑、不相邻插空。概率：至少一个=1-都不发生。容斥两集合：A+B-AB=总-都不。年龄差不变；牛吃草先求草长速度=(N1T1-N2T2)/(T1-T2)；鸡兔同笼先假设全鸡。\n\n【言语理解】逻辑填空找语境对应：转折反义、并列近义、递进加深、解释同义；再辨语素差异、程度轻重、感情色彩、固定搭配。片段阅读找中心句：总分看首句、分总看尾句、转折/递进/因果后是重点；答案必须含主题词，问题+对策时优先选对策。细节题防偷换概念、时态、范围、语气、无中生有、正反颠倒。语句排序：代词开头不做首句，总结/对策做尾句，关联词与指代词捆绑。\n\n【判断推理·图形】规律优先级：元素相同→位置(平移/旋转/翻转)，元素相似→样式(叠加/求同/求异/黑白加)，元素不同→数量(点线角面素)，都不行→属性(对称/曲直/封闭)；一笔画看奇点=0或2；折纸盒看相对面(Z字两端)不能同时出现；常记对称轴数量(正方形4、等边三角形3)。定义判断：抓主体/客体/目的/方式/条件/原因/结果八要素逐一比对。类比推理：逻辑关系(全同/包含/组成/交叉/并列/矛盾/反对)、语义(近义/反义/褒贬)、语法(主谓/动宾/偏正)、对应(功能/材料/职业/工具/因果/象征)，多选符合时做二级辨析(方向/程度/范围)。逻辑判断：如果A那么B→A→B；只有A才B→B→A；A是B的前提→B→A；逆否等价；肯前必肯后、否后必否前；加强力度=否论点>搭桥>论据>举例；削弱力度=否论点>拆桥>另有他因>举例；矛盾关系一真一假，反对关系至少一假或至少一真。朴素逻辑用表格/列表/假设/排除。\n\n【常识判断】用排除法，含“一定/所有/必须”的绝对化表述多为错，优先回想高频时政、法律、党史考点。\n\n【申论】审题→找点→加工→书写；单一题归纳概括、综合题按“是什么-为什么-怎么办”、公文注意格式、大作文用五段三分式或递进式：立意+结构+分论点+素材，不写整篇范文。\n\n【输出格式】\n【题型识别】一句话点明题型\n【解题思路】分步骤\n【速算/速解】资料和数量必写，其它模块写速解技巧\n【易错点】至少1条\n【答案】答案或“需人工核对”';
 function buildAnalysisPrompt(r){
   return HS13+'\n\n【题目信息】\n模块：'+r.module+'\n题型：'+r.questionType+'\n题干：'+(r.question||"（图形题，见原图）")+'\n选项答案：'+(r.answer||"未提供")+'\n\n请严格按输出格式生成这道题的解析。';
 }
@@ -844,7 +844,7 @@ async function genAnalysisFor(endpoint,ak,model,lp,done){
   if(!aiR.length) return;
   for(var i=0;i<aiR.length;i++){
     var r=aiR[i];
-    if(lp) lp.textContent="正在生成花生十三解析 "+(i+1)+"/"+aiR.length+"…";
+    if(lp) lp.textContent="正在生成速解解析 "+(i+1)+"/"+aiR.length+"…";
     try{
       var data=await callTextAI(endpoint,ak,model,buildAnalysisPrompt(r));
       var ct=data.choices&&data.choices[0]?data.choices[0].message.content:"";
@@ -894,7 +894,7 @@ async function textRecognition(){
     aiPhoto="";
     renderTextAI();
     document.getElementById("cb-text-loading").style.display="";
-    var lp=document.querySelector("#cb-text-loading p"); if(lp)lp.textContent="正在生成花生十三解析…";
+    var lp=document.querySelector("#cb-text-loading p"); if(lp)lp.textContent="正在生成速解解析…";
     await genTextAnalysis();
   }catch(err){
     var msg=String(err&&err.message||err||"未知错误");
@@ -985,7 +985,7 @@ async function analyzePhoto(){
     renderAI();
     if(aiR.length){
       document.getElementById("cb-ai-loading").style.display="";
-      var lp=document.querySelector("#cb-ai-loading p"); if(lp) lp.textContent="正在生成花生十三解析…";
+      var lp=document.querySelector("#cb-ai-loading p"); if(lp) lp.textContent="正在生成速解解析…";
       await genAnalysis();
     }
   }catch(err){
@@ -1387,14 +1387,12 @@ function rset(){
   document.getElementById("cb-set-provider").value=localStorage.getItem("cb_provider")||"glm";
   document.getElementById("cb-set-apikey").value=localStorage.getItem("cb_apikey")||"";
   document.getElementById("cb-set-remind").value=localStorage.getItem("cb_remind")||"08:00";
-  document.getElementById("cb-set-update").value=localStorage.getItem("cb_update_url")||"https://raw.githubusercontent.com/2020-GIF/cuotiben-vip-releases/main/version.json";
   document.getElementById("cb-set-dark").checked=localStorage.getItem("cb_dark")==="1";
   document.getElementById("cb-set-font").value=localStorage.getItem("cb_font")||"16";
   document.getElementById("cb-set-text-api").value=localStorage.getItem("cb_text_api")||"";
   document.getElementById("cb-set-text-model").value=localStorage.getItem("cb_text_model")||"";
   document.getElementById("cb-set-text-key").value=localStorage.getItem("cb_text_key")||"";
   document.getElementById("cb-set-goal").value=localStorage.getItem("cb_goal")||"50";
-  document.getElementById("cb-set-feedback-email").value=localStorage.getItem("cb_feedback_email")||"2840542949@qq.com";
   document.getElementById("cb-set-sb-url").value=localStorage.getItem("cb_sb_url")||"";
   document.getElementById("cb-set-sb-key").value=localStorage.getItem("cb_sb_key")||"";
   document.getElementById("cb-set-sb-device").value=localStorage.getItem("cb_sb_device")||"";
@@ -1414,7 +1412,6 @@ function saveSettings(){
   localStorage.setItem("cb_apikey",document.getElementById("cb-set-apikey").value.trim());
   localStorage.setItem("cb_model",document.getElementById("cb-set-model").value);
   localStorage.setItem("cb_remind",document.getElementById("cb-set-remind").value);
-  localStorage.setItem("cb_update_url",document.getElementById("cb-set-update").value.trim());
   localStorage.setItem("cb_dark",document.getElementById("cb-set-dark").checked?"1":"0");
   localStorage.setItem("cb_font",document.getElementById("cb-set-font").value);
   localStorage.setItem("cb_text_api",document.getElementById("cb-set-text-api").value.trim());
@@ -1423,7 +1420,6 @@ function saveSettings(){
   var oldGoal=localStorage.getItem("cb_goal")||"50";
   var newGoal=document.getElementById("cb-set-goal").value||"50";
   localStorage.setItem("cb_goal",newGoal);
-  localStorage.setItem("cb_feedback_email",document.getElementById("cb-set-feedback-email").value.trim());
   sbPersistFields();
   if(String(oldGoal)!==String(newGoal))localStorage.setItem("cb_goal_ts",String(Date.now()));
   applyAppearance(); scheduleNotify(); sbPaint(); toast("设置已保存");
@@ -1433,8 +1429,7 @@ function applyAppearance(){
   document.documentElement.style.fontSize=(localStorage.getItem("cb_font")||"16")+"px";
 }
 function checkUpdate(){
-  var url=(localStorage.getItem("cb_update_url")||"https://raw.githubusercontent.com/2020-GIF/cuotiben-vip-releases/main/version.json").trim();
-  if(!url){toast("请先在设置里填写更新源地址（version.json 链接）");return}
+  var url="https://raw.githubusercontent.com/2020-GIF/cuotiben-vip-releases/main/version.json";
   fetch(url+(url.indexOf("?")>=0?"&":"?")+"_="+Date.now(),{cache:"no-store"}).then(function(r){return r.json()}).then(function(info){
     if(info&&info.versionCode>APP_VERSION_CODE&&info.apkUrl){
       if(window.Android&&window.Android.downloadApk){
@@ -1448,7 +1443,7 @@ function checkUpdate(){
     }else{
       toast("已是最新版本（"+APP_VERSION_NAME+"）");
     }
-  }).catch(function(e){toast("检查失败："+(e&&e.message||"网络错误")+"，请确认更新源地址",6000)});
+  }).catch(function(e){toast("检查失败："+(e&&e.message||"网络错误")+"，请稍后重试",6000)});
 }
 function openFeedback(){document.getElementById("cb-feedback").style.display="flex";setTimeout(function(){var t=document.getElementById("cb-fb-text");if(t)t.focus()},100)}
 function closeFeedback(){document.getElementById("cb-feedback").style.display="none"}
@@ -1855,7 +1850,7 @@ function bindEvents(){
   el=document.getElementById("cb-btn-close-print"); if(el) el.addEventListener("click",function(){document.getElementById("cb-exam-print").style.display="none";document.getElementById("cb-exam-config").style.display=""});
   // Settings
   el=document.getElementById("cb-btn-save-set"); if(el) el.addEventListener("click",saveSettings);
-  (function(){var sc=document.querySelector("#cb-view-settings .cb-card"); if(sc&&!document.getElementById("cb-vip-status")){var div=document.createElement("div");div.className="cb-setting";div.innerHTML='<h3>👑 会员中心</h3><div id="cb-vip-status" style="font-size:0.8rem;margin-bottom:6px"></div><div style="display:flex;gap:6px"><input type="text" id="cb-vip-code" placeholder="输入激活码，如 GKB-365-XXXXXXXX-XXXX" style="flex:1;border:1px solid var(--border);border-radius:8px;padding:8px;font-size:0.8rem"><button class="cb-btn gold" id="cb-btn-vip-activate" style="font-size:0.8rem;padding:6px 12px">激活</button></div><p style="font-size:0.72rem;color:var(--text2);margin:6px 0 0">购买会员：联系 2840542949@qq.com（微信/邮箱），付款后发送激活码；同一激活码可在手机/平板/电脑共用。<br>注意：AI 识别需先在下方「AI 识别」里填自己的 API Key（智谱/通义）。</p>';var first=sc.querySelector(".cb-setting");if(first)sc.insertBefore(div,first);else sc.appendChild(div)}})();
+  (function(){var sc=document.querySelector("#cb-view-settings .cb-card"); if(sc&&!document.getElementById("cb-vip-status")){var div=document.createElement("div");div.className="cb-setting";div.innerHTML='<h3>👑 会员中心</h3><div id="cb-vip-status" style="font-size:0.8rem;margin-bottom:6px"></div><div style="display:flex;gap:6px"><input type="text" id="cb-vip-code" placeholder="输入激活码，如 GKB-365-XXXXXXXX-XXXX" style="flex:1;border:1px solid var(--border);border-radius:8px;padding:8px;font-size:0.8rem"><button class="cb-btn gold" id="cb-btn-vip-activate" style="font-size:0.8rem;padding:6px 12px">激活</button></div><p style="font-size:0.72rem;color:var(--text2);margin:6px 0 0">购买会员：点下方「反馈与帮助 → 写反馈」留言购买，或通过下载渠道联系客服；付款后发送激活码。同一激活码可在手机/平板/电脑共用。<br>注意：AI 识别需先在下方「AI 识别」里填自己的 API Key（智谱/通义）。</p>';var first=sc.querySelector(".cb-setting");if(first)sc.insertBefore(div,first);else sc.appendChild(div)}})();
   (function(){if(!document.getElementById("cb-vip-modal")){var d=document.createElement("div");d.innerHTML='<div id="cb-vip-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.72);z-index:330;align-items:center;justify-content:center;padding:16px;box-sizing:border-box"><div style="background:var(--card);border-radius:12px;padding:18px;width:100%;max-width:400px"><div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px"><h3 style="margin:0">👑 会员功能</h3><button id="cb-vip-close" style="border:none;background:none;cursor:pointer;font-size:1rem;color:var(--text2)">✕</button></div><p id="cb-vip-msg" style="font-size:0.85rem;margin:0 0 10px"></p><ul style="font-size:0.78rem;color:var(--text2);margin:0 0 12px;padding-left:16px"><li>AI 拍照识别 / 文字批量识别 / 解题解析</li><li>Supabase 多设备云同步</li><li>组卷导出含答案解析 PDF</li></ul><div style="display:flex;gap:8px"><button class="cb-btn gold" id="cb-vip-gosettings" style="flex:1">去激活会员</button><button class="cb-btn ghost" id="cb-vip-later" style="flex:1">先不用</button></div></div></div>';document.body.appendChild(d.firstChild)}})();
   el=document.getElementById("cb-btn-vip-activate"); if(el) el.addEventListener("click",vipActivate);
   el=document.getElementById("cb-vip-close"); if(el) el.addEventListener("click",closeVipModal);
