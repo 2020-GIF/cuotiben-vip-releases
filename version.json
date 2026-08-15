@@ -1,6 +1,6 @@
 {
-  "versionCode": 1,
-  "versionName": "1.0.0",
-  "apkUrl": "https://raw.githubusercontent.com/2020-GIF/cuotiben-vip-releases/main/cuotiben-vip-v1.0.0.apk",
-  "note": "公考错题本·会员版首发：AI 识别/解析、多设备云同步、组卷含解析 PDF 会员解锁；AI 免费试用 5 次"
+  "versionCode": 2,
+  "versionName": "1.0.1",
+  "apkUrl": "https://raw.githubusercontent.com/2020-GIF/cuotiben-vip-releases/main/cuotiben-vip-v1.0.1.apk",
+  "note": "修复激活按钮无反应；未填 API Key 时给出明确提示"
 }

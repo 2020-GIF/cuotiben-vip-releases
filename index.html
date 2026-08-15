@@ -342,7 +342,7 @@ var QTYPES={
 };
 var examQs=[], examAns={}, examTimer=null, examSec=0;
 var kwFilter="";
-var APP_VERSION_CODE=1; var APP_VERSION_NAME="1.0.0";
+var APP_VERSION_CODE=2; var APP_VERSION_NAME="1.0.1";
 
 // ===== VIEW SWITCH =====
 function sv(v){
@@ -951,7 +951,7 @@ async function analyzePhoto(){
   if(!photoUrl) return;
   if(!vipAiGate("AI 拍照识别"))return;
   var provider=localStorage.getItem("cb_provider")||"glm";
-  var ak=localStorage.getItem("cb_apikey")||""; if(!ak) return;
+  var ak=localStorage.getItem("cb_apikey")||""; if(!ak){toast("请先在设置 → AI 识别中填写你的 API Key（会员解锁功能，API 费用由你的 Key 承担）",4200);return}
   var model=localStorage.getItem("cb_model")||"glm-4v-plus";
   document.getElementById("cb-btn-analyze").style.display="none"; document.getElementById("cb-ai-loading").style.display="";
   var endpoint="";
@@ -1399,7 +1399,6 @@ function rset(){
   document.getElementById("cb-set-sb-key").value=localStorage.getItem("cb_sb_key")||"";
   document.getElementById("cb-set-sb-device").value=localStorage.getItem("cb_sb_device")||"";
   document.getElementById("cb-set-sb-auto").checked=localStorage.getItem("cb_sb_auto")!=="0";
-  (function(){var sc=document.querySelector("#cb-view-settings .cb-card"); if(sc&&!document.getElementById("cb-vip-status")){var div=document.createElement("div");div.className="cb-setting";div.innerHTML='<h3>👑 会员中心</h3><div id="cb-vip-status" style="font-size:0.8rem;margin-bottom:6px"></div><div style="display:flex;gap:6px"><input type="text" id="cb-vip-code" placeholder="输入激活码，如 GKB-365-XXXXXXXX-XXXX" style="flex:1;border:1px solid var(--border);border-radius:8px;padding:8px;font-size:0.8rem"><button class="cb-btn gold" id="cb-btn-vip-activate" style="font-size:0.8rem;padding:6px 12px">激活</button></div><p style="font-size:0.72rem;color:var(--text2);margin:6px 0 0">购买会员：联系 2840542949@qq.com（微信/邮箱），付款后发送激活码；同一激活码可在手机/平板/电脑共用。</p>';var first=sc.querySelector(".cb-setting");if(first)sc.insertBefore(div,first);else sc.appendChild(div)}})();
   onProviderChange(); sbPaint(); sbVerText(); vipPaint();
 }
 function onProviderChange(){
@@ -1856,6 +1855,7 @@ function bindEvents(){
   el=document.getElementById("cb-btn-close-print"); if(el) el.addEventListener("click",function(){document.getElementById("cb-exam-print").style.display="none";document.getElementById("cb-exam-config").style.display=""});
   // Settings
   el=document.getElementById("cb-btn-save-set"); if(el) el.addEventListener("click",saveSettings);
+  (function(){var sc=document.querySelector("#cb-view-settings .cb-card"); if(sc&&!document.getElementById("cb-vip-status")){var div=document.createElement("div");div.className="cb-setting";div.innerHTML='<h3>👑 会员中心</h3><div id="cb-vip-status" style="font-size:0.8rem;margin-bottom:6px"></div><div style="display:flex;gap:6px"><input type="text" id="cb-vip-code" placeholder="输入激活码，如 GKB-365-XXXXXXXX-XXXX" style="flex:1;border:1px solid var(--border);border-radius:8px;padding:8px;font-size:0.8rem"><button class="cb-btn gold" id="cb-btn-vip-activate" style="font-size:0.8rem;padding:6px 12px">激活</button></div><p style="font-size:0.72rem;color:var(--text2);margin:6px 0 0">购买会员：联系 2840542949@qq.com（微信/邮箱），付款后发送激活码；同一激活码可在手机/平板/电脑共用。<br>注意：AI 识别需先在下方「AI 识别」里填自己的 API Key（智谱/通义）。</p>';var first=sc.querySelector(".cb-setting");if(first)sc.insertBefore(div,first);else sc.appendChild(div)}})();
   (function(){if(!document.getElementById("cb-vip-modal")){var d=document.createElement("div");d.innerHTML='<div id="cb-vip-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.72);z-index:330;align-items:center;justify-content:center;padding:16px;box-sizing:border-box"><div style="background:var(--card);border-radius:12px;padding:18px;width:100%;max-width:400px"><div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px"><h3 style="margin:0">👑 会员功能</h3><button id="cb-vip-close" style="border:none;background:none;cursor:pointer;font-size:1rem;color:var(--text2)">✕</button></div><p id="cb-vip-msg" style="font-size:0.85rem;margin:0 0 10px"></p><ul style="font-size:0.78rem;color:var(--text2);margin:0 0 12px;padding-left:16px"><li>AI 拍照识别 / 文字批量识别 / 解题解析</li><li>Supabase 多设备云同步</li><li>组卷导出含答案解析 PDF</li></ul><div style="display:flex;gap:8px"><button class="cb-btn gold" id="cb-vip-gosettings" style="flex:1">去激活会员</button><button class="cb-btn ghost" id="cb-vip-later" style="flex:1">先不用</button></div></div></div>';document.body.appendChild(d.firstChild)}})();
   el=document.getElementById("cb-btn-vip-activate"); if(el) el.addEventListener("click",vipActivate);
   el=document.getElementById("cb-vip-close"); if(el) el.addEventListener("click",closeVipModal);
