@@ -1,6 +1,6 @@
 {
-  "versionCode": 4,
-  "versionName": "1.1.0",
-  "apkUrl": "https://raw.githubusercontent.com/2020-GIF/cuotiben-vip-releases/main/cuotiben-vip-v1.1.0.apk",
-  "note": "新增会员套餐页、首次启动引导、隐私政策与免责声明"
+  "versionCode": 5,
+  "versionName": "1.2.0",
+  "apkUrl": "https://raw.githubusercontent.com/2020-GIF/cuotiben-vip-releases/main/cuotiben-vip-v1.2.0.apk",
+  "note": "全新视觉主题：渐变顶栏、悬浮底部导航、圆角卡片与深色模式优化"
 }
