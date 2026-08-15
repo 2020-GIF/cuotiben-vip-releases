@@ -1,6 +1,6 @@
 {
-  "versionCode": 5,
-  "versionName": "1.2.0",
-  "apkUrl": "https://raw.githubusercontent.com/2020-GIF/cuotiben-vip-releases/main/cuotiben-vip-v1.2.0.apk",
-  "note": "全新视觉主题：渐变顶栏、悬浮底部导航、圆角卡片与深色模式优化"
+  "versionCode": 6,
+  "versionName": "1.2.1",
+  "apkUrl": "https://raw.githubusercontent.com/2020-GIF/cuotiben-vip-releases/main/cuotiben-vip-v1.2.1.apk",
+  "note": "修复检查更新无响应：增加即时提示与 15 秒超时，失败自动打开下载页"
 }

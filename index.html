@@ -412,7 +412,7 @@ var QTYPES={
 };
 var examQs=[], examAns={}, examTimer=null, examSec=0;
 var kwFilter="";
-var APP_VERSION_CODE=5; var APP_VERSION_NAME="1.2.0";
+var APP_VERSION_CODE=6; var APP_VERSION_NAME="1.2.1";
 
 // ===== VIEW SWITCH =====
 function sv(v){
@@ -1500,20 +1500,30 @@ function applyAppearance(){
 }
 function checkUpdate(){
   var url="https://raw.githubusercontent.com/2020-GIF/cuotiben-vip-releases/main/version.json";
-  fetch(url+(url.indexOf("?")>=0?"&":"?")+"_="+Date.now(),{cache:"no-store"}).then(function(r){return r.json()}).then(function(info){
+  toast("正在检查更新…",1200);
+  var ctrl=typeof AbortController!=="undefined"?new AbortController():null;
+  var timer=ctrl?setTimeout(function(){ctrl.abort()},15000):null;
+  var opt={cache:"no-store"}; if(ctrl)opt.signal=ctrl.signal;
+  fetch(url+(url.indexOf("?")>=0?"&":"?")+"_="+Date.now(),opt).then(function(r){return r.json()}).then(function(info){
+    if(timer)clearTimeout(timer);
     if(info&&info.versionCode>APP_VERSION_CODE&&info.apkUrl){
       if(window.Android&&window.Android.downloadApk){
         toast("发现新版本 "+info.versionName+"，开始下载…",2600);
         window.__dlDone=function(ok,msg){window.__dlDone=null;if(ok){toast("更新包已下载，请按系统提示安装",3000)}else{toast(msg,6000)}};
         window.Android.downloadApk(info.apkUrl,"公考错题本-"+info.versionName+".apk");
       }else{
-        try{window.open("https://github.com/2020-GIF/cuotiben-releases/releases/latest")}catch(e){}
+        try{window.open("https://github.com/2020-GIF/cuotiben-vip-releases/releases/latest")}catch(e){}
         toast("发现新版本 "+info.versionName+"，已打开下载页面",3000);
       }
     }else{
       toast("已是最新版本（"+APP_VERSION_NAME+"）");
     }
-  }).catch(function(e){toast("检查失败："+(e&&e.message||"网络错误")+"，请稍后重试",6000)});
+  }).catch(function(e){
+    if(timer)clearTimeout(timer);
+    var msg=(e&&e.name==="AbortError")?"网络超时，请检查网络后重试":((e&&e.message)||"网络错误");
+    toast("检查失败："+msg,5000);
+    if(window.Android&&window.Android.openExternal){try{window.Android.openExternal("https://github.com/2020-GIF/cuotiben-vip-releases/releases/latest")}catch(err){}}
+  });
 }
 function openFeedback(){document.getElementById("cb-feedback").style.display="flex";setTimeout(function(){var t=document.getElementById("cb-fb-text");if(t)t.focus()},100)}
 function closeFeedback(){document.getElementById("cb-feedback").style.display="none"}
