@@ -1,6 +1,6 @@
 {
-  "versionCode": 11,
-  "versionName": "1.5.1",
-  "apkUrl": "https://raw.githubusercontent.com/2020-GIF/cuotiben-vip-releases/main/cuotiben-vip-v1.5.1.apk",
-  "note": "拍照识图保留原图：不再擦除红笔/手写，仅让 AI 忽略；组卷导出去笔迹功能保留"
+  "versionCode": 12,
+  "versionName": "1.5.2",
+  "apkUrl": "https://cdn.jsdelivr.net/gh/2020-GIF/cuotiben-vip-releases@v1.5.2/cuotiben-vip-v1.5.2.apk",
+  "note": "检查更新自动切换国内镜像线路，下载失败自动换源重试"
 }
