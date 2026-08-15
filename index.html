@@ -272,7 +272,7 @@ body.dark #cb-topbar{background:linear-gradient(120deg,#1d2748,#2c3a6e 60%,#3748
 <section id="cb-view-add" class="cb-view">
   <div class="cb-tabs"><button class="cb-tab-btn active" data-tab="manual">✏️ 手动录入</button><button class="cb-tab-btn" data-tab="photo">📷 拍照识别</button><button class="cb-tab-btn" data-tab="text">📝 文字识别</button></div>
   <div id="cb-tab-manual"><form class="cb-form cb-card" id="cb-form-add"><h2>录入错题</h2><label>模块</label><div class="cb-chips" id="cb-add-chips"></div><label for="cb-inp-q">题目</label><textarea id="cb-inp-q" rows="3" placeholder="输入题目…" required></textarea><label for="cb-inp-a">答案 / 解析</label><textarea id="cb-inp-a" rows="3" placeholder="输入正确答案…" required></textarea><div class="cb-form-row"><div class="cb-form-col"><label>题型</label><select id="cb-inp-qtype"></select></div><div class="cb-form-col"><label>答题形式</label><select id="cb-inp-fmt"><option>单选</option><option>多选</option><option>判断</option><option>不定项</option><option>案例分析</option><option>公文写作</option><option>大作文</option><option>其他</option></select></div></div><div class="cb-form-row"><div class="cb-form-col"><label>难度</label><select id="cb-inp-diff"><option value="1">⭐</option><option value="2">⭐⭐</option><option value="3">⭐⭐⭐</option></select></div><div class="cb-form-col"><label>来源</label><select id="cb-inp-src"><option>未知</option><option>真题</option><option>模拟题</option><option>专项练习</option></select></div></div><div class="cb-form-row"><div class="cb-form-col"><label>错因</label><select id="cb-inp-cause"><option>知识点不熟</option><option>粗心大意</option><option>理解偏差</option><option>时间不够</option><option>审题错误</option><option>其他</option></select></div></div><div style="display:flex;gap:8px;margin-top:12px"><button type="submit" class="cb-btn pri">💾 保存</button><button type="button" class="cb-btn ghost" id="cb-btn-cancel-add">取消</button></div></form></div>
-  <div id="cb-tab-photo" style="display:none"><div class="cb-card"><div id="cb-photo-up"><div style="display:flex;gap:10px;margin-bottom:12px"><div id="cb-photo-camera" class="cb-photo-up" style="flex:1;cursor:pointer"><div class="cb-pu-icon">📷</div><p>拍照</p><p style="font-size:0.65rem;color:#a0aec0">直接用相机拍试卷</p></div><div id="cb-photo-gallery" class="cb-photo-up" style="flex:1;cursor:pointer"><div class="cb-pu-icon">🖼</div><p>相册</p><p style="font-size:0.65rem;color:#a0aec0">从相册选择照片</p></div></div><p style="text-align:center;font-size:0.72rem;color:var(--text2)">AI 会自动忽略手写与红笔批改，只识别印刷体题目；资料分析会逐格读取表格数字</p><p style="text-align:center;font-size:0.66rem;color:#a0aec0;margin-top:4px">⚠️ 免费额度自动使用内置 AI，无需任何配置</p></div><input type="file" id="cb-photo-inp" accept="image/*" capture="environment" style="display:none"><div id="cb-photo-pv" class="cb-photo-pv" style="display:none"><img id="cb-photo-img" src="" alt="预览"><button class="cb-photo-rm" id="cb-photo-rm">✕</button></div><button class="cb-btn gold wide" id="cb-btn-analyze" style="display:none">🔍 开始识别</button><div id="cb-ai-loading" style="display:none;text-align:center;padding:20px"><div class="cb-spinner"></div><p style="font-size:0.8rem;color:var(--text2);margin-top:8px">AI 正在识别错题...</p></div><div id="cb-ai-results" style="display:none"><div class="cb-sec-hd"><h2 id="cb-ai-count">识别结果</h2></div><div id="cb-ai-list"></div><button class="cb-btn pri wide" id="cb-btn-save-ai" style="margin-top:8px">💾 全部保存</button></div></div></div>
+  <div id="cb-tab-photo" style="display:none"><div class="cb-card"><div id="cb-photo-up"><div style="display:flex;gap:10px;margin-bottom:12px"><div id="cb-photo-camera" class="cb-photo-up" style="flex:1;cursor:pointer"><div class="cb-pu-icon">📷</div><p>拍照</p><p style="font-size:0.65rem;color:#a0aec0">直接用相机拍试卷</p></div><div id="cb-photo-gallery" class="cb-photo-up" style="flex:1;cursor:pointer"><div class="cb-pu-icon">🖼</div><p>相册</p><p style="font-size:0.65rem;color:#a0aec0">从相册选择照片</p></div></div><p style="text-align:center;font-size:0.72rem;color:var(--text2)">AI 会自动忽略手写与红笔批改，只识别印刷体题目；资料分析会逐格读取表格数字</p><p style="text-align:center;font-size:0.66rem;color:#a0aec0;margin-top:4px">⚠️ 新用户赠 15 次永久额度；每日打卡再领 3 次当日免费额度；仅拍照识图扣次数</p></div><input type="file" id="cb-photo-inp" accept="image/*" capture="environment" style="display:none"><div id="cb-photo-pv" class="cb-photo-pv" style="display:none"><img id="cb-photo-img" src="" alt="预览"><button class="cb-photo-rm" id="cb-photo-rm">✕</button></div><button class="cb-btn gold wide" id="cb-btn-analyze" style="display:none">🔍 开始识别</button><div id="cb-ai-loading" style="display:none;text-align:center;padding:20px"><div class="cb-spinner"></div><p style="font-size:0.8rem;color:var(--text2);margin-top:8px">AI 正在识别错题...</p></div><div id="cb-ai-results" style="display:none"><div class="cb-sec-hd"><h2 id="cb-ai-count">识别结果</h2></div><div id="cb-ai-list"></div><button class="cb-btn pri wide" id="cb-btn-save-ai" style="margin-top:8px">💾 全部保存</button></div></div></div>
 </section>
 <div id="cb-tab-text" style="display:none"><div class="cb-card"><h2>📝 文字批量识别</h2><p style="font-size:0.75rem;color:var(--text2);margin-bottom:8px">粘贴一题或多题（含选项），AI 会自动归类并生成速解解析</p><textarea id="cb-text-inp" rows="9" placeholder="粘贴题目文字，可一次粘贴多题…" style="width:100%;box-sizing:border-box;border:1px solid var(--border);border-radius:8px;padding:10px;font-size:0.85rem"></textarea><button class="cb-btn gold wide" id="cb-btn-text-rec" style="margin-top:10px">🔍 开始识别</button><div id="cb-text-loading" style="display:none;text-align:center;padding:20px"><div class="cb-spinner"></div><p style="font-size:0.8rem;color:var(--text2);margin-top:8px">AI 正在识别题目…</p></div><div id="cb-text-results" style="display:none;margin-top:12px"><div class="cb-sec-hd"><h2 id="cb-text-count">识别结果</h2></div><div id="cb-text-list"></div><button class="cb-btn pri wide" id="cb-btn-text-save" style="margin-top:8px">💾 全部保存</button></div></div></div>
 <section id="cb-view-manage" class="cb-view">
@@ -281,7 +281,7 @@ body.dark #cb-topbar{background:linear-gradient(120deg,#1d2748,#2c3a6e 60%,#3748
 </section>
 <section id="cb-view-checkin" class="cb-view">
   <div class="cb-card"><div class="cb-sec-hd"><h2>🎯 今日目标</h2></div><div id="cb-checkin-goal"></div></div>
-  <div class="cb-card"><h2>📅 今日套题打卡</h2><div id="cb-checkin-form"></div><div class="cb-form-row" style="margin-top:8px"><div class="cb-form-col"><label style="font-size:0.75rem;color:var(--text2)">今日总用时（分钟）</label><input type="number" id="cb-checkin-minutes" min="0" placeholder="0"></div><div class="cb-form-col"><label style="font-size:0.75rem;color:var(--text2)">申论写作（字数）</label><input type="number" id="cb-checkin-words" min="0" placeholder="可空"></div></div><input type="text" id="cb-checkin-note" placeholder="备注：做了哪套题、今天状态…" style="width:100%;box-sizing:border-box;border:1px solid var(--border);border-radius:8px;padding:8px;font-size:0.85rem;margin-top:8px"><button class="cb-btn pri wide" id="cb-btn-checkin-save" style="margin-top:8px">💾 保存打卡</button></div>
+  <div class="cb-card"><h2>📅 今日套题打卡</h2><div id="cb-checkin-form"></div><div class="cb-form-row" style="margin-top:8px"><div class="cb-form-col"><label style="font-size:0.75rem;color:var(--text2)">今日总用时（分钟）</label><input type="number" id="cb-checkin-minutes" min="0" placeholder="0"></div><div class="cb-form-col"><label style="font-size:0.75rem;color:var(--text2)">申论写作（字数）</label><input type="number" id="cb-checkin-words" min="0" placeholder="可空"></div></div><input type="text" id="cb-checkin-note" placeholder="备注：做了哪套题、今天状态…" style="width:100%;box-sizing:border-box;border:1px solid var(--border);border-radius:8px;padding:8px;font-size:0.85rem;margin-top:8px"><button class="cb-btn pri wide" id="cb-btn-checkin-save" style="margin-top:8px">💾 保存打卡</button><p style="font-size:0.7rem;color:#dd6b20;margin:6px 0 0">🎁 每日打卡领取 3 次当日免费识图额度（24 点清零、不可累积）</p></div>
   <div class="cb-card"><div class="cb-sec-hd"><h2>🔥 最近7日打卡</h2></div><div id="cb-checkin-days"></div></div>
   <div class="cb-card"><div class="cb-sec-hd"><h2>📊 7日模块正确率</h2></div><div id="cb-checkin-mods"></div></div>
   <div class="cb-card"><div class="cb-sec-hd"><h2>📉 30日正确率趋势</h2><select id="cb-checkin-trend-mod" style="margin-bottom:6px"></select></div><div class="cb-chart-wrap"><canvas id="cb-checkin-trend"></canvas></div></div>
@@ -303,14 +303,15 @@ body.dark #cb-topbar{background:linear-gradient(120deg,#1d2748,#2c3a6e 60%,#3748
 <section id="cb-view-settings" class="cb-view">
   <div class="cb-card"><h2>⚙ 设置</h2>
     <div class="cb-setting"><h3>💾 数据管理</h3><div style="display:flex;gap:6px;flex-wrap:wrap"><button class="cb-btn pri" id="cb-btn-backup" style="font-size:0.8rem;padding:6px 12px">💾 备份到下载</button><button class="cb-btn pri" id="cb-btn-export" style="font-size:0.8rem;padding:6px 12px">📥 导出 JSON</button><button class="cb-btn ghost" id="cb-btn-import" style="font-size:0.8rem;padding:6px 12px">📤 导入 JSON</button><button class="cb-btn ghost" id="cb-btn-export-html" style="font-size:0.8rem;padding:6px 12px">🖨 可打印 HTML</button><button class="cb-btn danger" id="cb-btn-clear" style="font-size:0.8rem;padding:6px 12px">🗑 清空全部</button></div><input type="file" id="cb-import-file" accept=".json" style="display:none"></div>
-    <div class="cb-setting"><h3>🖼 拍照识别</h3><p style="font-size:0.72rem;color:var(--text2);margin:0 0 6px">识别使用内置 AI，无需填写任何 API 配置。</p><label style="display:flex;align-items:center;gap:8px"><input type="checkbox" id="cb-set-cleanred" checked> 自动去除红笔批改痕迹（推荐；图表含红色线条时可关）</label></div>
+    <div class="cb-setting"><h3>🖼 拍照识别</h3><label style="display:flex;align-items:center;gap:8px"><input type="checkbox" id="cb-set-cleanred" checked> 自动去除红笔批改痕迹（推荐；图表含红色线条时可关）</label></div>
     <div class="cb-setting"><h3>☁️ 云同步（Supabase）</h3><p style="font-size:0.72rem;color:var(--text2);margin:0 0 6px">手机 / 平板 / 电脑填同一个 Supabase 项目即可自动合并同步，免费注册：<a href="https://supabase.com/dashboard" target="_blank" style="color:var(--pri)">supabase.com/dashboard</a>（免费）</p><label>Project URL</label><input type="text" id="cb-set-sb-url" placeholder="https://xxxx.supabase.co"><label>anon public key</label><input type="password" id="cb-set-sb-key" placeholder="eyJhbGciOi..."><label>本机名称（可选，便于分辨设备）</label><input type="text" id="cb-set-sb-device" placeholder="手机 / 平板 / 电脑"><label style="display:flex;align-items:center;gap:8px;margin-bottom:8px"><input type="checkbox" id="cb-set-sb-auto" checked> 自动同步（打开应用 / 修改数据后自动合并）</label><div style="display:flex;gap:6px;margin-top:6px;flex-wrap:wrap"><button class="cb-btn pri" id="cb-btn-sb-test" style="font-size:0.8rem;padding:6px 12px">🔌 保存并测试</button><button class="cb-btn pri" id="cb-btn-sync" style="font-size:0.8rem;padding:6px 12px">☁️ 立即同步</button><button class="cb-btn ghost" id="cb-btn-sb-sql" style="font-size:0.8rem;padding:6px 12px">📋 复制建表 SQL</button></div><div id="cb-sb-status" style="font-size:0.75rem;color:var(--text2);margin-top:6px"></div><details style="margin-top:8px"><summary style="font-size:0.75rem;color:var(--pri);cursor:pointer">📖 三步配置教程（点开）</summary><ol style="font-size:0.72rem;color:var(--text2);margin:6px 0 0;padding-left:16px"><li>打开 supabase.com/dashboard，注册/登录，新建一个免费项目。</li><li>左侧 SQL Editor → New query → 点上面的“复制建表 SQL”，粘贴进去点 Run。</li><li>Settings → API 复制 Project URL 和 anon public key 填到上面，点“保存并测试”。</li></ol></details></div>
+    <div class="cb-setting"><h3>💻 电脑 / 平板使用</h3><p style="font-size:0.72rem;color:var(--text2);margin:0 0 6px">电脑或平板用浏览器打开下面网址即可使用；数据通过上方「云同步」配置后可在多设备合并。</p><div style="display:flex;gap:6px"><input type="text" id="cb-web-url" readonly value="https://2020-gif.github.io/cuotiben-vip-releases/" style="flex:1;border:1px solid var(--border);border-radius:8px;padding:7px;font-size:0.72rem;color:var(--text2)"><button class="cb-btn ghost" id="cb-btn-copy-web" style="font-size:0.75rem;padding:6px 10px;flex:0 0 auto">📋 复制</button></div><p style="font-size:0.7rem;color:var(--text2);margin:4px 0 0">平板也可安装本应用安装包（联系开发者获取），或直接使用浏览器打开上方网址。</p></div>
     <div class="cb-setting"><h3>🎯 目标</h3><label>每日目标题数</label><input type="number" id="cb-set-goal" min="0" value="50"></div>
     <div class="cb-setting"><h3>🎨 外观</h3><label style="display:flex;align-items:center;gap:8px;margin-bottom:8px"><input type="checkbox" id="cb-set-dark"> 深色模式</label><label>字号</label><select id="cb-set-font"><option value="14">小</option><option value="16" selected>中</option><option value="18">大</option></select></div>
     <div class="cb-setting"><h3>🔔 提醒</h3><label>每日提醒时间</label><input type="time" id="cb-set-remind" value="08:00"></div>
     <div class="cb-setting"><h3>💬 反馈与帮助</h3><div style="display:flex;gap:6px;margin-top:6px"><button class="cb-btn pri" id="cb-btn-feedback-open" style="font-size:0.8rem;padding:6px 12px">✍️ 写反馈</button></div><p style="font-size:0.7rem;color:var(--text2);margin-top:4px">意见会直接发送给开发者邮箱</p></div>
     <div class="cb-setting"><h3>🔄 更新</h3><div style="display:flex;gap:6px;margin-top:6px"><button class="cb-btn pri" id="cb-btn-update" style="font-size:0.8rem;padding:6px 12px">🔍 检查更新</button></div><p style="font-size:0.7rem;color:var(--text2);margin-top:4px">点击检查最新版本，发现新版本后自动下载并引导安装</p></div>
-    <button class="cb-btn gold wide" id="cb-btn-save-set">💾 保存设置</button><p style="font-size:0.7rem;color:var(--text2);margin-top:8px">当前版本：1.4.0（考岸错题本）</p></div>
+    <button class="cb-btn gold wide" id="cb-btn-save-set">💾 保存设置</button><p style="font-size:0.7rem;color:var(--text2);margin-top:8px">当前版本：1.5.0（考岸错题本）</p></div>
 </section>
 </main>
 <nav id="cb-nav">
@@ -412,7 +413,7 @@ var QTYPES={
 };
 var examQs=[], examAns={}, examTimer=null, examSec=0;
 var kwFilter="";
-var APP_VERSION_CODE=9; var APP_VERSION_NAME="1.4.0";
+var APP_VERSION_CODE=10; var APP_VERSION_NAME="1.5.0";
 
 // ===== VIEW SWITCH =====
 function sv(v){
@@ -685,7 +686,9 @@ function saveCheckin(){
   if(!any){toast("请至少填一个模块的题数");return}
   dbDayPut({date:td,modules:mods,note:document.getElementById("cb-checkin-note").value.trim()||"",minutes:parseInt(document.getElementById("cb-checkin-minutes").value)||0,shenlunWords:parseInt(document.getElementById("cb-checkin-words").value)||null,ut:new Date().toISOString()},function(e){
     if(e){toast("保存失败："+e.message);return}
-    toast("打卡已保存");renderCheckin(); sbQueueSync();
+    var granted=grantDailyFree();
+    toast(granted?"打卡已保存，今日免费识图额度 +3 次":"打卡已保存");
+    vipPaint(); renderCheckin(); sbQueueSync();
   });
 }
 function renderCheckin(){
@@ -937,7 +940,6 @@ var TEXT_PROMPT='你是公务员考试(省考/国考)错题识别与题型归类
 async function textRecognition(){
   var txt=document.getElementById("cb-text-inp").value.trim();
   if(!txt){toast("请先粘贴题目文字");return}
-  if(!vipAiGate("AI 文字识别"))return;
   var tc=aiTextCred();
   var api=tc.api, model=tc.model, ak=tc.key;
   document.getElementById("cb-btn-text-rec").style.display="none";
@@ -998,7 +1000,6 @@ function toggleTEdit(i){var el=document.getElementById("cb-t-edit-"+i);if(!el)re
 function applyTEdit(i){var el=document.getElementById("cb-t-edit-"+i);if(!el||!aiR[i])return;aiR[i].question=el.querySelector(".e-q").value.trim();aiR[i].answer=el.querySelector(".e-a").value.trim();aiR[i].analysis=el.querySelector(".e-x").value.trim();renderTextAI()}
 function saveTextAI(){
   if(!aiR.length) return; var now=new Date(), n=0;
-  vipMarkAiUsed();
   for(var i=0;i<aiR.length;i++){ var r=aiR[i],m=MODS.indexOf(r.module)>=0?r.module:MODS[0];
     dbAdd({id:"q_"+now.getTime()+"_"+Math.random().toString(36).slice(2,8)+"_t"+i,mod:m,q:r.question||"",a:r.answer||"",
       qtype:(QTYPES[m]||["其他"]).indexOf(r.questionType)>=0?r.questionType:(QTYPES[m]||["其他"])[0],
@@ -1804,14 +1805,23 @@ function vipB32(v,len){var out="";for(var i=0;i<len;i++){out=VIP_ALPH.charAt(v%3
 function vipInfo(){try{var v=JSON.parse(localStorage.getItem("cb_vip")||"null");return v&&typeof v==="object"?v:null}catch(e){return null}}
 function isVip(){var v=vipInfo();if(!v)return false;if(v.expires&&Date.now()>v.expires){localStorage.removeItem("cb_vip");return false}return true}
 function vipDaysLeft(){var v=vipInfo();if(!v)return 0;if(!v.expires)return -1;return Math.max(0,Math.ceil((v.expires-Date.now())/86400000))}
-var AI_FREE_LIMIT=10;
-function vipFreeLeft(){return Math.max(0,AI_FREE_LIMIT-parseInt(localStorage.getItem("cb_ai_free_used")||"0"))}
+var NEWBIE_QUOTA=15, DAILY_FREE=3, DAILY_CAP=200;
+function permQuota(){return Math.max(0,parseInt(localStorage.getItem("cb_perm_quota")||"0"))}
+function dailyFreeLeft(){var d=localStorage.getItem("cb_df_date"),c=parseInt(localStorage.getItem("cb_df_left")||"0");return d===dk(new Date())?Math.max(0,c):0}
+function dailyUsed(){var d=localStorage.getItem("cb_day_date"),c=parseInt(localStorage.getItem("cb_day_used")||"0");return d===dk(new Date())?c:0}
+function grantDailyFree(){var td=dk(new Date());if(localStorage.getItem("cb_df_date")===td)return false;localStorage.setItem("cb_df_date",td);localStorage.setItem("cb_df_left",String(DAILY_FREE));return true}
+function quotaInit(){
+  var old=parseInt(localStorage.getItem("cb_api_quota")||"0");
+  if(old>0&&localStorage.getItem("cb_quota_migrated")!=="1"){localStorage.setItem("cb_perm_quota",String(permQuota()+old));localStorage.removeItem("cb_api_quota")}
+  localStorage.setItem("cb_quota_migrated","1");
+  if(localStorage.getItem("cb_newbie_granted")!=="1"){localStorage.setItem("cb_perm_quota",String(permQuota()+NEWBIE_QUOTA));localStorage.setItem("cb_newbie_granted","1")}
+  vipPaint();
+}
 var DEV_AI_KEY="4adc7f49c302426498c500db17688a5f.WcOKK1w1FY4BO2ad";
 var DEV_AI_ENDPOINT="https://open.bigmodel.cn/api/paas/v4/chat/completions";
 var DEV_AI_VISION_MODEL="glm-4v-plus";
 var DEV_AI_TEXT_MODEL="glm-4-flash";
-function apiQuotaLeft(){return Math.max(0,parseInt(localStorage.getItem("cb_api_quota")||"0"))}
-function aiUseMode(){if(vipFreeLeft()>0)return "free";if(apiQuotaLeft()>0)return "quota";return "none"}
+function aiUseMode(){if(dailyFreeLeft()>0)return "free";if(permQuota()>0)return "quota";return "none"}
 function aiVisionCred(){
   return {mode:aiUseMode(),provider:"glm",key:DEV_AI_KEY,model:DEV_AI_VISION_MODEL};
 }
@@ -1824,9 +1834,12 @@ function aiTextCred(){
 function vipPaint(){
   var el=document.getElementById("cb-vip-status"); if(!el)return;
   if(isVip()){var v=vipInfo(); el.innerHTML='✅ 会员已激活'+(v.expires?(' · 剩余 '+vipDaysLeft()+' 天'):' · 永久');}
-  else if(vipFreeLeft()>0){el.innerHTML='🎁 AI 识别免费额度剩余 '+vipFreeLeft()+' 次';}
-  else if(apiQuotaLeft()>0){el.innerHTML='🎁 内置 AI 剩余 '+apiQuotaLeft()+' 次';}
-  else{el.innerHTML='⏰ 免费额度已用完 · 购买次数包后继续使用';}
+  else{
+    var df=dailyFreeLeft(),p=permQuota();
+    var h='永久额度 '+p+' 次 · 今日免费 '+df+' 次';
+    if(p===0&&df===0)h+=' · <span style="color:#dd6b20">额度已用完，购买次数包或打卡领取</span>';
+    el.innerHTML=h;
+  }
 }
 function vipActivate(){
   var code=(document.getElementById("cb-vip-code").value||"").trim().toUpperCase().replace(/[\s-]+/g,"-");
@@ -1836,11 +1849,13 @@ function vipActivate(){
     if(!(q>0&&q<=100000)){toast("次数额度无效");return}
     var kh=vipHash(q+"-"+km[2]+"-"+VIP_SECRET);
     if(vipB32(kh%1048576,4)!==km[3]){toast("激活码无效，请核对后重试");return}
-    var cur=parseInt(localStorage.getItem("cb_api_quota")||"0");
-    localStorage.setItem("cb_api_quota",String(cur+q));
+    var first=localStorage.getItem("cb_first_purchase")!=="1";
+    var bonus=first?10:0;
+    localStorage.setItem("cb_perm_quota",String(permQuota()+q+bonus));
+    if(first)localStorage.setItem("cb_first_purchase","1");
     document.getElementById("cb-vip-code").value="";
     vipPaint();
-    toast("🎉 内置 AI 次数包已到账 +"+q+" 次");
+    toast("🎉 识图额度到账 +"+(q+bonus)+" 次"+(bonus?"（含首充赠送 10 次）":""));
     return;
   }
   var m=code.match(/^GKB-(\d+)-([23456789ABCDEFGHJKLMNPQRSTUVWXYZ]{8})-([23456789ABCDEFGHJKLMNPQRSTUVWXYZ]{4})$/);
@@ -1858,31 +1873,38 @@ function vipActivate(){
 }
 function vipAiGate(feature){
   if(isVip())return true;
-  if(vipFreeLeft()>0){toast("AI 识别免费额度剩余 "+vipFreeLeft()+" 次（保存结果时扣除）",2600);return true}
-  if(apiQuotaLeft()>0){toast("内置 AI 剩余 "+apiQuotaLeft()+" 次（保存结果时扣除）",2600);return true}
+  if(dailyUsed()>=DAILY_CAP){toast("今日识图已达 200 次上限，明天再来吧",3200);return false}
+  if(dailyFreeLeft()>0){toast("今日免费额度剩余 "+dailyFreeLeft()+" 次",2200);return true}
+  if(permQuota()>0){toast("永久识图额度剩余 "+permQuota()+" 次",2200);return true}
   openVipModal(feature); return false;
 }
 function vipMarkAiUsed(){
   if(isVip())return;
-  if(vipFreeLeft()>0){var u=parseInt(localStorage.getItem("cb_ai_free_used")||"0");localStorage.setItem("cb_ai_free_used",String(Math.min(AI_FREE_LIMIT,u+1)));vipPaint();return}
-  var q=apiQuotaLeft();if(q>0){localStorage.setItem("cb_api_quota",String(q-1));}
+  var td=dk(new Date());
+  localStorage.setItem("cb_day_date",td);
+  localStorage.setItem("cb_day_used",String(dailyUsed()+1));
+  var df=dailyFreeLeft();
+  if(df>0){localStorage.setItem("cb_df_left",String(df-1))}
+  else{var p=permQuota();if(p>0){localStorage.setItem("cb_perm_quota",String(p-1))}}
   vipPaint();
 }
 function openVipModal(feature){
   var m=document.getElementById("cb-vip-modal"); if(!m)return;
-  var p=document.getElementById("cb-vip-msg"); if(p)p.textContent="“"+(feature||"该功能")+"”需要次数额度。免费额度用完后，购买内置 AI 次数包即可继续使用。";
+  var p=document.getElementById("cb-vip-msg"); if(p)p.textContent="“"+(feature||"该功能")+"”需要识图额度。新用户送 15 次永久额度，每日打卡领 3 次当日免费额度；用完后购买次数包即可继续。";
   m.style.display="flex";
 }
 function closeVipModal(){var m=document.getElementById("cb-vip-modal");if(m)m.style.display="none"}
-var API_PACKS={"gk100":{name:"国考包",price:9.9,quota:100,desc:"内置 AI · 100 次识别"},"sk300":{name:"省考包",price:19.9,quota:300,desc:"内置 AI · 300 次识别"},"lk500":{name:"联考包",price:29.9,quota:500,desc:"内置 AI · 500 次识别"},"cc1000":{name:"冲刺包",price:49.9,quota:1000,desc:"内置 AI · 1000 次识别"}};
+var API_PACKS={"yj40":{name:"应急小包",price:1,quota:40,desc:"40 次识图额度"},"zh500":{name:"主推包",price:9.9,quota:500,desc:"500 次识图额度"},"cq1000":{name:"长期备考包",price:16.9,quota:1000,desc:"1000 次识图额度"}};
 function vipShopOpen(){
   var host=document.getElementById("cb-shop-tiers"); if(host){
-    var h='<div style="font-size:0.8rem;font-weight:700;margin-bottom:8px">🤖 内置 AI 次数包（按次计费，额度用多少算多少）</div>';
-    var pk=["gk100","sk300","lk500","cc1000"];
-    for(var i=0;i<pk.length;i++){var k=pk[i],p=API_PACKS[k];
-      h+='<div style="border:1px solid var(--border);border-radius:10px;padding:10px;margin-bottom:8px;display:flex;align-items:center;gap:8px"><div style="flex:1"><div style="font-size:0.9rem;font-weight:700">'+p.name+'</div><div style="font-size:0.7rem;color:var(--text2)">'+p.desc+'</div></div><div style="font-size:0.95rem;font-weight:800;color:var(--gold)">¥'+p.price+'</div><button class="cb-btn gold" data-vip-buy="'+k+'" style="font-size:0.72rem;padding:6px 10px">购买</button></div>';
+    var h='<div style="font-size:0.8rem;font-weight:700;margin-bottom:8px">📦 识图次数包（付费额度永久有效）</div>';
+    var pk=["yj40","zh500","cq1000"];
+    for(var i=0;i<pk.length;i++){var k=pk[i],p=API_PACKS[k],hot=k==="zh500";
+      h+='<div style="border:1px solid '+(hot?"var(--gold)":"var(--border)")+';border-radius:10px;padding:10px;margin-bottom:8px;display:flex;align-items:center;gap:8px"><div style="flex:1"><div style="font-size:0.9rem;font-weight:700">'+p.name+(hot?' <span style="font-size:0.62rem;background:#b8860b;color:#fff;padding:2px 6px;border-radius:8px">🔥 主推</span>':'')+'</div><div style="font-size:0.7rem;color:var(--text2)">'+p.desc+'</div></div><div style="font-size:0.95rem;font-weight:800;color:var(--gold)">¥'+p.price+'</div><button class="cb-btn gold" data-vip-buy="'+k+'" style="font-size:0.72rem;padding:6px 10px">购买</button></div>';
     }
-    h+='<p style="font-size:0.7rem;color:var(--text2);margin:6px 0 0">付款后发放激活码，激活后额度累加，可在手机/平板/电脑共用。</p>';
+    h+='<p style="font-size:0.72rem;color:#dd6b20;margin:6px 0">🎁 首充任意档位额外赠送 10 次永久额度</p>';
+    h+='<details style="margin-top:4px"><summary style="font-size:0.72rem;color:var(--text2);cursor:pointer">📖 使用规则</summary><ol style="font-size:0.7rem;color:var(--text2);margin:6px 0 0;padding-left:16px;line-height:1.8"><li>新用户注册赠送 15 次永久识图额度</li><li>每日打卡领取 3 次免费额度，当日 24 点清零、不可累积</li><li>扣费顺序：优先当日免费额度，耗尽后扣除付费永久额度</li><li>仅拍照识图扣费，手动文字录入不计次数；识别失败不扣费</li><li>账号每日识图总上限 200 次；付费额度永久有效</li></ol></details>';
+    h+='<p style="font-size:0.7rem;color:var(--text2);margin:6px 0 0">点击「购买」后按提示添加开发者 QQ 咨询付款，付款后发放激活码，额度累加。</p>';
     host.innerHTML=h;
   }
   var m=document.getElementById("cb-vip-shop"); if(m)m.style.display="flex";
@@ -1903,11 +1925,16 @@ function copyQq(){
   if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(q).then(function(){toast("QQ 号已复制：2840542949")},function(){toast("QQ：2840542949")})}
   else{toast("QQ：2840542949")}
 }
+function copyWebUrl(){
+  var u="https://2020-gif.github.io/cuotiben-vip-releases/";
+  if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(u).then(function(){toast("网址已复制")},function(){toast(u)})}
+  else{toast(u)}
+}
 var OB_STEPS=[
  {t:"👋 欢迎使用考岸错题本",h:"把错题拍下来，AI 自动识别题型并生成速解解析；错题按记忆曲线安排复习；一键组卷，可打印或导出 PDF。"},
- {t:"🔑 第 1 步 · AI 识别",h:"前 10 次免费识别已内置 AI，无需任何配置：录入 → 拍照/相册 → 开始识别。免费额度用完后，系统会提醒你选择后续方案。"},
+ {t:"🔑 第 1 步 · AI 识别",h:"新用户自动获得 15 次永久识图额度，无需任何配置：录入 → 拍照/相册 → 开始识别。仅拍照识图扣次数，识别失败不扣。"},
  {t:"☁️ 第 2 步 · 云同步（可选）",h:"设置 → 云同步：按教程在 Supabase 免费建项目，填入 Project URL 和 anon key，即可在手机/平板/电脑同步数据。"},
- {t:"🎁 第 3 步 · 免费额度",h:"AI 识别有 10 次免费额度，放心先用；额度用完后，系统会提醒你后续的使用方式。"}
+ {t:"🎁 第 3 步 · 免费额度",h:"新用户送 15 次永久额度；每日打卡再领 3 次当日免费额度（24 点清零）；用完后可购买次数包，也可在电脑/平板网页版使用。"}
 ];
 var obIdx=0;
 function obShow(i){
@@ -1987,6 +2014,7 @@ function bindEvents(){
   el=document.getElementById("cb-btn-update"); if(el) el.addEventListener("click",checkUpdate);
   el=document.getElementById("cb-btn-feedback-open"); if(el) el.addEventListener("click",openFeedback);
   el=document.getElementById("cb-fb-mail"); if(el) el.addEventListener("click",sendFeedbackMail);
+  el=document.getElementById("cb-btn-copy-web"); if(el) el.addEventListener("click",copyWebUrl);
   el=document.getElementById("cb-set-dark"); if(el) el.addEventListener("change",function(){localStorage.setItem("cb_dark",this.checked?"1":"0");applyAppearance()});
   el=document.getElementById("cb-set-font"); if(el) el.addEventListener("change",function(){localStorage.setItem("cb_font",this.value);applyAppearance()});
   el=document.getElementById("cb-btn-export"); if(el) el.addEventListener("click",exportJSON);
@@ -2028,7 +2056,7 @@ function bindEvents(){
   el=document.getElementById("cb-btn-close-print"); if(el) el.addEventListener("click",function(){document.getElementById("cb-exam-print").style.display="none";document.getElementById("cb-exam-config").style.display=""});
   // Settings
   el=document.getElementById("cb-btn-save-set"); if(el) el.addEventListener("click",saveSettings);
-  (function(){var sc=document.querySelector("#cb-view-settings .cb-card"); if(sc&&!document.getElementById("cb-vip-status")){var div=document.createElement("div");div.className="cb-setting";div.innerHTML='<h3>👑 额度与激活</h3><div id="cb-vip-status" style="font-size:0.8rem;margin-bottom:6px"></div><div style="display:flex;gap:6px"><input type="text" id="cb-vip-code" placeholder="输入激活码，如 KAB-100-XXXXXXXX-XXXX" style="flex:1;border:1px solid var(--border);border-radius:8px;padding:8px;font-size:0.8rem"><button class="cb-btn gold" id="cb-btn-vip-activate" style="font-size:0.8rem;padding:6px 12px">激活</button></div><p style="font-size:0.72rem;color:var(--text2);margin:6px 0 0">购买次数包：点下方「查看套餐与购买」，点击购买后按提示添加开发者 QQ 咨询付款；付款后发放激活码，激活后额度累加，可在手机/平板/电脑共用。</p>';var first=sc.querySelector(".cb-setting");if(first)sc.insertBefore(div,first);else sc.appendChild(div)}})();
+  (function(){var sc=document.querySelector("#cb-view-settings .cb-card"); if(sc&&!document.getElementById("cb-vip-status")){var div=document.createElement("div");div.className="cb-setting";div.innerHTML='<h3>👑 额度与激活</h3><div id="cb-vip-status" style="font-size:0.8rem;margin-bottom:6px"></div><div style="display:flex;gap:6px"><input type="text" id="cb-vip-code" placeholder="输入激活码，如 KAB-500-XXXXXXXX-XXXX" style="flex:1;border:1px solid var(--border);border-radius:8px;padding:8px;font-size:0.8rem"><button class="cb-btn gold" id="cb-btn-vip-activate" style="font-size:0.8rem;padding:6px 12px">激活</button></div><p style="font-size:0.72rem;color:var(--text2);margin:6px 0 0">新用户赠 15 次永久识图额度；每日打卡领 3 次当日免费额度。购买次数包：点下方「查看套餐与购买」，点击购买后按提示添加开发者 QQ 咨询付款；首充任意档位额外赠 10 次，激活后额度累加。</p>';var first=sc.querySelector(".cb-setting");if(first)sc.insertBefore(div,first);else sc.appendChild(div)}})();
   (function(){if(!document.getElementById("cb-vip-modal")){var d=document.createElement("div");d.innerHTML='<div id="cb-vip-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.72);z-index:330;align-items:center;justify-content:center;padding:16px;box-sizing:border-box"><div style="background:var(--card);border-radius:12px;padding:18px;width:100%;max-width:400px"><div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px"><h3 style="margin:0">🔒 需要次数额度</h3><button id="cb-vip-close" style="border:none;background:none;cursor:pointer;font-size:1rem;color:var(--text2)">✕</button></div><p id="cb-vip-msg" style="font-size:0.85rem;margin:0 0 10px"></p><ul style="font-size:0.78rem;color:var(--text2);margin:0 0 12px;padding-left:16px"><li>AI 拍照识别 / 文字批量识别 / 解题解析</li><li>Supabase 多设备云同步</li><li>组卷导出含答案解析 PDF</li></ul><div style="display:flex;gap:8px"><button class="cb-btn gold" id="cb-vip-gosettings" style="flex:1">查看购买方案</button><button class="cb-btn ghost" id="cb-vip-later" style="flex:1">先不用</button></div></div></div>';document.body.appendChild(d.firstChild)}})();
   el=document.getElementById("cb-btn-vip-activate"); if(el) el.addEventListener("click",vipActivate);
   el=document.getElementById("cb-vip-close"); if(el) el.addEventListener("click",closeVipModal);
@@ -2076,7 +2104,7 @@ function init(){
       document.body.innerHTML='<div style="padding:60px;text-align:center;font-family:sans-serif"><h2>数据库错误</h2><p style="color:red;margin:10px 0">'+err.message+'</p><button onclick="location.reload()" style="margin:6px;padding:10px 28px;background:#1a365d;color:#fff;border:none;border-radius:8px;cursor:pointer;font-size:14px">🔄 重试</button><button onclick="if(confirm(\'确定清理数据库？所有数据将丢失！\')){indexedDB.deleteDatabase(\'CBT_DB\');location.reload()}" style="margin:6px;padding:10px 28px;background:#e53e3e;color:#fff;border:none;border-radius:8px;cursor:pointer;font-size:14px">🗑 清理数据库后重试</button></div>';
       return;
     }
-    applyAppearance(); bindEvents(); rd(); autoBackup(); sbPaint(); sbVerText(); sbAutoStart(); obInit();
+    applyAppearance(); bindEvents(); rd(); autoBackup(); sbPaint(); quotaInit(); sbVerText(); sbAutoStart(); obInit();
   });
 }
 document.addEventListener("DOMContentLoaded",init);
