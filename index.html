@@ -342,7 +342,7 @@ var QTYPES={
 };
 var examQs=[], examAns={}, examTimer=null, examSec=0;
 var kwFilter="";
-var APP_VERSION_CODE=3; var APP_VERSION_NAME="1.0.2";
+var APP_VERSION_CODE=4; var APP_VERSION_NAME="1.1.0";
 
 // ===== VIEW SWITCH =====
 function sv(v){
@@ -1745,6 +1745,44 @@ function openVipModal(feature){
   m.style.display="flex";
 }
 function closeVipModal(){var m=document.getElementById("cb-vip-modal");if(m)m.style.display="none"}
+var VIP_PLANS={"30":{name:"月卡",price:19.9,desc:"30 天会员，适合先试用"},"90":{name:"季卡",price:39.9,desc:"90 天会员，适合冲刺期"},"365":{name:"年卡",price:99,desc:"365 天会员，覆盖备考全程"},"9999":{name:"永久",price:199,desc:"一次买断，永久使用"}};
+function vipShopOpen(){
+  var host=document.getElementById("cb-shop-tiers"); if(host){
+    var order=["30","90","365","9999"],h="";
+    for(var i=0;i<order.length;i++){var d=order[i],p=VIP_PLANS[d];
+      h+='<div style="border:1px solid '+(d==="365"?"var(--gold)":"var(--border)")+';border-radius:10px;padding:10px;margin-bottom:8px;display:flex;align-items:center;gap:8px"><div style="flex:1"><div style="font-size:0.9rem;font-weight:700">'+p.name+(d==="365"?' <span style="font-size:0.62rem;background:#b8860b;color:#fff;padding:2px 6px;border-radius:8px">推荐</span>':'')+'</div><div style="font-size:0.7rem;color:var(--text2)">'+p.desc+'</div></div><div style="font-size:0.95rem;font-weight:800;color:var(--gold)">¥'+p.price+'</div><button class="cb-btn gold" data-vip-buy="'+d+'" style="font-size:0.72rem;padding:6px 10px">购买</button></div>';
+    }
+    host.innerHTML=h;
+  }
+  var m=document.getElementById("cb-vip-shop"); if(m)m.style.display="flex";
+}
+function vipShopClose(){var m=document.getElementById("cb-vip-shop");if(m)m.style.display="none"}
+function vipShopBuy(days){
+  var p=VIP_PLANS[days]; if(!p)return;
+  vipShopClose(); openFeedback();
+  var t=document.getElementById("cb-fb-text"); if(t)t.value="【购买会员】我想购买："+p.name+"（¥"+p.price+"）\n请告诉我付款方式，谢谢。";
+}
+var OB_STEPS=[
+ {t:"👋 欢迎使用公考错题本·会员版",h:"把错题拍下来，AI 自动识别题型并生成速解解析；错题按记忆曲线安排复习；一键组卷，可打印或导出 PDF。"},
+ {t:"🔑 第 1 步 · 配置 AI Key",h:"设置 → AI 识别：服务商选「智谱 GLM-4V」，粘贴你自己的 API Key 并保存。会员解锁的是功能，API 费用由你的 Key 承担。"},
+ {t:"☁️ 第 2 步 · 云同步（可选）",h:"设置 → 云同步：按教程在 Supabase 免费建项目，填入 Project URL 和 anon key，即可在手机/平板/电脑同步数据。"},
+ {t:"👑 第 3 步 · 激活会员",h:"设置 → 会员中心：查看套餐与购买；AI 识别有 5 次免费试用。激活码付款后由开发者发放。"}
+];
+var obIdx=0;
+function obShow(i){
+  obIdx=i;
+  var st=document.getElementById("cb-onboard-step"); if(st)st.innerHTML='<h3 style="margin:0 0 10px">'+OB_STEPS[i].t+'</h3><div style="font-size:0.85rem;line-height:1.8;color:var(--text2)">'+OB_STEPS[i].h+'</div>';
+  var prev=document.getElementById("cb-onboard-prev"); if(prev)prev.style.visibility=i===0?"hidden":"";
+  var next=document.getElementById("cb-onboard-next"); if(next)next.style.display=i===OB_STEPS.length-1?"none":"";
+  var agree=document.getElementById("cb-onboard-agree"); if(agree)agree.style.display=i===OB_STEPS.length-1?"":"none";
+}
+function obNext(){if(obIdx<OB_STEPS.length-1)obShow(obIdx+1)}
+function obPrev(){if(obIdx>0)obShow(obIdx-1)}
+function obCheck(){var c=document.getElementById("cb-onboard-check"),s=document.getElementById("cb-onboard-start");if(c&&s)s.disabled=!c.checked}
+function obStart(){localStorage.setItem("cb_onboarded","1");var m=document.getElementById("cb-onboard");if(m)m.style.display="none"}
+function obInit(){if(localStorage.getItem("cb_onboarded")==="1")return;var m=document.getElementById("cb-onboard");if(!m)return;m.style.display="flex";obShow(0)}
+function privacyOpen(){var m=document.getElementById("cb-privacy-modal");if(m)m.style.display="flex"}
+function privacyClose(){var m=document.getElementById("cb-privacy-modal");if(m)m.style.display="none"}
 
 // ===== NOTIFICATIONS =====
 function scheduleNotify(){
@@ -1856,6 +1894,21 @@ function bindEvents(){
   el=document.getElementById("cb-vip-close"); if(el) el.addEventListener("click",closeVipModal);
   el=document.getElementById("cb-vip-later"); if(el) el.addEventListener("click",closeVipModal);
   el=document.getElementById("cb-vip-gosettings"); if(el) el.addEventListener("click",function(){closeVipModal();sv("settings");setTimeout(function(){var t=document.getElementById("cb-vip-code");if(t)t.focus()},200)});
+  (function(){if(!document.getElementById("cb-vip-shop")){var d=document.createElement("div");d.innerHTML='<div id="cb-vip-shop" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.72);z-index:335;align-items:center;justify-content:center;padding:16px;box-sizing:border-box"><div style="background:var(--card);border-radius:12px;padding:16px;width:100%;max-width:440px;max-height:86vh;overflow:auto"><div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px"><h3 style="margin:0">👑 会员套餐</h3><button id="cb-shop-close" style="border:none;background:none;cursor:pointer;font-size:1rem;color:var(--text2)">✕</button></div><div id="cb-shop-tiers"></div><p style="font-size:0.72rem;color:var(--text2);margin:8px 0 0">购买：点套餐按钮后通过「写反馈」提交购买意向，付款后发放激活码；同一激活码可在手机/平板/电脑共用。</p><button class="cb-btn ghost" id="cb-shop-activate" style="width:100%;margin-top:8px">已有激活码？去激活</button></div></div>';document.body.appendChild(d.firstChild)}})();
+  (function(){if(!document.getElementById("cb-onboard")){var d=document.createElement("div");d.innerHTML='<div id="cb-onboard" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.82);z-index:340;align-items:center;justify-content:center;padding:16px;box-sizing:border-box"><div style="background:var(--card);border-radius:14px;padding:20px;width:100%;max-width:430px"><div id="cb-onboard-step" style="min-height:210px"></div><div style="display:flex;gap:8px;margin-top:12px"><button id="cb-onboard-prev" class="cb-btn ghost" style="flex:0 0 auto">上一步</button><button id="cb-onboard-next" class="cb-btn pri" style="flex:1">下一步</button></div><div id="cb-onboard-agree" style="display:none;margin-top:10px"><label style="display:flex;align-items:center;gap:6px;font-size:0.75rem"><input type="checkbox" id="cb-onboard-check"> 我已阅读并同意 <a href="#" id="cb-onboard-privacy" style="color:var(--pri)">《隐私政策》</a></label><button class="cb-btn gold wide" id="cb-onboard-start" style="margin-top:8px" disabled>🚀 开始使用</button></div></div></div>';document.body.appendChild(d.firstChild)}})();
+  (function(){if(!document.getElementById("cb-privacy-modal")){var d=document.createElement("div");d.innerHTML='<div id="cb-privacy-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.72);z-index:345;align-items:center;justify-content:center;padding:16px;box-sizing:border-box"><div style="background:var(--card);border-radius:12px;padding:16px;width:100%;max-width:480px;max-height:84vh;overflow:auto"><div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px"><h3 style="margin:0">隐私政策与免责声明</h3><button id="cb-privacy-close" style="border:none;background:none;cursor:pointer;font-size:1rem;color:var(--text2)">✕</button></div><div style="font-size:0.76rem;line-height:1.7;color:var(--text2)"><p>1. 数据存储：错题、图片、打卡记录默认仅保存在本机，不会上传给开发者。</p><p>2. 云同步：仅当你主动配置 Supabase 并开启同步时，数据才存储到你自己的 Supabase 项目。</p><p>3. AI 识别：你提交的图片或文字会发送给你自己填写的 AI 服务商用于识别，请遵守其服务条款。</p><p>4. 反馈：使用「写反馈」时，内容会通过邮件发送给开发者用于改进产品。</p><p>5. 本应用不收集设备信息、通讯录、位置等无关信息。</p><p>6. 免责声明：解析由 AI 生成，仅供参考，不构成答题或考试结果承诺，请以官方教材和答案为准。</p><p>7. 会员：激活码购买与使用规则以购买时约定为准，请妥善保管激活码。</p></div><button class="cb-btn ghost" id="cb-privacy-got" style="width:100%;margin-top:8px">我知道了</button></div></div>';document.body.appendChild(d.firstChild)}})();
+  el=document.getElementById("cb-shop-close"); if(el) el.addEventListener("click",vipShopClose);
+  el=document.getElementById("cb-shop-activate"); if(el) el.addEventListener("click",function(){vipShopClose();sv("settings");setTimeout(function(){var t=document.getElementById("cb-vip-code");if(t)t.focus()},200)});
+  document.addEventListener("click",function(e){var b=e.target&&e.target.closest?e.target.closest("[data-vip-buy]"):null;if(b)vipShopBuy(b.getAttribute("data-vip-buy"))});
+  el=document.getElementById("cb-onboard-prev"); if(el) el.addEventListener("click",obPrev);
+  el=document.getElementById("cb-onboard-next"); if(el) el.addEventListener("click",obNext);
+  el=document.getElementById("cb-onboard-check"); if(el) el.addEventListener("change",obCheck);
+  el=document.getElementById("cb-onboard-privacy"); if(el) el.addEventListener("click",function(e){e.preventDefault();privacyOpen()});
+  el=document.getElementById("cb-onboard-start"); if(el) el.addEventListener("click",obStart);
+  el=document.getElementById("cb-privacy-close"); if(el) el.addEventListener("click",privacyClose);
+  el=document.getElementById("cb-privacy-got"); if(el) el.addEventListener("click",privacyClose);
+  (function(){var b=document.getElementById("cb-btn-feedback-open");if(b){var s=b.closest(".cb-setting");if(s&&!document.getElementById("cb-btn-privacy")){var btn=document.createElement("button");btn.id="cb-btn-privacy";btn.className="cb-btn ghost";btn.style.cssText="font-size:0.8rem;padding:6px 12px";btn.textContent="📜 隐私政策";var row=s.querySelector("div");if(row)row.appendChild(btn);btn.addEventListener("click",privacyOpen)}}})();
+  (function(){var st=document.getElementById("cb-vip-status");if(st){var s=st.closest(".cb-setting");if(s&&!document.getElementById("cb-vip-shop-open2")){var b=document.createElement("button");b.id="cb-vip-shop-open2";b.className="cb-btn gold";b.style.cssText="width:100%;margin-top:6px;font-size:0.8rem";b.textContent="💳 查看套餐与购买";s.appendChild(b);b.addEventListener("click",vipShopOpen)}}})();
   el=document.getElementById("cb-btn-sync"); if(el) el.addEventListener("click",function(){sbSyncNow(false)});
   el=document.getElementById("cb-btn-sb-test"); if(el) el.addEventListener("click",sbSaveAndTest);
   el=document.getElementById("cb-btn-sb-sql"); if(el) el.addEventListener("click",sbCopySql);
@@ -1879,7 +1932,7 @@ function init(){
       document.body.innerHTML='<div style="padding:60px;text-align:center;font-family:sans-serif"><h2>数据库错误</h2><p style="color:red;margin:10px 0">'+err.message+'</p><button onclick="location.reload()" style="margin:6px;padding:10px 28px;background:#1a365d;color:#fff;border:none;border-radius:8px;cursor:pointer;font-size:14px">🔄 重试</button><button onclick="if(confirm(\'确定清理数据库？所有数据将丢失！\')){indexedDB.deleteDatabase(\'CBT_DB\');location.reload()}" style="margin:6px;padding:10px 28px;background:#e53e3e;color:#fff;border:none;border-radius:8px;cursor:pointer;font-size:14px">🗑 清理数据库后重试</button></div>';
       return;
     }
-    applyAppearance(); bindEvents(); rd(); autoBackup(); sbPaint(); sbVerText(); sbAutoStart();
+    applyAppearance(); bindEvents(); rd(); autoBackup(); sbPaint(); sbVerText(); sbAutoStart(); obInit();
   });
 }
 document.addEventListener("DOMContentLoaded",init);
