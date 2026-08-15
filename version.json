@@ -1,6 +1,6 @@
 {
-  "versionCode": 7,
-  "versionName": "1.2.2",
-  "apkUrl": "https://raw.githubusercontent.com/2020-GIF/cuotiben-vip-releases/main/cuotiben-vip-v1.2.2.apk",
-  "note": "应用更名「考岸错题本」并更换原创图标；识别结果新增错因显示与选择"
+  "versionCode": 8,
+  "versionName": "1.3.0",
+  "apkUrl": "https://raw.githubusercontent.com/2020-GIF/cuotiben-vip-releases/main/cuotiben-vip-v1.3.0.apk",
+  "note": "识别更准：忽略手写与红笔批改、资料分析逐格读取表格数字、图片增强预处理；免费 AI 识别额度调整为 10 次"
 }

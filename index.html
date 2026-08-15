@@ -272,7 +272,7 @@ body.dark #cb-topbar{background:linear-gradient(120deg,#1d2748,#2c3a6e 60%,#3748
 <section id="cb-view-add" class="cb-view">
   <div class="cb-tabs"><button class="cb-tab-btn active" data-tab="manual">✏️ 手动录入</button><button class="cb-tab-btn" data-tab="photo">📷 拍照识别</button><button class="cb-tab-btn" data-tab="text">📝 文字识别</button></div>
   <div id="cb-tab-manual"><form class="cb-form cb-card" id="cb-form-add"><h2>录入错题</h2><label>模块</label><div class="cb-chips" id="cb-add-chips"></div><label for="cb-inp-q">题目</label><textarea id="cb-inp-q" rows="3" placeholder="输入题目…" required></textarea><label for="cb-inp-a">答案 / 解析</label><textarea id="cb-inp-a" rows="3" placeholder="输入正确答案…" required></textarea><div class="cb-form-row"><div class="cb-form-col"><label>题型</label><select id="cb-inp-qtype"></select></div><div class="cb-form-col"><label>答题形式</label><select id="cb-inp-fmt"><option>单选</option><option>多选</option><option>判断</option><option>不定项</option><option>案例分析</option><option>公文写作</option><option>大作文</option><option>其他</option></select></div></div><div class="cb-form-row"><div class="cb-form-col"><label>难度</label><select id="cb-inp-diff"><option value="1">⭐</option><option value="2">⭐⭐</option><option value="3">⭐⭐⭐</option></select></div><div class="cb-form-col"><label>来源</label><select id="cb-inp-src"><option>未知</option><option>真题</option><option>模拟题</option><option>专项练习</option></select></div></div><div class="cb-form-row"><div class="cb-form-col"><label>错因</label><select id="cb-inp-cause"><option>知识点不熟</option><option>粗心大意</option><option>理解偏差</option><option>时间不够</option><option>审题错误</option><option>其他</option></select></div></div><div style="display:flex;gap:8px;margin-top:12px"><button type="submit" class="cb-btn pri">💾 保存</button><button type="button" class="cb-btn ghost" id="cb-btn-cancel-add">取消</button></div></form></div>
-  <div id="cb-tab-photo" style="display:none"><div class="cb-card"><div id="cb-photo-up"><div style="display:flex;gap:10px;margin-bottom:12px"><div id="cb-photo-camera" class="cb-photo-up" style="flex:1;cursor:pointer"><div class="cb-pu-icon">📷</div><p>拍照</p><p style="font-size:0.65rem;color:#a0aec0">直接用相机拍试卷</p></div><div id="cb-photo-gallery" class="cb-photo-up" style="flex:1;cursor:pointer"><div class="cb-pu-icon">🖼</div><p>相册</p><p style="font-size:0.65rem;color:#a0aec0">从相册选择照片</p></div></div><p style="text-align:center;font-size:0.72rem;color:var(--text2)">AI 能识别红笔✗、圈注○、手写批改的错题</p><p style="text-align:center;font-size:0.66rem;color:#a0aec0;margin-top:4px">⚠️ 需先在设置中配置 AI 服务商（通义千问VL 推荐）</p></div><input type="file" id="cb-photo-inp" accept="image/*" capture="environment" style="display:none"><div id="cb-photo-pv" class="cb-photo-pv" style="display:none"><img id="cb-photo-img" src="" alt="预览"><button class="cb-photo-rm" id="cb-photo-rm">✕</button></div><button class="cb-btn gold wide" id="cb-btn-analyze" style="display:none">🔍 开始识别</button><div id="cb-ai-loading" style="display:none;text-align:center;padding:20px"><div class="cb-spinner"></div><p style="font-size:0.8rem;color:var(--text2);margin-top:8px">AI 正在识别错题...</p></div><div id="cb-ai-results" style="display:none"><div class="cb-sec-hd"><h2 id="cb-ai-count">识别结果</h2></div><div id="cb-ai-list"></div><button class="cb-btn pri wide" id="cb-btn-save-ai" style="margin-top:8px">💾 全部保存</button></div></div></div>
+  <div id="cb-tab-photo" style="display:none"><div class="cb-card"><div id="cb-photo-up"><div style="display:flex;gap:10px;margin-bottom:12px"><div id="cb-photo-camera" class="cb-photo-up" style="flex:1;cursor:pointer"><div class="cb-pu-icon">📷</div><p>拍照</p><p style="font-size:0.65rem;color:#a0aec0">直接用相机拍试卷</p></div><div id="cb-photo-gallery" class="cb-photo-up" style="flex:1;cursor:pointer"><div class="cb-pu-icon">🖼</div><p>相册</p><p style="font-size:0.65rem;color:#a0aec0">从相册选择照片</p></div></div><p style="text-align:center;font-size:0.72rem;color:var(--text2)">AI 会自动忽略手写与红笔批改，只识别印刷体题目；资料分析会逐格读取表格数字</p><p style="text-align:center;font-size:0.66rem;color:#a0aec0;margin-top:4px">⚠️ 需先在设置中配置 AI 服务商（通义千问VL 推荐）</p></div><input type="file" id="cb-photo-inp" accept="image/*" capture="environment" style="display:none"><div id="cb-photo-pv" class="cb-photo-pv" style="display:none"><img id="cb-photo-img" src="" alt="预览"><button class="cb-photo-rm" id="cb-photo-rm">✕</button></div><button class="cb-btn gold wide" id="cb-btn-analyze" style="display:none">🔍 开始识别</button><div id="cb-ai-loading" style="display:none;text-align:center;padding:20px"><div class="cb-spinner"></div><p style="font-size:0.8rem;color:var(--text2);margin-top:8px">AI 正在识别错题...</p></div><div id="cb-ai-results" style="display:none"><div class="cb-sec-hd"><h2 id="cb-ai-count">识别结果</h2></div><div id="cb-ai-list"></div><button class="cb-btn pri wide" id="cb-btn-save-ai" style="margin-top:8px">💾 全部保存</button></div></div></div>
 </section>
 <div id="cb-tab-text" style="display:none"><div class="cb-card"><h2>📝 文字批量识别</h2><p style="font-size:0.75rem;color:var(--text2);margin-bottom:8px">粘贴一题或多题（含选项），AI 会自动归类并生成速解解析</p><textarea id="cb-text-inp" rows="9" placeholder="粘贴题目文字，可一次粘贴多题…" style="width:100%;box-sizing:border-box;border:1px solid var(--border);border-radius:8px;padding:10px;font-size:0.85rem"></textarea><button class="cb-btn gold wide" id="cb-btn-text-rec" style="margin-top:10px">🔍 开始识别</button><div id="cb-text-loading" style="display:none;text-align:center;padding:20px"><div class="cb-spinner"></div><p style="font-size:0.8rem;color:var(--text2);margin-top:8px">AI 正在识别题目…</p></div><div id="cb-text-results" style="display:none;margin-top:12px"><div class="cb-sec-hd"><h2 id="cb-text-count">识别结果</h2></div><div id="cb-text-list"></div><button class="cb-btn pri wide" id="cb-btn-text-save" style="margin-top:8px">💾 全部保存</button></div></div></div>
 <section id="cb-view-manage" class="cb-view">
@@ -303,7 +303,7 @@ body.dark #cb-topbar{background:linear-gradient(120deg,#1d2748,#2c3a6e 60%,#3748
 <section id="cb-view-settings" class="cb-view">
   <div class="cb-card"><h2>⚙ 设置</h2>
     <div class="cb-setting"><h3>💾 数据管理</h3><div style="display:flex;gap:6px;flex-wrap:wrap"><button class="cb-btn pri" id="cb-btn-backup" style="font-size:0.8rem;padding:6px 12px">💾 备份到下载</button><button class="cb-btn pri" id="cb-btn-export" style="font-size:0.8rem;padding:6px 12px">📥 导出 JSON</button><button class="cb-btn ghost" id="cb-btn-import" style="font-size:0.8rem;padding:6px 12px">📤 导入 JSON</button><button class="cb-btn ghost" id="cb-btn-export-html" style="font-size:0.8rem;padding:6px 12px">🖨 可打印 HTML</button><button class="cb-btn danger" id="cb-btn-clear" style="font-size:0.8rem;padding:6px 12px">🗑 清空全部</button></div><input type="file" id="cb-import-file" accept=".json" style="display:none"></div>
-    <div class="cb-setting"><h3>🤖 AI 识别（拍照OCR）</h3><label>AI 服务商</label><select id="cb-set-provider" onchange="onProviderChange()" style="margin-bottom:4px"><option value="qwen">通义千问 VL（阿里云 · 国内可用 · 推荐）</option><option value="openai">OpenAI GPT-4o（需代理）</option><option value="glm">智谱 GLM-4V（国内可用）</option></select><label>API Key</label><input type="password" id="cb-set-apikey" placeholder="粘贴 API Key..."><p style="font-size:0.7rem;color:var(--text2);margin:2px 0 6px">通义千问：<a href="https://dashscope.aliyun.com/" target="_blank" style="color:var(--pri)">DashScope控制台</a> → API-KEY管理<br>OpenAI：<a href="https://platform.openai.com/api-keys" target="_blank" style="color:var(--pri)">platform.openai.com</a><br>智谱：<a href="https://open.bigmodel.cn/" target="_blank" style="color:var(--pri)">open.bigmodel.cn</a></p><label>模型</label><select id="cb-set-model"><option value="qwen-vl-plus">通义千问 VL Plus</option><option value="qwen-vl-max">通义千问 VL Max（更强更准）</option></select><p style="font-size:0.7rem;color:#e53e3e;margin-top:4px">⚠️ 注意：DeepSeek 不支持图片识别，请选择以上支持视觉的模型</p></div>
+    <div class="cb-setting"><h3>🤖 AI 识别（拍照OCR）</h3><label>AI 服务商</label><select id="cb-set-provider" onchange="onProviderChange()" style="margin-bottom:4px"><option value="qwen">通义千问 VL（阿里云 · 国内可用 · 推荐）</option><option value="openai">OpenAI GPT-4o（需代理）</option><option value="glm">智谱 GLM-4V（国内可用）</option></select><label>API Key</label><input type="password" id="cb-set-apikey" placeholder="粘贴 API Key..."><p style="font-size:0.7rem;color:var(--text2);margin:2px 0 6px">通义千问：<a href="https://dashscope.aliyun.com/" target="_blank" style="color:var(--pri)">DashScope控制台</a> → API-KEY管理<br>OpenAI：<a href="https://platform.openai.com/api-keys" target="_blank" style="color:var(--pri)">platform.openai.com</a><br>智谱：<a href="https://open.bigmodel.cn/" target="_blank" style="color:var(--pri)">open.bigmodel.cn</a></p><label>模型</label><select id="cb-set-model"><option value="qwen-vl-plus">通义千问 VL Plus</option><option value="qwen-vl-max">通义千问 VL Max（更强更准）</option></select><p style="font-size:0.7rem;color:#e53e3e;margin-top:4px">⚠️ 注意：DeepSeek 不支持图片识别，请选择以上支持视觉的模型</p><label style="display:flex;align-items:center;gap:8px;margin-top:6px"><input type="checkbox" id="cb-set-cleanred" checked> 自动去除红笔批改痕迹（推荐；图表含红色线条时可关）</label></div>
     <div class="cb-setting"><h3>☁️ 云同步（Supabase）</h3><p style="font-size:0.72rem;color:var(--text2);margin:0 0 6px">手机 / 平板 / 电脑填同一个 Supabase 项目即可自动合并同步，免费注册：<a href="https://supabase.com/dashboard" target="_blank" style="color:var(--pri)">supabase.com/dashboard</a>（可用 GitHub 登录）</p><label>Project URL</label><input type="text" id="cb-set-sb-url" placeholder="https://xxxx.supabase.co"><label>anon public key</label><input type="password" id="cb-set-sb-key" placeholder="eyJhbGciOi..."><label>本机名称（可选，便于分辨设备）</label><input type="text" id="cb-set-sb-device" placeholder="手机 / 平板 / 电脑"><label style="display:flex;align-items:center;gap:8px;margin-bottom:8px"><input type="checkbox" id="cb-set-sb-auto" checked> 自动同步（打开应用 / 修改数据后自动合并）</label><div style="display:flex;gap:6px;margin-top:6px;flex-wrap:wrap"><button class="cb-btn pri" id="cb-btn-sb-test" style="font-size:0.8rem;padding:6px 12px">🔌 保存并测试</button><button class="cb-btn pri" id="cb-btn-sync" style="font-size:0.8rem;padding:6px 12px">☁️ 立即同步</button><button class="cb-btn ghost" id="cb-btn-sb-sql" style="font-size:0.8rem;padding:6px 12px">📋 复制建表 SQL</button></div><div id="cb-sb-status" style="font-size:0.75rem;color:var(--text2);margin-top:6px"></div><details style="margin-top:8px"><summary style="font-size:0.75rem;color:var(--pri);cursor:pointer">📖 三步配置教程（点开）</summary><ol style="font-size:0.72rem;color:var(--text2);margin:6px 0 0;padding-left:16px"><li>打开 supabase.com/dashboard，用 GitHub 或邮箱注册/登录，新建一个免费项目。</li><li>左侧 SQL Editor → New query → 点上面的“复制建表 SQL”，粘贴进去点 Run。</li><li>Settings → API 复制 Project URL 和 anon public key 填到上面，点“保存并测试”。</li></ol></details></div>
     <div class="cb-setting"><h3>📝 文字识别接口</h3><label>接口地址（完整 /chat/completions）</label><input type="text" id="cb-set-text-api" placeholder="https://api.deepseek.com/chat/completions"><label>模型名</label><input type="text" id="cb-set-text-model" placeholder="deepseek-chat"><label>API Key（留空则复用上面的主 Key）</label><input type="password" id="cb-set-text-key" placeholder="可选"></div>
     <div class="cb-setting"><h3>🎯 目标</h3><label>每日目标题数</label><input type="number" id="cb-set-goal" min="0" value="50"></div>
@@ -311,7 +311,7 @@ body.dark #cb-topbar{background:linear-gradient(120deg,#1d2748,#2c3a6e 60%,#3748
     <div class="cb-setting"><h3>🔔 提醒</h3><label>每日提醒时间</label><input type="time" id="cb-set-remind" value="08:00"></div>
     <div class="cb-setting"><h3>💬 反馈与帮助</h3><div style="display:flex;gap:6px;margin-top:6px"><button class="cb-btn pri" id="cb-btn-feedback-open" style="font-size:0.8rem;padding:6px 12px">✍️ 写反馈</button></div><p style="font-size:0.7rem;color:var(--text2);margin-top:4px">意见会直接发送给开发者邮箱，或提交到 GitHub Issues</p></div>
     <div class="cb-setting"><h3>🔄 更新</h3><div style="display:flex;gap:6px;margin-top:6px"><button class="cb-btn pri" id="cb-btn-update" style="font-size:0.8rem;padding:6px 12px">🔍 检查更新</button></div><p style="font-size:0.7rem;color:var(--text2);margin-top:4px">点击检查最新版本，发现新版本后自动下载并引导安装</p></div>
-    <button class="cb-btn gold wide" id="cb-btn-save-set">💾 保存设置</button><p style="font-size:0.7rem;color:var(--text2);margin-top:8px">当前版本：1.2.2（考岸错题本）</p></div>
+    <button class="cb-btn gold wide" id="cb-btn-save-set">💾 保存设置</button><p style="font-size:0.7rem;color:var(--text2);margin-top:8px">当前版本：1.3.0（考岸错题本）</p></div>
 </section>
 </main>
 <nav id="cb-nav">
@@ -413,7 +413,7 @@ var QTYPES={
 };
 var examQs=[], examAns={}, examTimer=null, examSec=0;
 var kwFilter="";
-var APP_VERSION_CODE=7; var APP_VERSION_NAME="1.2.2";
+var APP_VERSION_CODE=8; var APP_VERSION_NAME="1.3.0";
 
 // ===== VIEW SWITCH =====
 function sv(v){
@@ -1033,11 +1033,14 @@ async function analyzePhoto(){
   else if(provider==="openai") endpoint="https://api.openai.com/v1/chat/completions";
   else if(provider==="glm") endpoint="https://open.bigmodel.cn/api/paas/v4/chat/completions";
   try{
-    // Compress image: max 1024px, JPEG quality 0.7, reduces size from ~5MB to ~100KB
-    var compressedUrl=await compressImage(photoUrl,1024,0.7); aiPhoto=compressedUrl;
-    var prompt='你是公务员考试(省考/国考)错题识别与题型归类专家。请分析这张试卷/练习照片，逐题识别所有被红笔打叉、圈注或有明显批改的错题，严格按JSON数组返回，不要任何解释。\n\n【最重硬性要求】\n1. 题目必须逐字转录，禁止概括、改写或编造；看不清的字用“□”代替。\n2. 选项必须完整转录A/B/C/D原文；图形题的题干写“（图形题，原图见附图）”，图形细节写进visualDescription。\n3. 答案answer：只有图片中明确标注了正确答案（如“答案：B”、红色勾选、批改对勾）才填选项字母；否则一律填null，绝对禁止猜测。\n4. 难度difficulty：只能填整数1、2或3。\n5. 没有依据的解析analysis填null。\n\n数组每项字段：\nmodule：只能是常识判断/言语理解与表达/数量关系/判断推理/资料分析/申论/面试之一\nquestionType：具体题型，只能从下列标准库选择：常识判断(政治常识/法律常识/经济常识/人文历史/科技生活/地理国情/管理公文)、言语理解与表达(逻辑填空/片段阅读/语句表达/文章阅读)、数量关系(数学运算/数字推理)、判断推理(图形推理/定义判断/类比推理/逻辑判断/事件排序)、资料分析(增长相关/比重相关/平均数与倍数/综合分析)、申论(归纳概括/综合分析/提出对策/贯彻执行/文章写作)、面试(综合分析/计划组织/应急应变/人际关系/自我认知)\nanswerFormat：单选/多选/判断/不定项/案例分析/公文写作/大作文/其他\nquestion：逐字转录的完整题干和全部选项，图形题写“（图形题，原图见附图）”\nvisualDescription：图形推理/统计图的详细视觉描述（每个图形的形状、数量、位置、方向、颜色、数据），纯文字题填null\nanswer：图片中明确标注的正确答案字母，否则null\nanalysis：简要解析，无依据填null\ndifficulty：整数1或2或3\nsource：真题/模拟题/专项练习/未知\nerrorCause：知识点不熟/粗心大意/理解偏差/时间不够/审题错误/其他\nkeywords：知识点标签数组，最多3个，例如["假言命题","逆否命题"]\n\n【判定规则】\n1. 图形、九宫格、折纸盒、找规律→判断推理-图形推理；先给定义再选符合项→定义判断；一对或多对词语→类比推理；论点论据推出结论→逻辑判断。\n2. 空缺词语填空→言语理解与表达-逻辑填空；问主旨/意图/细节/推断→片段阅读；语句排序或语句填空→语句表达。\n3. 数字运算、方程、行程、工程、排列组合、概率→数量关系-数学运算；数字序列找规律→数字推理。\n4. 统计表/统计图/百分比/倍数/平均数→资料分析，按考点归入增长相关/比重相关/平均数与倍数/综合分析。\n5. 申论小题按设问归类，写文章→文章写作。\n6. 面试题按测评要素归类。\n\n如果图片模糊无法识别，返回{"error":"图片无法识别"}。';
-    var maxTok=provider==="glm"?2048:4096;
-    var bodyObj={model:model,messages:[{role:"user",content:[{type:"text",text:prompt},{type:"image_url",image_url:{url:compressedUrl}}]}],max_tokens:maxTok,temperature:0.1};
+    // 图片预处理：放大到 1600px 保细节 + 对比度增强 + 锐化 + 可选去除红笔批改
+    var lp0=document.querySelector("#cb-ai-loading p"); if(lp0) lp0.textContent="正在优化图片…";
+    var cleanRed=localStorage.getItem("cb_clean_red")!=="0";
+    var processed=await preprocessImage(photoUrl,cleanRed); aiPhoto=processed;
+    if(lp0) lp0.textContent="AI 正在识别错题…";
+    var prompt='你是公务员考试(省考/国考)错题识别与题型归类专家。请分析这张试卷/练习照片，逐题识别所有错题，严格按JSON数组返回，不要任何解释。\n\n【最高优先：忽略手写与批改】\n照片上可能混有黑色签字笔手写字、红色批改（打叉、画圈、打勾、评分、签名、改错字）。手写内容和批改痕迹都不是题目本身：只逐字转录印刷体题干与选项，绝对禁止把手写字、批改字当成题目或答案转录；被手写覆盖看不清的印刷字用“□”代替，禁止臆测。红笔勾选/圈注仅用于判断 answer 字段，其内容不转录。\n\n【最重硬性要求】\n1. 题目必须逐字转录，禁止概括、改写或编造；看不清的字用“□”代替。\n2. 选项必须完整转录A/B/C/D原文；图形题的题干写“（图形题，原图见附图）”，图形细节写进visualDescription。\n3. 答案answer：只有图片中明确标注了正确答案（如“答案：B”、红色勾选、批改对勾）才填选项字母；否则一律填null，绝对禁止猜测。\n4. 难度difficulty：只能填整数1、2或3。\n5. 没有依据的解析analysis填null。\n\n数组每项字段：\nmodule：只能是常识判断/言语理解与表达/数量关系/判断推理/资料分析/申论/面试之一\nquestionType：具体题型，只能从下列标准库选择：常识判断(政治常识/法律常识/经济常识/人文历史/科技生活/地理国情/管理公文)、言语理解与表达(逻辑填空/片段阅读/语句表达/文章阅读)、数量关系(数学运算/数字推理)、判断推理(图形推理/定义判断/类比推理/逻辑判断/事件排序)、资料分析(增长相关/比重相关/平均数与倍数/综合分析)、申论(归纳概括/综合分析/提出对策/贯彻执行/文章写作)、面试(综合分析/计划组织/应急应变/人际关系/自我认知)\nanswerFormat：单选/多选/判断/不定项/案例分析/公文写作/大作文/其他\nquestion：逐字转录的完整题干和全部选项，图形题写“（图形题，原图见附图）”\nvisualDescription：图形推理/统计图/表格的详细视觉描述（图形的形状、数量、位置、方向、颜色；表格按行列完整转录全部数据），纯文字题填null\nanswer：图片中明确标注的正确答案字母，否则null\nanalysis：简要解析，无依据填null\ndifficulty：整数1或2或3\nsource：真题/模拟题/专项练习/未知\nerrorCause：知识点不熟/粗心大意/理解偏差/时间不够/审题错误/其他\nkeywords：知识点标签数组，最多3个，例如["假言命题","逆否命题"]\n\n【判定规则】\n1. 图形、九宫格、折纸盒、找规律→判断推理-图形推理；先给定义再选符合项→定义判断；一对或多对词语→类比推理；论点论据推出结论→逻辑判断。\n2. 空缺词语填空→言语理解与表达-逻辑填空；问主旨/意图/细节/推断→片段阅读；语句排序或语句填空→语句表达。\n3. 数字运算、方程、行程、工程、排列组合、概率→数量关系-数学运算；数字序列找规律→数字推理。\n4. 统计表/统计图/百分比/倍数/平均数→资料分析，按考点归入增长相关/比重相关/平均数与倍数/综合分析。\n5. 【资料分析数字铁律】表格和图表必须逐行逐列读取数字，完整转录进visualDescription（格式如“年份/指标:数值”），保留小数点、百分号、负号、单位；数字必须与图片完全一致，禁止估算、四舍五入、漏写、编造；看不清的数字写“□”。题干引用的所有数值同样逐字转录。\n6. 申论小题按设问归类，写文章→文章写作。\n7. 面试题按测评要素归类。\n\n如果图片模糊无法识别，返回{"error":"图片无法识别"}。';
+    var maxTok=(provider==="glm"&&model==="glm-4v")?2048:4096;
+    var bodyObj={model:model,messages:[{role:"user",content:[{type:"text",text:prompt},{type:"image_url",image_url:{url:processed}}]}],max_tokens:maxTok,temperature:0.1};
     var data;
     if(window.Android&&window.Android.aiRequest){data=await nativeAI(endpoint,ak,bodyObj)}
     else{
@@ -1086,6 +1089,50 @@ function compressImage(dataUrl,maxSize,quality){
       resolve(canvas.toDataURL("image/jpeg",quality||0.7));
     };
     img.onerror=function(){resolve(dataUrl)}; // fallback to original
+    img.src=dataUrl;
+  });
+}
+// 识别前预处理：提高分辨率保留表格数字 + 对比度增强 + 锐化 + 可选去除红笔批改
+function preprocessImage(dataUrl,removeRed){
+  return new Promise(function(resolve,reject){
+    var img=new Image();
+    img.onload=function(){
+      try{
+        var w=img.width,h=img.height,max=1600;
+        if(w>max||h>max){var ratio=Math.min(max/w,max/h);w=Math.round(w*ratio);h=Math.round(h*ratio)}
+        var canvas=document.createElement("canvas");canvas.width=w;canvas.height=h;
+        var ctx=canvas.getContext("2d");ctx.drawImage(img,0,0,w,h);
+        var d=ctx.getImageData(0,0,w,h),px=d.data;
+        var i,r,g,b,red,v;
+        for(i=0;i<px.length;i+=4){
+          r=px[i];g=px[i+1];b=px[i+2];
+          red=r-Math.max(g,b);
+          if(removeRed&&red>48&&r>105){px[i]=255;px[i+1]=255;px[i+2]=255;continue}
+          v=r>127?Math.min(255,127+Math.round((r-127)*1.28)):Math.max(0,127-Math.round((127-r)*1.12));px[i]=v;
+          v=g>127?Math.min(255,127+Math.round((g-127)*1.28)):Math.max(0,127-Math.round((127-g)*1.12));px[i+1]=v;
+          v=b>127?Math.min(255,127+Math.round((b-127)*1.28)):Math.max(0,127-Math.round((127-b)*1.12));px[i+2]=v;
+        }
+        ctx.putImageData(d,0,0);
+        var src=ctx.getImageData(0,0,w,h).data;
+        var out=ctx.createImageData(w,h),dst=out.data;
+        var K=[0,-1,0,-1,5,-1,0,-1,0],x,y,kx,ky,ni,nj,o,k,sumR,sumG,sumB,idx;
+        for(y=0;y<h;y++){for(x=0;x<w;x++){
+          idx=(y*w+x)*4;sumR=0;sumG=0;sumB=0;
+          for(ky=-1;ky<=1;ky++){for(kx=-1;kx<=1;kx++){
+            nj=y+ky<0?0:(y+ky>=h?h-1:y+ky);ni=x+kx<0?0:(x+kx>=w?w-1:x+kx);
+            k=K[(ky+1)*3+(kx+1)];o=(nj*w+ni)*4;
+            sumR+=src[o]*k;sumG+=src[o+1]*k;sumB+=src[o+2]*k;
+          }}
+          dst[idx]=sumR<0?0:(sumR>255?255:sumR);
+          dst[idx+1]=sumG<0?0:(sumG>255?255:sumG);
+          dst[idx+2]=sumB<0?0:(sumB>255?255:sumB);
+          dst[idx+3]=255;
+        }}
+        ctx.putImageData(out,0,0);
+        resolve(canvas.toDataURL("image/jpeg",0.86));
+      }catch(e){resolve(dataUrl)}
+    };
+    img.onerror=function(){resolve(dataUrl)};
     img.src=dataUrl;
   });
 }
@@ -1463,6 +1510,7 @@ function doExportPdf(){
 function rset(){
   document.getElementById("cb-set-provider").value=localStorage.getItem("cb_provider")||"glm";
   document.getElementById("cb-set-apikey").value=localStorage.getItem("cb_apikey")||"";
+  document.getElementById("cb-set-cleanred").checked=localStorage.getItem("cb_clean_red")!=="0";
   document.getElementById("cb-set-remind").value=localStorage.getItem("cb_remind")||"08:00";
   document.getElementById("cb-set-dark").checked=localStorage.getItem("cb_dark")==="1";
   document.getElementById("cb-set-font").value=localStorage.getItem("cb_font")||"16";
@@ -1487,6 +1535,7 @@ function onProviderChange(){
 function saveSettings(){
   localStorage.setItem("cb_provider",document.getElementById("cb-set-provider").value);
   localStorage.setItem("cb_apikey",document.getElementById("cb-set-apikey").value.trim());
+  localStorage.setItem("cb_clean_red",document.getElementById("cb-set-cleanred").checked?"1":"0");
   localStorage.setItem("cb_model",document.getElementById("cb-set-model").value);
   localStorage.setItem("cb_remind",document.getElementById("cb-set-remind").value);
   localStorage.setItem("cb_dark",document.getElementById("cb-set-dark").checked?"1":"0");
@@ -1794,11 +1843,13 @@ function vipB32(v,len){var out="";for(var i=0;i<len;i++){out=VIP_ALPH.charAt(v%3
 function vipInfo(){try{var v=JSON.parse(localStorage.getItem("cb_vip")||"null");return v&&typeof v==="object"?v:null}catch(e){return null}}
 function isVip(){var v=vipInfo();if(!v)return false;if(v.expires&&Date.now()>v.expires){localStorage.removeItem("cb_vip");return false}return true}
 function vipDaysLeft(){var v=vipInfo();if(!v)return 0;if(!v.expires)return -1;return Math.max(0,Math.ceil((v.expires-Date.now())/86400000))}
-function vipFreeLeft(){return Math.max(0,5-parseInt(localStorage.getItem("cb_ai_free_used")||"0"))}
+var AI_FREE_LIMIT=10;
+function vipFreeLeft(){return Math.max(0,AI_FREE_LIMIT-parseInt(localStorage.getItem("cb_ai_free_used")||"0"))}
 function vipPaint(){
   var el=document.getElementById("cb-vip-status"); if(!el)return;
   if(isVip()){var v=vipInfo(); el.innerHTML='✅ 会员已激活'+(v.expires?(' · 剩余 '+vipDaysLeft()+' 天'):' · 永久');}
-  else{el.innerHTML='未激活 · AI 识别免费试用剩余 '+vipFreeLeft()+' 次';}
+  else if(vipFreeLeft()>0){el.innerHTML='🎁 AI 识别免费额度剩余 '+vipFreeLeft()+' 次';}
+  else{el.innerHTML='⏰ 免费额度已用完 · 激活会员后继续使用';}
 }
 function vipActivate(){
   var code=(document.getElementById("cb-vip-code").value||"").trim().toUpperCase().replace(/[\s-]+/g,"-");
@@ -1817,18 +1868,18 @@ function vipActivate(){
 }
 function vipAiGate(feature){
   if(isVip())return true;
-  if(vipFreeLeft()>0){toast("AI 识别免费试用剩余 "+vipFreeLeft()+" 次（保存结果时扣除）",2600);return true}
+  if(vipFreeLeft()>0){toast("AI 识别免费额度剩余 "+vipFreeLeft()+" 次（保存结果时扣除）",2600);return true}
   openVipModal(feature); return false;
 }
 function vipMarkAiUsed(){
   if(isVip())return;
   var u=parseInt(localStorage.getItem("cb_ai_free_used")||"0");
-  localStorage.setItem("cb_ai_free_used",String(Math.min(5,u+1)));
+  localStorage.setItem("cb_ai_free_used",String(Math.min(AI_FREE_LIMIT,u+1)));
   vipPaint();
 }
 function openVipModal(feature){
   var m=document.getElementById("cb-vip-modal"); if(!m)return;
-  var p=document.getElementById("cb-vip-msg"); if(p)p.textContent="“"+(feature||"该功能")+"”为会员功能。会员可解锁：AI 识别与解析、多设备云同步、组卷含解析 PDF。";
+  var p=document.getElementById("cb-vip-msg"); if(p)p.textContent="“"+(feature||"该功能")+"”为会员功能。免费 AI 识别额度用完后，开通会员即可继续使用：AI 识别与解析、多设备云同步、组卷含解析 PDF。";
   m.style.display="flex";
 }
 function closeVipModal(){var m=document.getElementById("cb-vip-modal");if(m)m.style.display="none"}
@@ -1853,7 +1904,7 @@ var OB_STEPS=[
  {t:"👋 欢迎使用考岸错题本",h:"把错题拍下来，AI 自动识别题型并生成速解解析；错题按记忆曲线安排复习；一键组卷，可打印或导出 PDF。"},
  {t:"🔑 第 1 步 · 配置 AI Key",h:"设置 → AI 识别：服务商选「智谱 GLM-4V」，粘贴你自己的 API Key 并保存。会员解锁的是功能，API 费用由你的 Key 承担。"},
  {t:"☁️ 第 2 步 · 云同步（可选）",h:"设置 → 云同步：按教程在 Supabase 免费建项目，填入 Project URL 和 anon key，即可在手机/平板/电脑同步数据。"},
- {t:"👑 第 3 步 · 激活会员",h:"设置 → 会员中心：查看套餐与购买；AI 识别有 5 次免费试用。激活码付款后由开发者发放。"}
+ {t:"🎁 第 3 步 · 免费额度",h:"AI 识别有 10 次免费额度，放心先用；额度用完后，系统会提醒你后续的使用方式。"}
 ];
 var obIdx=0;
 function obShow(i){
