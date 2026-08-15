@@ -1,6 +1,6 @@
 {
-  "versionCode": 10,
-  "versionName": "1.5.0",
-  "apkUrl": "https://raw.githubusercontent.com/2020-GIF/cuotiben-vip-releases/main/cuotiben-vip-v1.5.0.apk",
-  "note": "新额度体系：新用户15次+每日打卡3次+1/9.9/16.9元次数包；新增电脑/平板入口"
+  "versionCode": 11,
+  "versionName": "1.5.1",
+  "apkUrl": "https://raw.githubusercontent.com/2020-GIF/cuotiben-vip-releases/main/cuotiben-vip-v1.5.1.apk",
+  "note": "拍照识图保留原图：不再擦除红笔/手写，仅让 AI 忽略；组卷导出去笔迹功能保留"
 }
