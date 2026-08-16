@@ -1,6 +1,6 @@
 {
-  "versionCode": 13,
-  "versionName": "1.5.3",
-  "apkUrl": "https://cdn.jsdelivr.net/gh/2020-GIF/cuotiben-vip-releases@v1.5.3/cuotiben-vip-v1.5.3.apk",
-  "note": "考点标签规范化：AI 只从公考考点库取名；激活码仅限使用一次"
+  "versionCode": 14,
+  "versionName": "1.5.4",
+  "apkUrl": "https://cdn.jsdelivr.net/gh/2020-GIF/cuotiben-vip-releases@v1.5.4/cuotiben-vip-v1.5.4.apk",
+  "note": "支持 iPhone/iPad 添加到主屏幕使用（网页版 PWA）"
 }
