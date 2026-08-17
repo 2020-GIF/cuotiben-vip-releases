@@ -310,7 +310,7 @@ body.dark #cb-topbar{background:linear-gradient(120deg,#1d2748,#2c3a6e 60%,#3748
     <div class="cb-setting"><h3>🔔 提醒</h3><label>每日提醒时间</label><input type="time" id="cb-set-remind" value="08:00"></div>
     <div class="cb-setting"><h3>💬 反馈与帮助</h3><div style="display:flex;gap:6px;margin-top:6px"><button class="cb-btn pri" id="cb-btn-feedback-open" style="font-size:0.8rem;padding:6px 12px">✍️ 写反馈</button></div><p style="font-size:0.7rem;color:var(--text2);margin-top:4px">意见会直接发送给开发者邮箱</p></div>
     <div class="cb-setting"><h3>🔄 更新</h3><div style="display:flex;gap:6px;margin-top:6px"><button class="cb-btn pri" id="cb-btn-update" style="font-size:0.8rem;padding:6px 12px">🔍 检查更新</button></div><p style="font-size:0.7rem;color:var(--text2);margin-top:4px">点击检查最新版本，发现新版本后自动下载并引导安装</p></div>
-    <button class="cb-btn gold wide" id="cb-btn-save-set">💾 保存设置</button><p style="font-size:0.7rem;color:var(--text2);margin-top:8px">当前版本：1.5.5（考岸错题本）</p></div>
+    <button class="cb-btn gold wide" id="cb-btn-save-set">💾 保存设置</button><p style="font-size:0.7rem;color:var(--text2);margin-top:8px">当前版本：1.5.6（考岸错题本）</p></div>
 </section>
 </main>
 <nav id="cb-nav">
@@ -431,7 +431,7 @@ function normKeywords(mod,arr){
 }
 var examQs=[], examAns={}, examTimer=null, examSec=0;
 var kwFilter="";
-var APP_VERSION_CODE=15; var APP_VERSION_NAME="1.5.5";
+var APP_VERSION_CODE=16; var APP_VERSION_NAME="1.5.6";
 
 // ===== VIEW SWITCH =====
 function sv(v){
@@ -938,7 +938,8 @@ async function genAnalysisFor(endpoint,ak,model,lp,done){
     if(lp) lp.textContent="正在生成速解解析 "+(i+1)+"/"+aiR.length+"…";
     try{
       var data=await callTextAI(endpoint,ak,model,buildAnalysisPrompt(r));
-      var ct=data.choices&&data.choices[0]?data.choices[0].message.content:"";
+      var msg=data.choices&&data.choices[0]?data.choices[0].message:null;
+      var ct=msg?(msg.content||msg.reasoning_content||""):"";
       if(ct) r.analysis=ct;
     }catch(e){}
   }
@@ -966,7 +967,8 @@ async function textRecognition(){
   try{
     var textPrompt=TEXT_PROMPT+'\n\n【考点库】\n'+kwLibText();
     var data=await callTextAI(api,ak,model,textPrompt+'\n\n【用户粘贴的题目】\n'+txt+'\n\n只返回JSON数组。');
-    var ct=data.choices&&data.choices[0]?data.choices[0].message.content:"[]";
+    var msg0=data.choices&&data.choices[0]?data.choices[0].message:null;
+    var ct=msg0?(msg0.content||msg0.reasoning_content||"[]"):"[]";
     ct=ct.replace(/```json/g,"").replace(/```/g,"").trim();
     var parsed=JSON.parse(ct);
     if(!Array.isArray(parsed)) throw new Error((parsed&&parsed.error)||"返回格式不正确，请重试");
@@ -1055,7 +1057,8 @@ async function analyzePhoto(){
       if(!resp.ok){var ed={};try{ed=await resp.json()}catch(ex){}throw new Error(ed.error?ed.error.message:("HTTP "+resp.status))}
       data=await resp.json();
     }
-    var ct=data.choices&&data.choices[0]?data.choices[0].message.content:"[]";
+    var msg0=data.choices&&data.choices[0]?data.choices[0].message:null;
+    var ct=msg0?(msg0.content||msg0.reasoning_content||"[]"):"[]";
     ct=ct.replace(/```json/g,"").replace(/```/g,"").trim();
     var parsed=JSON.parse(ct);
     if(!Array.isArray(parsed)) throw new Error((parsed&&parsed.error)||"返回格式不正确，请重试");
@@ -1862,7 +1865,7 @@ function quotaInit(){
 var DEV_AI_KEY="363d22428ee04e258a73d9fa068236bf.wYAwCGESj0BL7Bi4";
 var DEV_AI_ENDPOINT="https://open.bigmodel.cn/api/paas/v4/chat/completions";
 var DEV_AI_VISION_MODEL="glm-4.6v";
-var DEV_AI_TEXT_MODEL="glm-4.5-air";
+var DEV_AI_TEXT_MODEL="glm-4-air";
 function aiUseMode(){if(dailyFreeLeft()>0)return "free";if(permQuota()>0)return "quota";return "none"}
 function aiVisionCred(){
   return {mode:aiUseMode(),provider:"glm",key:DEV_AI_KEY,model:DEV_AI_VISION_MODEL};
