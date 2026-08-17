@@ -1,6 +1,6 @@
 {
-  "versionCode": 14,
-  "versionName": "1.5.4",
-  "apkUrl": "https://cdn.jsdelivr.net/gh/2020-GIF/cuotiben-vip-releases@v1.5.4/cuotiben-vip-v1.5.4.apk",
-  "note": "支持 iPhone/iPad 添加到主屏幕使用（网页版 PWA）"
+  "versionCode": 15,
+  "versionName": "1.5.5",
+  "apkUrl": "https://cdn.jsdelivr.net/gh/2020-GIF/cuotiben-vip-releases@v1.5.5/cuotiben-vip-v1.5.5.apk",
+  "note": "更换识别服务：视觉用 GLM-4.6V（输出上限提升到 4096），文本解析用 GLM-4.5-Air"
 }
