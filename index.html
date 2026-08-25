@@ -461,7 +461,7 @@ function normKeywords(mod,arr){
 }
 var examQs=[], examAns={}, examTimer=null, examSec=0;
 var kwFilter="";
-var APP_VERSION_CODE=21; var APP_VERSION_NAME="1.6.1";
+var APP_VERSION_CODE=22; var APP_VERSION_NAME="1.6.2";
 
 // ===== VIEW SWITCH =====
 function sv(v){
@@ -1052,9 +1052,13 @@ function buildAnalysisPrompt(r){
 }
 async function aiCallRaw(endpoint,ak,bodyObj){
   if(window.Android&&window.Android.aiRequest) return nativeAI(endpoint,ak,bodyObj);
-  var resp=await fetch(endpoint,{method:"POST",headers:{"Content-Type":"application/json","Authorization":"Bearer "+ak},body:JSON.stringify(bodyObj)});
-  if(!resp.ok){var ed={};try{ed=await resp.json()}catch(ex){}throw new Error(ed.error?ed.error.message:("HTTP "+resp.status))}
-  return resp.json();
+  var ctrl=typeof AbortController!=="undefined"?new AbortController():null;
+  var timer=ctrl?setTimeout(function(){ctrl.abort()},120000):null;
+  try{
+    var resp=await fetch(endpoint,{method:"POST",headers:{"Content-Type":"application/json","Authorization":"Bearer "+ak},body:JSON.stringify(bodyObj),signal:ctrl?ctrl.signal:undefined});
+    if(!resp.ok){var ed={};try{ed=await resp.json()}catch(ex){}throw new Error(ed.error?ed.error.message:("HTTP "+resp.status))}
+    return await resp.json();
+  }finally{ if(timer)clearTimeout(timer); }
 }
 async function callTextAI(endpoint,ak,model,prompt,img){
   var content=img?[{type:"text",text:prompt},{type:"image_url",image_url:{url:img}}]:prompt;
@@ -1065,18 +1069,27 @@ async function callTextAI(endpoint,ak,model,prompt,img){
   catch(e){if(thinking){delete bodyObj.thinking;return await aiCallRaw(endpoint,ak,bodyObj)}throw e}
 }
 async function genAnalysisFor(endpoint,ak,model,lp,done){
-  if(!aiR.length) return;
-  for(var i=0;i<aiR.length;i++){
-    var r=aiR[i];
-    if(lp) lp.textContent="正在生成速解解析 "+(i+1)+"/"+aiR.length+"…";
-    try{
-      var data=await callTextAI(endpoint,ak,model,buildAnalysisPrompt(r),(aiPhoto&&aiR.length===1)?aiPhoto:null);
-      var msg=data.choices&&data.choices[0]?data.choices[0].message:null;
-      var ct=msg?(msg.content||msg.reasoning_content||""):"";
-      if(ct) r.analysis=ct;
-    }catch(e){}
+  var failN=0;
+  try{
+    if(!aiR.length) return;
+    for(var i=0;i<aiR.length;i++){
+      var r=aiR[i];
+      if(lp) lp.textContent="正在生成速解解析 "+(i+1)+"/"+aiR.length+"…";
+      try{
+        var data=await callTextAI(endpoint,ak,model,buildAnalysisPrompt(r),(aiPhoto&&aiR.length===1)?aiPhoto:null);
+        var msg=data.choices&&data.choices[0]?data.choices[0].message:null;
+        var ct=msg?(msg.content||msg.reasoning_content||""):"";
+        r.analysis=ct||"⚠️ 解析生成失败，点「重试解析」再试一次";
+        if(!ct) failN++;
+      }catch(e){
+        r.analysis="⚠️ 解析生成失败，点「重试解析」再试一次";
+        failN++;
+      }
+    }
+  }finally{
+    if(done) done();
   }
-  if(done) done();
+  if(failN>0&&aiR.length>1) toast(failN+" 道题解析失败，可点「重试解析」重新生成",3200);
 }
 async function genAnalysis(){
   var ac=aiAnalysisCred();
@@ -1137,6 +1150,7 @@ function renderTextAI(){
     if(r.analysis) h+='<div style="font-size:0.76rem;color:#718096;margin-bottom:6px;white-space:pre-wrap">解析：'+(r.analysis||"").replace(/</g,"&lt;")+'</div>';
     if(r.keywords&&r.keywords.length) h+='<div style="font-size:0.72rem;margin-bottom:6px">'+r.keywords.map(function(k){return '<span style="display:inline-block;background:rgba(184,134,11,0.12);color:#8a6d1a;border-radius:10px;padding:1px 8px;margin:0 4px 4px 0">'+k+'</span>'}).join("")+'</div>';
     h+='<div style="font-size:0.76rem;color:#8a6d1a;background:rgba(184,134,11,0.1);border-radius:6px;padding:4px 8px;margin-bottom:6px">🔍 错因：'+cause+'</div>';
+    if(!r.analysis||r.analysis.indexOf("⚠️")===0) h+='<button onclick="retryAnalysis('+i+')" class="cb-btn ghost" style="font-size:0.72rem;padding:3px 10px;margin-bottom:6px">🔄 重试解析</button>';
     h+='<div id="cb-t-edit-'+i+'" style="display:none;margin-bottom:8px;border-top:1px dashed var(--border);padding-top:8px"><label style="font-size:0.72rem;color:var(--text2)">题目</label><textarea class="e-q" rows="3" style="width:100%;box-sizing:border-box;border:1px solid var(--border);border-radius:8px;padding:6px;font-size:0.8rem;margin-bottom:6px">'+esc(r.question)+'</textarea><label style="font-size:0.72rem;color:var(--text2)">答案</label><input class="e-a" value="'+escAttr(r.answer)+'" style="width:100%;box-sizing:border-box;border:1px solid var(--border);border-radius:8px;padding:6px;font-size:0.8rem;margin-bottom:6px"><label style="font-size:0.72rem;color:var(--text2)">解析</label><textarea class="e-x" rows="4" style="width:100%;box-sizing:border-box;border:1px solid var(--border);border-radius:8px;padding:6px;font-size:0.8rem">'+esc(r.analysis)+'</textarea><div style="margin-top:6px"><button onclick="applyTEdit('+i+')" class="cb-btn pri" style="font-size:0.8rem;padding:4px 12px">保存修改</button></div></div>';
     h+='<div style="display:flex;gap:4px;flex-wrap:wrap">';
     h+='<select onchange="aiR['+i+'].module=this.value;updTQtype('+i+',this.value)">'; for(var j=0;j<MODS.length;j++) h+='<option'+(MODS[j]===m?' selected':'')+'>'+MODS[j]+'</option>'; h+='</select>';
@@ -1210,6 +1224,7 @@ async function analyzePhoto(){
     var items=await runRecognition(processed);
     for(var i=0;i<items.length;i++)items[i].img=processed;
     aiR=items; aiPhotoCount=1;
+    if(items&&items.length) vipMarkAiUsed();
     renderAI();
     if(aiR.length){
       document.getElementById("cb-ai-loading").style.display="";
@@ -1232,6 +1247,7 @@ async function analyzePhoto(){
 async function batchAnalyze(files){
   if(!files||!files.length) return;
   if(!vipAiGate("AI 拍照识别"))return;
+  if(!isVip()&&aiQuotaLeft()<files.length){toast("额度不足：本次批量识图需 "+files.length+" 次额度，当前仅剩 "+aiQuotaLeft()+" 次，请购买次数包或明天再试",4000);openVipModal("批量识图");return}
   document.getElementById("cb-btn-analyze").style.display="none"; document.getElementById("cb-ai-loading").style.display="";
   aiR=[]; aiPhotoCount=0;
   var lp=document.querySelector("#cb-ai-loading p"); if(lp) lp.textContent="正在读取照片…";
@@ -1257,6 +1273,7 @@ async function batchAnalyze(files){
 async function batchAnalyzeUrls(urls){
   if(!urls||!urls.length) return;
   if(!vipAiGate("AI 拍照识别"))return;
+  if(!isVip()&&aiQuotaLeft()<urls.length){toast("额度不足：本次批量识图需 "+urls.length+" 次额度，当前仅剩 "+aiQuotaLeft()+" 次，请购买次数包或明天再试",4000);openVipModal("批量识图");return}
   document.getElementById("cb-btn-analyze").style.display="none"; document.getElementById("cb-ai-loading").style.display="";
   aiR=[]; aiPhotoCount=0;
   var lp=document.querySelector("#cb-ai-loading p"); if(lp) lp.textContent="正在准备批量识图（共 "+urls.length+" 张）…";
@@ -1283,7 +1300,7 @@ async function runBatchCore(urls,lp){
       var items=await runRecognition(processed);
       if(items&&items.length){
         for(var j=0;j<items.length;j++){items[j].img=processed;aiR.push(items[j])}
-        aiPhotoCount++; okCount++;
+        aiPhotoCount++; okCount++; vipMarkAiUsed();
       } else { failCount++; }
     }catch(perr){ failCount++; }
   }
@@ -1372,6 +1389,7 @@ function renderAI(){
     if(r.visualDescription) h+='<div style="font-size:0.76rem;color:#4a5568;background:#edf2f7;padding:6px 8px;border-radius:6px;margin-bottom:6px;white-space:pre-wrap">图形/图表：'+(r.visualDescription||"").replace(/</g,"&lt;")+'</div>';
     if(r.keywords&&r.keywords.length) h+='<div style="font-size:0.72rem;margin-bottom:6px">'+r.keywords.map(function(k){return '<span style="display:inline-block;background:rgba(184,134,11,0.12);color:#8a6d1a;border-radius:10px;padding:1px 8px;margin:0 4px 4px 0">'+k+'</span>'}).join("")+'</div>';
     h+='<div style="font-size:0.76rem;color:#8a6d1a;background:rgba(184,134,11,0.1);border-radius:6px;padding:4px 8px;margin-bottom:6px">🔍 错因：'+cause+'</div>';
+    if(!r.analysis||r.analysis.indexOf("⚠️")===0) h+='<button onclick="retryAnalysis('+i+')" class="cb-btn ghost" style="font-size:0.72rem;padding:3px 10px;margin-bottom:6px">🔄 重试解析</button>';
     h+='<div id="cb-ai-edit-'+i+'" style="display:none;margin-bottom:8px;border-top:1px dashed var(--border);padding-top:8px"><label style="font-size:0.72rem;color:var(--text2)">题目</label><textarea class="e-q" rows="3" style="width:100%;box-sizing:border-box;border:1px solid var(--border);border-radius:8px;padding:6px;font-size:0.8rem;margin-bottom:6px">'+esc(r.question)+'</textarea><label style="font-size:0.72rem;color:var(--text2)">答案</label><input class="e-a" value="'+escAttr(r.answer)+'" placeholder="答案，不确定可留空" style="width:100%;box-sizing:border-box;border:1px solid var(--border);border-radius:8px;padding:6px;font-size:0.8rem;margin-bottom:6px"><label style="font-size:0.72rem;color:var(--text2)">解析</label><textarea class="e-x" rows="4" style="width:100%;box-sizing:border-box;border:1px solid var(--border);border-radius:8px;padding:6px;font-size:0.8rem">'+esc(r.analysis)+'</textarea><div style="margin-top:6px"><button onclick="applyAIEdit('+i+')" class="cb-btn pri" style="font-size:0.8rem;padding:4px 12px">保存修改</button></div></div>';
     h+='<div style="display:flex;gap:4px;flex-wrap:wrap">';
     h+='<select onchange="aiR['+i+'].module=this.value;updAIQtype('+i+',this.value)">'; for(var j=0;j<MODS.length;j++) h+='<option'+(MODS[j]===m?' selected':'')+'>'+MODS[j]+'</option>'; h+='</select>';
@@ -1393,6 +1411,20 @@ function updAIQtype(i,mod){
   var el=document.getElementById("cb-ai-qt-"+i); if(el) el.innerHTML=qtypeOptions(mod,aiR[i].questionType);
 }
 function removeAI(i){ aiR.splice(i,1); renderAI(); }
+async function retryAnalysis(i){
+  var r=aiR[i]; if(!r||r.__busy) return;
+  r.__busy=true; r.analysis="⏳ 正在重新生成解析…"; renderAI();
+  try{
+    var ac=aiAnalysisCred();
+    var data=await callTextAI(ac.api,ac.key,ac.model,buildAnalysisPrompt(r),(aiPhoto&&aiR.length===1)?aiPhoto:null);
+    var msg=data.choices&&data.choices[0]?data.choices[0].message:null;
+    var ct=msg?(msg.content||msg.reasoning_content||""):"";
+    r.analysis=ct||"⚠️ 解析生成失败，请重试";
+  }catch(e){
+    r.analysis="⚠️ 解析生成失败："+String(e&&e.message||e||"网络错误");
+  }
+  r.__busy=false; renderAI();
+}
 function esc(s){return String(s==null?"":s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")}
 function escAttr(s){return esc(s).replace(/"/g,"&quot;").replace(/'/g,"&#39;")}
 function toggleAIEdit(i){
@@ -1560,7 +1592,6 @@ function cleanInk(src,mode){
 function saveAI(){
   if(!aiR.length) return; var now=new Date(), n=0;
   photoQueue=[]; renderPhotoQueueHint();
-  for(var k=0;k<Math.max(1,aiPhotoCount);k++)vipMarkAiUsed();
   for(var i=0;i<aiR.length;i++){ var r=aiR[i],m=MODS.indexOf(r.module)>=0?r.module:MODS[0];
     dbAdd({id:"q_"+now.getTime()+"_"+Math.random().toString(36).slice(2,8)+"_"+i,mod:m,q:r.question||"",a:r.answer||"",
       qtype:(QTYPES[m]||["其他"]).indexOf(r.questionType)>=0?r.questionType:(QTYPES[m]||["其他"])[0],
@@ -2095,6 +2126,7 @@ function vipDaysLeft(){var v=vipInfo();if(!v)return 0;if(!v.expires)return -1;re
 var NEWBIE_QUOTA=15, DAILY_FREE=3, DAILY_CAP=200;
 function permQuota(){return Math.max(0,parseInt(localStorage.getItem("cb_perm_quota")||"0"))}
 function dailyFreeLeft(){var d=localStorage.getItem("cb_df_date"),c=parseInt(localStorage.getItem("cb_df_left")||"0");return d===dk(new Date())?Math.max(0,c):0}
+function aiQuotaLeft(){return dailyFreeLeft()+permQuota()}
 function dailyUsed(){var d=localStorage.getItem("cb_day_date"),c=parseInt(localStorage.getItem("cb_day_used")||"0");return d===dk(new Date())?c:0}
 function grantDailyFree(){var td=dk(new Date());if(localStorage.getItem("cb_df_date")===td)return false;localStorage.setItem("cb_df_date",td);localStorage.setItem("cb_df_left",String(DAILY_FREE));return true}
 function quotaInit(){
