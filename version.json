@@ -1,1 +1,1 @@
-{ "versionCode": 19, "versionName": "1.5.9", "apkUrl": "https://cdn.jsdelivr.net/gh/2020-GIF/cuotiben-vip-releases@v1.5.9/cuotiben-vip-v1.5.9.apk", "note": "修复图形推理解析：解析时传入图形描述与原图，内置完整图形推理规律体系，逐图核对" }
+{ "versionCode": 20, "versionName": "1.6.0", "apkUrl": "https://cdn.jsdelivr.net/gh/2020-GIF/cuotiben-vip-releases@v1.6.0/cuotiben-vip-v1.6.0.apk", "note": "支持相册批量识图；识图切后台可继续（前台服务+唤醒锁）；拍照自动裁剪+自由手绘选区；判断推理解析强化" }
