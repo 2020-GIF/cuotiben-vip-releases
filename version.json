@@ -1,1 +1,1 @@
-{ "versionCode": 22, "versionName": "1.6.2", "apkUrl": "https://cdn.jsdelivr.net/gh/2020-GIF/cuotiben-vip-releases@v1.6.2/cuotiben-vip-v1.6.2.apk", "note": "额度识别成功即扣、批量预检额度；解析请求加超时+单题重试" }
+{ "versionCode": 23, "versionName": "1.6.3", "apkUrl": "https://cdn.jsdelivr.net/gh/2020-GIF/cuotiben-vip-releases@v1.6.3/cuotiben-vip-v1.6.3.apk", "note": "资料分析考点补全（隔年/年均/混合增长率、贡献率、基期比重平均数倍数等）；解析输出禁止编程符号、中文分步叙述" }
