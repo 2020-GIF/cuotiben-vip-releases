@@ -310,7 +310,7 @@ body.dark #cb-topbar{background:linear-gradient(120deg,#1d2748,#2c3a6e 60%,#3748
     <div class="cb-setting"><h3>🔔 提醒</h3><label>每日提醒时间</label><input type="time" id="cb-set-remind" value="08:00"></div>
     <div class="cb-setting"><h3>💬 反馈与帮助</h3><div style="display:flex;gap:6px;margin-top:6px"><button class="cb-btn pri" id="cb-btn-feedback-open" style="font-size:0.8rem;padding:6px 12px">✍️ 写反馈</button></div><p style="font-size:0.7rem;color:var(--text2);margin-top:4px">意见会直接发送给开发者邮箱</p></div>
     <div class="cb-setting"><h3>🔄 更新</h3><div style="display:flex;gap:6px;margin-top:6px"><button class="cb-btn pri" id="cb-btn-update" style="font-size:0.8rem;padding:6px 12px">🔍 检查更新</button></div><p style="font-size:0.7rem;color:var(--text2);margin-top:4px">点击检查最新版本，发现新版本后自动下载并引导安装</p></div>
-    <button class="cb-btn gold wide" id="cb-btn-save-set">💾 保存设置</button><p style="font-size:0.7rem;color:var(--text2);margin-top:8px">当前版本：1.5.6（考岸错题本）</p></div>
+    <button class="cb-btn gold wide" id="cb-btn-save-set">💾 保存设置</button><p style="font-size:0.7rem;color:var(--text2);margin-top:8px">当前版本：1.5.7（考岸错题本）</p></div>
 </section>
 </main>
 <nav id="cb-nav">
@@ -431,7 +431,7 @@ function normKeywords(mod,arr){
 }
 var examQs=[], examAns={}, examTimer=null, examSec=0;
 var kwFilter="";
-var APP_VERSION_CODE=16; var APP_VERSION_NAME="1.5.6";
+var APP_VERSION_CODE=17; var APP_VERSION_NAME="1.5.7";
 
 // ===== VIEW SWITCH =====
 function sv(v){
@@ -924,12 +924,18 @@ var HS13='你按照公考行测速解技巧生成错题解析，先识别题型�
 function buildAnalysisPrompt(r){
   return HS13+'\n\n【题目信息】\n模块：'+r.module+'\n题型：'+r.questionType+'\n题干：'+(r.question||"（图形题，见原图）")+'\n选项答案：'+(r.answer||"未提供")+'\n\n请严格按输出格式生成这道题的解析。';
 }
-async function callTextAI(endpoint,ak,model,prompt){
-  var bodyObj={model:model,messages:[{role:"user",content:prompt}],max_tokens:2048,temperature:0.2};
+async function aiCallRaw(endpoint,ak,bodyObj){
   if(window.Android&&window.Android.aiRequest) return nativeAI(endpoint,ak,bodyObj);
   var resp=await fetch(endpoint,{method:"POST",headers:{"Content-Type":"application/json","Authorization":"Bearer "+ak},body:JSON.stringify(bodyObj)});
   if(!resp.ok){var ed={};try{ed=await resp.json()}catch(ex){}throw new Error(ed.error?ed.error.message:("HTTP "+resp.status))}
   return resp.json();
+}
+async function callTextAI(endpoint,ak,model,prompt){
+  var bodyObj={model:model,messages:[{role:"user",content:prompt}],max_tokens:4096,temperature:0.2};
+  var thinking=/(^glm-4\.5|^glm-4\.6|^glm-4\.7|^glm-5)/.test(model||"");
+  if(thinking)bodyObj.thinking={type:"disabled"};
+  try{return await aiCallRaw(endpoint,ak,bodyObj)}
+  catch(e){if(thinking){delete bodyObj.thinking;return await aiCallRaw(endpoint,ak,bodyObj)}throw e}
 }
 async function genAnalysisFor(endpoint,ak,model,lp,done){
   if(!aiR.length) return;
@@ -1037,10 +1043,7 @@ async function analyzePhoto(){
   var cred=aiVisionCred();
   var provider=cred.provider, ak=cred.key, model=cred.model;
   document.getElementById("cb-btn-analyze").style.display="none"; document.getElementById("cb-ai-loading").style.display="";
-  var endpoint="";
-  if(provider==="qwen") endpoint="https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions";
-  else if(provider==="openai") endpoint="https://api.openai.com/v1/chat/completions";
-  else if(provider==="glm") endpoint="https://open.bigmodel.cn/api/paas/v4/chat/completions";
+  var endpoint=DEV_AI_ENDPOINT;
   try{
     // 图片预处理：放大保细节 + 对比度增强 + 锐化（保留原图，不擦除红笔/手写）
     var lp0=document.querySelector("#cb-ai-loading p"); if(lp0) lp0.textContent="正在优化图片…";
@@ -1862,13 +1865,13 @@ function quotaInit(){
   if(localStorage.getItem("cb_newbie_granted")!=="1"){localStorage.setItem("cb_perm_quota",String(permQuota()+NEWBIE_QUOTA));localStorage.setItem("cb_newbie_granted","1")}
   vipPaint();
 }
-var DEV_AI_KEY="363d22428ee04e258a73d9fa068236bf.wYAwCGESj0BL7Bi4";
-var DEV_AI_ENDPOINT="https://open.bigmodel.cn/api/paas/v4/chat/completions";
-var DEV_AI_VISION_MODEL="glm-4.6v";
-var DEV_AI_TEXT_MODEL="glm-4-air";
+var DEV_AI_KEY="FnyjoFUYU1V7UBxsr738ZzhfA2mXSbcvPkyK4lX9B3Urf2Sj";
+var DEV_AI_ENDPOINT="https://api.kabuai.cn/v1/chat/completions";
+var DEV_AI_VISION_MODEL="agnes-2.0-flash";
+var DEV_AI_TEXT_MODEL="agnes-2.0-flash";
 function aiUseMode(){if(dailyFreeLeft()>0)return "free";if(permQuota()>0)return "quota";return "none"}
 function aiVisionCred(){
-  return {mode:aiUseMode(),provider:"glm",key:DEV_AI_KEY,model:DEV_AI_VISION_MODEL};
+  return {mode:aiUseMode(),provider:"kabuai",key:DEV_AI_KEY,model:DEV_AI_VISION_MODEL};
 }
 function aiAnalysisCred(){
   return {mode:aiUseMode(),api:DEV_AI_ENDPOINT,key:DEV_AI_KEY,model:DEV_AI_TEXT_MODEL};
