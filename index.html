@@ -398,10 +398,37 @@ function srsCalc(q,rating){
 
 // ===== STATE =====
 var cv="dashboard", rq=[], ri=0, rs=[0,0,0,0,0], cr=-1;
-var aiR=[], photoUrl="", aiPhoto="", photoOrig="", aiPhotoCount=0;
+var aiR=[], photoUrl="", aiPhoto="", photoOrig="", aiPhotoCount=0, photoQueue=[];
 var aiTaskActive=false;
 function aiTaskStart(){aiTaskActive=true;try{if(window.Android&&window.Android.startAiTask)window.Android.startAiTask("正在识图/生成解析，切到其它应用也会继续…")}catch(e){}}
 function aiTaskStop(){aiTaskActive=false;try{if(window.Android&&window.Android.stopAiTask)window.Android.stopAiTask()}catch(e){}}
+function renderPhotoQueueHint(){
+  var el=document.getElementById("cb-photo-qhint"); if(!el) return;
+  var btn=document.getElementById("cb-btn-analyze");
+  if(photoQueue.length>0){
+    el.style.display="";
+    el.textContent="📚 批量队列已加入 "+photoQueue.length+" 张，可继续添加，或点开始识别一起处理";
+    if(btn) btn.textContent="🚀 开始识别（共 "+(photoQueue.length+(photoUrl?1:0))+" 张）";
+    var cq=document.getElementById("cb-photo-clearq"); if(cq) cq.style.display="";
+  } else {
+    el.style.display="none";
+    if(btn) btn.textContent="🔍 开始识别";
+    var cq2=document.getElementById("cb-photo-clearq"); if(cq2) cq2.style.display="none";
+  }
+}
+function addPhotoToQueue(){
+  if(!photoUrl) return;
+  photoQueue.push(photoUrl); photoQueue=photoQueue.slice(-20);
+  resetPhotoUI();
+  document.getElementById("cb-btn-analyze").style.display="";
+  renderPhotoQueueHint();
+  toast("已加入批量队列（"+photoQueue.length+" 张），可继续拍照/选图");
+}
+function clearPhotoQueue(){
+  photoQueue=[]; renderPhotoQueueHint();
+  if(!photoUrl) document.getElementById("cb-btn-analyze").style.display="none";
+  toast("已清空批量队列");
+}
 var AF_TYPES=["单选","多选","判断","不定项","案例分析","公文写作","大作文","其他"];
 var CAUSES=["知识点不熟","粗心大意","理解偏差","时间不够","审题错误","其他"];
 var QTYPES={
@@ -434,7 +461,7 @@ function normKeywords(mod,arr){
 }
 var examQs=[], examAns={}, examTimer=null, examSec=0;
 var kwFilter="";
-var APP_VERSION_CODE=20; var APP_VERSION_NAME="1.6.0";
+var APP_VERSION_CODE=21; var APP_VERSION_NAME="1.6.1";
 
 // ===== VIEW SWITCH =====
 function sv(v){
@@ -860,6 +887,7 @@ function resetPhotoUI(){
   var act=document.getElementById("cb-photo-actions"); if(act) act.style.display="none";
   var un=document.getElementById("cb-photo-undo"); if(un) un.style.display="none";
   document.getElementById("cb-ai-loading").style.display="none"; aiR=[]; photoUrl=""; aiPhoto=""; photoOrig=""; aiPhotoCount=0; document.getElementById("cb-photo-inp").value="";
+  renderPhotoQueueHint();
 }
 function handlePhoto(e){
   var files=e.target.files; if(!files||!files.length) return;
@@ -872,6 +900,7 @@ function handlePhoto(e){
     var act=document.getElementById("cb-photo-actions"); if(act) act.style.display="flex";
     var un=document.getElementById("cb-photo-undo"); if(un) un.style.display="none";
     setTimeout(function(){ cropPhoto(); },350);
+    renderPhotoQueueHint();
   };
   fr.onerror=function(){toast("图片读取失败，请重试或改用相册")};
   fr.readAsDataURL(f);
@@ -1166,6 +1195,12 @@ async function runRecognition(processed){
 async function analyzePhoto(){
   if(!photoUrl) return;
   if(!vipAiGate("AI 拍照识别"))return;
+  if(photoQueue.length>0){
+    var q=photoQueue.slice(); photoQueue=[]; renderPhotoQueueHint();
+    if(photoUrl) q.push(photoUrl);
+    await batchAnalyzeUrls(q);
+    return;
+  }
   document.getElementById("cb-btn-analyze").style.display="none"; document.getElementById("cb-ai-loading").style.display="";
   aiTaskStart();
   try{
@@ -1198,30 +1233,16 @@ async function batchAnalyze(files){
   if(!files||!files.length) return;
   if(!vipAiGate("AI 拍照识别"))return;
   document.getElementById("cb-btn-analyze").style.display="none"; document.getElementById("cb-ai-loading").style.display="";
-  aiR=[]; aiPhotoCount=0; var failCount=0, okCount=0;
-  var lp=document.querySelector("#cb-ai-loading p"); if(lp) lp.textContent="正在准备批量识图（共 "+files.length+" 张）…";
+  aiR=[]; aiPhotoCount=0;
+  var lp=document.querySelector("#cb-ai-loading p"); if(lp) lp.textContent="正在读取照片…";
   aiTaskStart();
   try{
+    var urls=[];
     for(var i=0;i<files.length;i++){
       var f=files[i];
-      var dataUrl=await new Promise(function(res,rej){var fr=new FileReader();fr.onload=function(){res(fr.result)};fr.onerror=function(){rej(new Error("图片读取失败"))};fr.readAsDataURL(f)});
-      var processed=await preprocessImage(dataUrl);
-      if(lp) lp.textContent="正在识别第 "+(i+1)+"/"+files.length+" 张…";
-      try{
-        var items=await runRecognition(processed);
-        if(items&&items.length){
-          for(var j=0;j<items.length;j++){items[j].img=processed;aiR.push(items[j])}
-          aiPhotoCount++; okCount++;
-        } else { failCount++; }
-      }catch(perr){ failCount++; }
+      urls.push(await new Promise(function(res,rej){var fr=new FileReader();fr.onload=function(){res(fr.result)};fr.onerror=function(){rej(new Error("图片读取失败"))};fr.readAsDataURL(f)}));
     }
-    renderAI();
-    if(aiR.length){
-      document.getElementById("cb-ai-loading").style.display="";
-      var lp2=document.querySelector("#cb-ai-loading p"); if(lp2) lp2.textContent="正在生成速解解析…";
-      await genAnalysis();
-    }
-    toast(failCount>0?(okCount>0?("识别完成 "+okCount+" 张，"+(files.length-okCount)+" 张未识别出题目"):("识别失败，"+files.length+" 张均未识别出题目")):("批量识别完成，共 "+okCount+" 张"));
+    await runBatchCore(urls,lp);
   }catch(err){
     var msg=String(err&&err.message||err||"未知错误");
     document.getElementById("cb-ai-list").innerHTML='<div class="cb-empty" style="color:#e53e3e">'+msg.replace(/</g,"&lt;")+'</div>';
@@ -1232,6 +1253,47 @@ async function batchAnalyze(files){
     aiTaskStop();
     var lp3=document.querySelector("#cb-ai-loading p"); if(lp3) lp3.textContent="AI 正在识别错题...";
   }
+}
+async function batchAnalyzeUrls(urls){
+  if(!urls||!urls.length) return;
+  if(!vipAiGate("AI 拍照识别"))return;
+  document.getElementById("cb-btn-analyze").style.display="none"; document.getElementById("cb-ai-loading").style.display="";
+  aiR=[]; aiPhotoCount=0;
+  var lp=document.querySelector("#cb-ai-loading p"); if(lp) lp.textContent="正在准备批量识图（共 "+urls.length+" 张）…";
+  aiTaskStart();
+  try{
+    await runBatchCore(urls,lp);
+  }catch(err){
+    var msg=String(err&&err.message||err||"未知错误");
+    document.getElementById("cb-ai-list").innerHTML='<div class="cb-empty" style="color:#e53e3e">'+msg.replace(/</g,"&lt;")+'</div>';
+    document.getElementById("cb-ai-count").textContent="识别失败";
+    document.getElementById("cb-ai-results").style.display="";
+    toast("批量识图失败："+msg);
+  }finally{
+    aiTaskStop();
+    var lp3=document.querySelector("#cb-ai-loading p"); if(lp3) lp3.textContent="AI 正在识别错题...";
+  }
+}
+async function runBatchCore(urls,lp){
+  var failCount=0, okCount=0;
+  for(var i=0;i<urls.length;i++){
+    var processed=await preprocessImage(urls[i]);
+    if(lp) lp.textContent="正在识别第 "+(i+1)+"/"+urls.length+" 张…";
+    try{
+      var items=await runRecognition(processed);
+      if(items&&items.length){
+        for(var j=0;j<items.length;j++){items[j].img=processed;aiR.push(items[j])}
+        aiPhotoCount++; okCount++;
+      } else { failCount++; }
+    }catch(perr){ failCount++; }
+  }
+  renderAI();
+  if(aiR.length){
+    document.getElementById("cb-ai-loading").style.display="";
+    var lp2=document.querySelector("#cb-ai-loading p"); if(lp2) lp2.textContent="正在生成速解解析…";
+    await genAnalysis();
+  }
+  toast(failCount>0?(okCount>0?("识别完成 "+okCount+" 张，"+(urls.length-okCount)+" 张未识别出题目"):("识别失败，"+urls.length+" 张均未识别出题目")):("批量识别完成，共 "+okCount+" 张"));
 }
 
 // Image compression: resize + JPEG encode to avoid token limit issues
@@ -1497,6 +1559,7 @@ function cleanInk(src,mode){
 }
 function saveAI(){
   if(!aiR.length) return; var now=new Date(), n=0;
+  photoQueue=[]; renderPhotoQueueHint();
   for(var k=0;k<Math.max(1,aiPhotoCount);k++)vipMarkAiUsed();
   for(var i=0;i<aiR.length;i++){ var r=aiR[i],m=MODS.indexOf(r.module)>=0?r.module:MODS[0];
     dbAdd({id:"q_"+now.getTime()+"_"+Math.random().toString(36).slice(2,8)+"_"+i,mod:m,q:r.question||"",a:r.answer||"",
@@ -2254,10 +2317,12 @@ function bindEvents(){
   el=document.getElementById("cb-checkin-trend-mod"); if(el) el.addEventListener("change",renderCheckin);
   // OCR
   el=document.getElementById("cb-photo-camera"); if(el) el.addEventListener("click",function(){var fi=document.getElementById("cb-photo-inp");fi.setAttribute("capture","environment");fi.click()}); el=document.getElementById("cb-photo-gallery"); if(el) el.addEventListener("click",function(){var fi=document.getElementById("cb-photo-inp");if(!fi.hasAttribute("multiple"))fi.setAttribute("multiple","");fi.removeAttribute("capture");fi.click()});
-  (function(){var pv=document.getElementById("cb-photo-pv"); if(pv&&!document.getElementById("cb-photo-actions")){pv.insertAdjacentHTML("afterend",'<div id="cb-photo-actions" style="display:none;gap:8px;margin-bottom:10px"><button class="cb-btn ghost" id="cb-photo-crop" style="flex:1;font-size:0.82rem">✂️ 裁剪照片</button><button class="cb-btn ghost" id="cb-photo-undo" style="flex:1;font-size:0.82rem;display:none">↩️ 恢复原图</button></div>')}})();
+  (function(){var pv=document.getElementById("cb-photo-pv"); if(pv&&!document.getElementById("cb-photo-actions")){pv.insertAdjacentHTML("afterend",'<div id="cb-photo-qhint" style="display:none;font-size:0.75rem;color:var(--gold,#b8860b);background:rgba(184,134,11,0.10);border-radius:8px;padding:6px 10px;margin-bottom:8px"></div><div id="cb-photo-actions" style="display:none;gap:8px;margin-bottom:10px"><button class="cb-btn ghost" id="cb-photo-crop" style="flex:1;font-size:0.82rem">✂️ 裁剪照片</button><button class="cb-btn ghost" id="cb-photo-add" style="flex:1;font-size:0.82rem">➕ 继续添加</button><button class="cb-btn ghost" id="cb-photo-undo" style="flex:1;font-size:0.82rem;display:none">↩️ 恢复原图</button><button class="cb-btn ghost" id="cb-photo-clearq" style="flex:1;font-size:0.82rem;display:none">🗑 清空队列</button></div>')}})();
   el=document.getElementById("cb-photo-inp"); if(el) el.addEventListener("change",handlePhoto);
   el=document.getElementById("cb-photo-crop"); if(el) el.addEventListener("click",cropPhoto);
   el=document.getElementById("cb-photo-undo"); if(el) el.addEventListener("click",undoPhoto);
+  el=document.getElementById("cb-photo-add"); if(el) el.addEventListener("click",addPhotoToQueue);
+  el=document.getElementById("cb-photo-clearq"); if(el) el.addEventListener("click",clearPhotoQueue);
   el=document.getElementById("cb-photo-rm"); if(el) el.addEventListener("click",resetPhotoUI);
   el=document.getElementById("cb-btn-text-rec"); if(el) el.addEventListener("click",textRecognition);
   el=document.getElementById("cb-btn-text-save"); if(el) el.addEventListener("click",saveTextAI);
