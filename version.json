@@ -1,1 +1,1 @@
-{ "versionCode": 20, "versionName": "1.6.0", "apkUrl": "https://cdn.jsdelivr.net/gh/2020-GIF/cuotiben-vip-releases@v1.6.0/cuotiben-vip-v1.6.0.apk", "note": "支持相册批量识图；识图切后台可继续（前台服务+唤醒锁）；拍照自动裁剪+自由手绘选区；判断推理解析强化" }
+{ "versionCode": 21, "versionName": "1.6.1", "apkUrl": "https://cdn.jsdelivr.net/gh/2020-GIF/cuotiben-vip-releases@v1.6.1/cuotiben-vip-v1.6.1.apk", "note": "修复相册批量识图（原生多选）；新增相机连拍批量队列：拍一张点继续添加，攒多张一起识别" }
