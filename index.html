@@ -1653,7 +1653,7 @@ async function checkUpdate(){
   for(var i=0;i<urls.length;i++){
     try{
       info=await fetchJsonTimeout(urls[i],10000);
-      if(info&&typeof info.versionCode==="number")break;
+      if(info&&typeof info.versionCode==="number"&&info.versionCode>APP_VERSION_CODE)break;
     }catch(e){
       lastErr=(e&&e.name==="AbortError")?"网络超时":String(e&&e.message||e||"网络错误");
     }
