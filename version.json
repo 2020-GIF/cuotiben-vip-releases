@@ -1,6 +1,1 @@
-{
-  "versionCode": 17,
-  "versionName": "1.5.7",
-  "apkUrl": "https://cdn.jsdelivr.net/gh/2020-GIF/cuotiben-vip-releases@v1.5.7/cuotiben-vip-v1.5.7.apk",
-  "note": "内置 AI 更换为 kabuai 接口（agnes-2.0-flash，支持拍照识图与解析）"
-}
+{ "versionCode": 18, "versionName": "1.5.8", "apkUrl": "https://cdn.jsdelivr.net/gh/2020-GIF/cuotiben-vip-releases@v1.5.8/cuotiben-vip-v1.5.8.apk", "note": "AI 解析升级：内置完整公考解题技巧库（资料分析速算/数量公式/言语判断申论），错题详情新增技巧讲解，模型升级 agnes-2.5-flash" }
