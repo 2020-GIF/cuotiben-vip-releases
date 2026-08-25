@@ -431,7 +431,7 @@ function normKeywords(mod,arr){
 }
 var examQs=[], examAns={}, examTimer=null, examSec=0;
 var kwFilter="";
-var APP_VERSION_CODE=17; var APP_VERSION_NAME="1.5.7";
+var APP_VERSION_CODE=18; var APP_VERSION_NAME="1.5.8";
 
 // ===== VIEW SWITCH =====
 function sv(v){
@@ -765,6 +765,7 @@ function renderCheckin(){
 // ===== MODAL =====
 var detailId=null;
 function showDetail(id){
+  var tw0=document.getElementById("cb-modal-tip-wrap"); if(tw0)tw0.style.display="none";
   dbGet(id,function(e,q){ if(e||!q) return; detailId=id;
     detailImg=q.img||null; document.getElementById("cb-modal-crop").style.display=q.img?"":"none";
     document.getElementById("cb-modal-verify").style.display=q.verify==="待核对"?"":"none";
@@ -776,7 +777,32 @@ function showDetail(id){
     document.getElementById("cb-modal").style.display="flex";
   });
 }
-function closeModal(){ document.getElementById("cb-modal").style.display="none"; detailId=null; }
+function closeModal(){ document.getElementById("cb-modal").style.display="none"; detailId=null; var tw=document.getElementById("cb-modal-tip-wrap"); if(tw)tw.style.display="none"; }
+var tipBusy=false;
+function showTip(){
+  if(!detailId||tipBusy) return;
+  var wrap=document.getElementById("cb-modal-tip-wrap");
+  var out=document.getElementById("cb-modal-tip");
+  var btn=document.getElementById("cb-modal-tip-btn");
+  if(!wrap||!out||!btn) return;
+  dbGet(detailId,function(e,q){ if(e||!q) return;
+    var ac=aiAnalysisCred();
+    var r={module:q.mod||"",questionType:q.qtype||"",question:q.q||"",answer:q.a||""};
+    wrap.style.display=""; out.textContent="正在生成技巧讲解…";
+    tipBusy=true; btn.disabled=true; btn.textContent="⏳ 讲解中…";
+    callTextAI(ac.api,ac.key,ac.model,buildAnalysisPrompt(r)+"\n\n要求：这是错题详情里的技巧讲解，重点讲清这道题用到的解题方法与速算/速解技巧，并给出错因与同类拓展。")
+    .then(function(data){
+      var msg=data.choices&&data.choices[0]?data.choices[0].message:null;
+      var ct=msg?(msg.content||msg.reasoning_content||""):"";
+      out.textContent=ct||"（模型未返回内容，请重试）";
+    })
+    .catch(function(err){
+      out.textContent="生成失败："+String(err&&err.message||err||"未知错误");
+    })
+    .finally(function(){ tipBusy=false; btn.disabled=false; btn.textContent="🧠 技巧讲解"; });
+  });
+}
+(function(){var foot=document.querySelector(".cb-modal-foot");if(foot&&!document.getElementById("cb-modal-tip-btn")){var b=document.createElement("button");b.className="cb-btn pri";b.id="cb-modal-tip-btn";b.style.fontSize="0.8rem";b.textContent="🧠 技巧讲解";foot.appendChild(b);b.addEventListener("click",showTip);}var body=document.querySelector(".cb-modal-body");if(body&&!document.getElementById("cb-modal-tip-wrap")){var w=document.createElement("div");w.id="cb-modal-tip-wrap";w.style.display="none";w.style.marginTop="10px";var h=document.createElement("div");h.style.marginBottom="2px";h.innerHTML="<b>🧠 技巧讲解</b>";var o=document.createElement("div");o.id="cb-modal-tip";o.style.fontSize="0.85rem";o.style.lineHeight="1.7";o.style.padding="8px";o.style.background="#f0f9ff";o.style.borderRadius="6px";o.style.whiteSpace="pre-wrap";w.appendChild(h);w.appendChild(o);body.appendChild(w);}})();
 function deleteQ(){ if(!detailId||!confirm("确定删除？")) return; sbMarkDel(detailId); dbDel(detailId,function(e){ closeModal(); sv("dashboard"); toast("已删除"); sbQueueSync(); }); }
 function resetQ(){ if(!detailId||!confirm("重置复习进度？")) return;
     dbGet(detailId,function(e,q){ if(e||!q) return; q.lv=0; q.ef=2.5; q.iv=1; q.nr=new Date().toISOString(); q.rep=0; q.hist=[]; q.ut=new Date().toISOString();
@@ -920,7 +946,62 @@ function nativeAI(url,ak,bodyObj){
     setTimeout(function(){if(window.__nativeAiResult){window.__nativeAiResult=null;reject(new Error("请求超时，请检查网络后重试"))}},120000);
   });
 }
-var HS13='你按照公考行测速解技巧生成错题解析，先识别题型再给方法，资料分析/数量关系必须给出速算过程，必须给出易错点，禁止只给答案。\n\n【资料分析·ABRX】A=现期量，B=基期量，R=增长率，X=增长量；B=A/(1+R)；X=B×R=A×R/(1+R)；R=(A-B)/B。速算：①截位直除——选项首位不同截2位、首位同次位不同截3位；②415份数法——现期:增量=(100+R):R，每份=现期/(100+R)，增量=每份×R；③假设分配——已知基期求现期A=B×(1+R)。比重升降看部分R与整体R谁大；比重差=(部分/整体)×(部分R-整体R)/(1+部分R)，单位是百分点；平均数增长率=(总量R-份数R)/(1+份数R)；“是几倍”=A/B，“多几倍”=A/B-1。\n\n【数量关系】工程：总量=效率×时间，给时间赋总量为最小公倍数，给效率比直接赋值。行程：相遇=速度和×时间，追及=速度差×时间，顺水=船速+水速，逆水=船速-水速。利润：利润率=利润/成本，售价=成本×(1+利润率)，可赋成本=100。排列组合：有序用A、无序用C，相邻捆绑、不相邻插空。概率：至少一个=1-都不发生。容斥两集合：A+B-AB=总-都不。年龄差不变；牛吃草先求草长速度=(N1T1-N2T2)/(T1-T2)；鸡兔同笼先假设全鸡。\n\n【言语理解】逻辑填空找语境对应：转折反义、并列近义、递进加深、解释同义；再辨语素差异、程度轻重、感情色彩、固定搭配。片段阅读找中心句：总分看首句、分总看尾句、转折/递进/因果后是重点；答案必须含主题词，问题+对策时优先选对策。细节题防偷换概念、时态、范围、语气、无中生有、正反颠倒。语句排序：代词开头不做首句，总结/对策做尾句，关联词与指代词捆绑。\n\n【判断推理·图形】规律优先级：元素相同→位置(平移/旋转/翻转)，元素相似→样式(叠加/求同/求异/黑白加)，元素不同→数量(点线角面素)，都不行→属性(对称/曲直/封闭)；一笔画看奇点=0或2；折纸盒看相对面(Z字两端)不能同时出现；常记对称轴数量(正方形4、等边三角形3)。定义判断：抓主体/客体/目的/方式/条件/原因/结果八要素逐一比对。类比推理：逻辑关系(全同/包含/组成/交叉/并列/矛盾/反对)、语义(近义/反义/褒贬)、语法(主谓/动宾/偏正)、对应(功能/材料/职业/工具/因果/象征)，多选符合时做二级辨析(方向/程度/范围)。逻辑判断：如果A那么B→A→B；只有A才B→B→A；A是B的前提→B→A；逆否等价；肯前必肯后、否后必否前；加强力度=否论点>搭桥>论据>举例；削弱力度=否论点>拆桥>另有他因>举例；矛盾关系一真一假，反对关系至少一假或至少一真。朴素逻辑用表格/列表/假设/排除。\n\n【常识判断】用排除法，含“一定/所有/必须”的绝对化表述多为错，优先回想高频时政、法律、党史考点。\n\n【申论】审题→找点→加工→书写；单一题归纳概括、综合题按“是什么-为什么-怎么办”、公文注意格式、大作文用五段三分式或递进式：立意+结构+分论点+素材，不写整篇范文。\n\n【输出格式】\n【题型识别】一句话点明题型\n【解题思路】分步骤\n【速算/速解】资料和数量必写，其它模块写速解技巧\n【易错点】至少1条\n【答案】答案或“需人工核对”';
+var HS13=[
+'你是公务员考试（国考/省考/联考/事业单位）行测申论解题技巧专家。下面给你一道错题，先识别题型，再按对应模块的解题技巧生成解析。资料分析与数量关系必须给出速算/速解过程，每道题必须给出易错点，禁止只给答案。',
+'',
+'【行测答题策略】推荐顺序：常识（8分钟）→资料分析（28分钟）→判断推理（35分钟）→言语理解（35分钟）→数量关系（剩余时间选做5-7题）。资料分析分值密度最高，先做且做对；数量关系性价比低放最后，不会就蒙、不空题；常识单题不超过30秒，会就选不会就蒙。',
+'',
+'【资料分析·ABRX体系】A=现期量，B=基期量，R=增长率，X=增长量。核心公式：B=A/(1+R)；X=B×R=A×R/(1+R)；R=(A-B)/B；现期=基期×(1+R)。求基期用截位直除，求现期用假设分配，求增长量用415份数。',
+'速算①截位直除：先看选项再截位——选项首位不同分母截2位，首位同、次位不同截3位，前两位同截4位；分子小（不足分母1/10）不截；分母接近整数可凑整（998→1000）。',
+'速算②415份数法：已知现期与增长率求增长量，现期:增长量=(100+R):R，每份=现期/(100+R)，增长量=每份×R。常见化简：R=10%→11:1，20%→6:1，25%→5:1，33%→4:1，50%→3:1，100%→2:1；已知基期求增长量直接用基期×R。',
+'速算③假设分配：已知基期求现期，设基期=100份，现期=(100+R)份，每份=基期/100，现期=每份×(100+R)，用乘法代替除法。',
+'速算④其它：分数比较用交叉相乘或找中间值；选项首位不同只算首位（首数法）；加减法看尾数（尾数法）；特殊分数熟记1/3≈33.3%、1/4=25%、1/5=20%、1/6≈16.7%、1/7≈14.3%、1/8=12.5%、1/9≈11.1%。',
+'比重：比重=部分/整体；比重升降看部分增长率与整体增长率谁大（部分R大于整体R则比重上升，反之下降）；比重差=(部分/整体)×(部分R-整体R)/(1+部分R)，单位是百分点。',
+'平均数：平均数增长率=(总量R-份数R)/(1+份数R)。倍数：“是几倍”=A/B，“多几倍”=A/B-1。综合分析题先看简单的选项、跳过计算量大的，用排除法。',
+'',
+'【数量关系】通用速解：赋值法（工程赋总量为最小公倍数、利润赋成本100、效率比直接赋值）、代入排除法、比例法、特殊值法；复杂题优先代入选项。',
+'工程：总量=效率×时间；给时间赋总量为最小公倍数，给效率比直接赋值；合作效率相加。',
+'行程：路程=速度×时间；相遇=速度和×相遇时间；追及=速度差×追及时间；顺水=船速+水速，逆水=船速-水速，船速=(顺水+逆水)/2，水速=(顺水-逆水)/2；1m/s=3.6km/h。',
+'利润：利润=售价-成本；利润率=利润/成本（分母是成本不是售价）；售价=成本×(1+利润率)；折扣价=原价×折扣；可赋成本=100。',
+'排列组合：有序用排列A(n,m)，无序用组合C(n,m)；相邻问题用捆绑法，不相邻用插空法；相同物品分配用隔板法；正面复杂用间接法（总数-反面）。',
+'概率：P=满足情况数/总情况数；“至少一个”=1-都不发生；独立事件“都发生”=各概率相乘。',
+'容斥：两集合A+B-AB=总-都不；三集合标准型A+B+C-AB-AC-BC+ABC=总-都不；非标准型A+B+C-只满足两个-2×满足三个=总-都不。',
+'年龄：年龄差永远不变，年龄倍数随时间变化；过去年龄减年数，未来年龄加年数。',
+'几何：勾股定理a²+b²=c²（常见勾股数3、4、5和5、12、13）；相似三角形对应边成比例；圆面积πr²，圆柱体积πr²h，球体积4πr³/3，表面积4πr²。',
+'溶液：浓度=溶质/溶液；混合用十字交叉法；蒸发溶剂减少、稀释溶剂增加、加溶质溶质增加。',
+'牛吃草：草长速度=(N1T1-N2T2)/(T1-T2)；原草量=N1T1-草长速度×T1；吃草天数=原草量/(N-草长速度)。',
+'鸡兔同笼：假设全鸡，兔数=(总脚-2×总头)/2；通用公式：A数量=(总分-低分×总数)/(高分-低分)。',
+'最值：最不利原则，保证至少=最不利+1；抽屉原理：n种物品取n×(k-1)+1个，至少有k个同种。',
+'',
+'【言语理解】逻辑填空：先找语境对应——转折反义、并列近义、递进加深、解释同义；再辨析词语——语素差异、程度轻重、感情色彩、固定搭配。',
+'片段阅读：找中心句——总分结构看首句、分总看尾句、转折/递进/因果之后是重点；答案必须含主题词；问题+对策时优先选对策；意图题选对策或呼吁。',
+'细节题：防偷换概念、时态、范围、语气、无中生有、正反颠倒。',
+'语句排序：代词开头的句子不做首句；总结/对策句做尾句；关联词与指代词要捆绑。',
+'标题填入：新闻看导语，议论看论点，说明看对象特征，寓言看启示。',
+'',
+'【判断推理】图形推理规律优先级：元素相同→位置（平移/旋转/翻转），元素相似→样式（叠加/求同/求异/黑白加），元素不同→数量（点线角面素），都不行→属性（对称/曲直/封闭）；一笔画看奇点=0或2；折纸盒看相对面（Z字两端）不能同时出现；对称轴数：正方形4、等边三角形3。',
+'定义判断：抓主体/客体/目的/方式/条件/原因/结果/性质八要素，逐一比对排除。',
+'类比推理：逻辑关系（全同/包含/组成/交叉/并列/矛盾/反对）、语义（近义/反义/褒贬）、语法（主谓/动宾/偏正）、对应（功能/材料/职业/工具/因果/象征）；多个选项符合时做二级辨析（方向/程度/范围/必然）。',
+'逻辑判断·翻译：如果A那么B、只要A就B→A→B；只有A才B、除非A否则不B、A是B的前提→B→A；逆否等价；肯前必肯后、否后必否前，肯后否前不确定。',
+'真假推理：找矛盾（一真一假：A与¬A、“所有”与“有的不”）→绕开矛盾看其他→再回判；反对关系“所有vs所有不”至少一假、“有的vs有的不”至少一真。',
+'加强力度：否论点>搭桥>加强论据>排除他因>举例；削弱力度：否论点>拆桥>否定论据>另有他因>举例。',
+'朴素逻辑：表格法、列表排除、假设法、代入法。',
+'',
+'【常识判断】优先排除法；含“一定/所有/必须/绝对”的绝对化表述多为错；优先回想高频时政、法律、党史、科技成就考点，不纠结。',
+'',
+'【申论】四步：审题→找点→加工→书写。单一题归纳概括；综合分析按“是什么-为什么-怎么办”；提出对策题注意主体可行性与针对性；公文题注意格式（标题/称谓/正文/落款）；大作文只给框架不写全文：立意+结构（五段三分式或递进式）+分论点+素材方向。',
+'',
+'【错题归因】结合用户选择的错因（知识点不熟/粗心大意/理解偏差/时间不够/审题错误）给出针对性建议：知识点不熟→补公式与方法；技巧不熟→练速算专项；粗心→审题与检查习惯；时间不够→调整做题顺序与蒙题策略；审题错误→圈画题干关键词。',
+'',
+'【输出格式】严格按以下小节输出：',
+'【题型识别】一句话点明模块与题型',
+'【解题思路】分步骤说明',
+'【速算/速解】资料分析和数量关系必写具体速算过程，其它模块写速解技巧',
+'【易错点】至少1条',
+'【错因】指出最可能错因与改进方向',
+'【同类拓展】一句话提示同类题怎么做',
+'【答案】答案字母或内容，无法确定写“需人工核对”'
+].join("\n");
 function buildAnalysisPrompt(r){
   return HS13+'\n\n【题目信息】\n模块：'+r.module+'\n题型：'+r.questionType+'\n题干：'+(r.question||"（图形题，见原图）")+'\n选项答案：'+(r.answer||"未提供")+'\n\n请严格按输出格式生成这道题的解析。';
 }
@@ -1867,8 +1948,8 @@ function quotaInit(){
 }
 var DEV_AI_KEY="FnyjoFUYU1V7UBxsr738ZzhfA2mXSbcvPkyK4lX9B3Urf2Sj";
 var DEV_AI_ENDPOINT="https://api.kabuai.cn/v1/chat/completions";
-var DEV_AI_VISION_MODEL="agnes-2.0-flash";
-var DEV_AI_TEXT_MODEL="agnes-2.0-flash";
+var DEV_AI_VISION_MODEL="agnes-2.5-flash";
+var DEV_AI_TEXT_MODEL="agnes-2.5-flash";
 function aiUseMode(){if(dailyFreeLeft()>0)return "free";if(permQuota()>0)return "quota";return "none"}
 function aiVisionCred(){
   return {mode:aiUseMode(),provider:"kabuai",key:DEV_AI_KEY,model:DEV_AI_VISION_MODEL};
