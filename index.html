@@ -462,7 +462,7 @@ function normKeywords(mod,arr){
 }
 var examQs=[], examAns={}, examTimer=null, examSec=0;
 var kwFilter="";
-var APP_VERSION_CODE=25; var APP_VERSION_NAME="1.6.5";
+var APP_VERSION_CODE=26; var APP_VERSION_NAME="1.6.6";
 
 // ===== VIEW SWITCH =====
 function sv(v){
@@ -1121,6 +1121,50 @@ function saveShenlun(){
   var now=new Date();
   var qt=document.getElementById("cb-sl-qtype").value;
   dbAdd({id:"q_"+now.getTime()+"_"+Math.random().toString(36).slice(2,8)+"_sl",mod:"申论",q:r.q+"\n\n【给定材料】\n"+r.mat,a:r.ref||"",qtype:qt,qfmt:(qt==="文章写作"?"大作文":"其他"),diff:2,src:"专项练习",cause:"其他",verify:r.ref?"已核对":"待核对",kw:[],img:null,notes:r.text,lv:0,ef:2.5,iv:1,nr:now.toISOString(),rep:0,hist:[],ct:now.toISOString(),lr:null,ut:now.toISOString()},function(){toast("已存入错题本（申论模块）");sv("dashboard");sbQueueSync()});
+}
+async function runShenlunOcr(processed){
+  var cred=aiVisionCred();
+  var provider=cred.provider, ak=cred.key, model=cred.model;
+  var endpoint=DEV_AI_ENDPOINT;
+  var prompt='你是申论题目识别专家。请分析这张照片，识别申论题目的题干、给定资料、作答和参考答案，严格按JSON对象返回，不要任何解释。\n\n硬性要求：\n1. 题干和给定资料必须逐字转录印刷体原文，禁止概括、改写或编造；看不清的字用“□”。\n2. 手写作答尽量转录，看不清用“□”，不得臆测。\n3. 参考答案只有原文明确标注（如“参考答案：”“答案：”）才填写，否则填null。\n4. 图片模糊无法识别时返回{"error":"图片无法识别"}。\n\n字段：question（题干，含分值/字数要求）、material（给定资料全文）、answer（我的作答，无则null）、reference（参考答案，无则null）。\n\n只返回JSON对象。';
+  var bodyObj={model:model,messages:[{role:"user",content:[{type:"text",text:prompt},{type:"image_url",image_url:{url:processed}}]}],max_tokens:4096,temperature:0.1};
+  var data;
+  if(window.Android&&window.Android.aiRequest){data=await nativeAI(endpoint,ak,bodyObj)}
+  else{
+    var resp=await fetch(endpoint,{method:"POST",headers:{"Content-Type":"application/json","Authorization":"Bearer "+ak},body:JSON.stringify(bodyObj)});
+    if(!resp.ok){var ed={};try{ed=await resp.json()}catch(ex){}throw new Error(ed.error?ed.error.message:("HTTP "+resp.status))}
+    data=await resp.json();
+  }
+  var msg0=data.choices&&data.choices[0]?data.choices[0].message:null;
+  var ct=msg0?(msg0.content||msg0.reasoning_content||"{}"):"{}";
+  ct=ct.replace(/```json/g,"").replace(/```/g,"").trim();
+  var obj=JSON.parse(ct);
+  if(obj&&obj.error) throw new Error(obj.error);
+  return obj||{};
+}
+async function handleShenlunPhoto(e){
+  var f=e.target.files[0]; if(!f) return;
+  if(!vipAiGate("申论拍照识别")){e.target.value="";return}
+  var pv=document.getElementById("cb-sl-photo-pv"), img=document.getElementById("cb-sl-photo-img"), loading=document.getElementById("cb-sl-ocr-loading");
+  if(!loading) return;
+  loading.style.display="";
+  aiTaskStart();
+  try{
+    var fr=await new Promise(function(res,rej){var r=new FileReader();r.onload=function(){res(r.result)};r.onerror=function(){rej(new Error("图片读取失败"))};r.readAsDataURL(f)});
+    var processed=await preprocessImage(fr);
+    if(img) img.src=processed; if(pv) pv.style.display="";
+    var obj=await runShenlunOcr(processed);
+    if(obj.question) document.getElementById("cb-sl-q").value=obj.question;
+    if(obj.material) document.getElementById("cb-sl-mat").value=obj.material;
+    if(obj.answer) document.getElementById("cb-sl-ans").value=obj.answer;
+    if(obj.reference) document.getElementById("cb-sl-ref").value=obj.reference;
+    vipMarkAiUsed();
+    toast("已识别，请核对内容后开始复盘");
+  }catch(err){
+    toast("申论识图失败："+String(err&&err.message||err||"未知错误"),4000);
+  }finally{
+    loading.style.display="none"; aiTaskStop();
+  }
 }
 function buildAnalysisPrompt(r){
   var vd=r.visualDescription?('\n图形/图表描述：'+r.visualDescription):'';
@@ -2437,6 +2481,19 @@ function bindEvents(){
   el=document.getElementById("cb-btn-text-save"); if(el) el.addEventListener("click",saveTextAI);
   el=document.getElementById("cb-btn-shenlun-go"); if(el) el.addEventListener("click",shenlunReview);
   el=document.getElementById("cb-btn-shenlun-save"); if(el) el.addEventListener("click",saveShenlun);
+  (function(){var sl=document.getElementById("cb-tab-shenlun");if(!sl||document.getElementById("cb-sl-photo-up"))return;var host=document.getElementById("cb-sl-qtype");if(!host)return;
+  var wrap=document.createElement("div");wrap.id="cb-sl-photo-up";wrap.style.cssText="display:flex;gap:10px;margin-bottom:10px";
+  var cam=document.createElement("div");cam.className="cb-photo-up";cam.id="cb-sl-photo-camera";cam.style.cssText="flex:1;cursor:pointer";cam.innerHTML='<div class="cb-pu-icon">📷</div><p style="font-size:0.75rem">拍题干/材料/作答</p>';
+  var gal=document.createElement("div");gal.className="cb-photo-up";gal.id="cb-sl-photo-gallery";gal.style.cssText="flex:1;cursor:pointer";gal.innerHTML='<div class="cb-pu-icon">🖼</div><p style="font-size:0.75rem">相册选图</p>';
+  wrap.appendChild(cam);wrap.appendChild(gal);
+  var inp=document.createElement("input");inp.type="file";inp.id="cb-sl-photo-inp";inp.accept="image/*";inp.style.display="none";
+  var pv=document.createElement("div");pv.id="cb-sl-photo-pv";pv.style.cssText="display:none;margin-bottom:10px";pv.innerHTML='<img id="cb-sl-photo-img" style="width:100%;max-height:220px;object-fit:contain;border:1px solid var(--border);border-radius:8px"><button class="cb-photo-rm" id="cb-sl-photo-rm">✕</button>';
+  var ld=document.createElement("div");ld.id="cb-sl-ocr-loading";ld.style.cssText="display:none;text-align:center;padding:12px";ld.innerHTML='<div class="cb-spinner"></div><p style="font-size:0.8rem;color:var(--text2)">正在识别申论照片…</p>';
+  host.parentNode.insertBefore(wrap,host);host.parentNode.insertBefore(inp,host);host.parentNode.insertBefore(pv,host);host.parentNode.insertBefore(ld,host);
+  var ci=document.getElementById("cb-sl-photo-camera");if(ci)ci.addEventListener("click",function(){var fi=document.getElementById("cb-sl-photo-inp");fi.setAttribute("capture","environment");fi.click()});
+  var gi=document.getElementById("cb-sl-photo-gallery");if(gi)gi.addEventListener("click",function(){var fi=document.getElementById("cb-sl-photo-inp");fi.removeAttribute("capture");fi.click()});
+  var pi=document.getElementById("cb-sl-photo-inp");if(pi)pi.addEventListener("change",handleShenlunPhoto);
+  var pr=document.getElementById("cb-sl-photo-rm");if(pr)pr.addEventListener("click",function(){var pv2=document.getElementById("cb-sl-photo-pv");if(pv2)pv2.style.display="none";if(pi)pi.value=""});})();
   var cc=document.getElementById("cb-crop-canvas");
   if(cc){
     cc.addEventListener("pointerdown",function(e){if(!cropState)return;var p=cropPos(e);if(cropState.mode==="free"){cropState.free=[p];cropState.freeDrawing=true;}else{cropState.dragging=true;cropState.sx=p.x;cropState.sy=p.y;cropState.rect={x:p.x,y:p.y,w:0,h:0};}drawCrop();e.preventDefault()});
