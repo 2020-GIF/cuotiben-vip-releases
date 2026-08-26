@@ -1,1 +1,1 @@
-{ "versionCode": 32, "versionName": "1.7.2", "apkUrl": "https://cdn.jsdelivr.net/gh/2020-GIF/cuotiben-vip-releases@v1.7.2/cuotiben-vip-v1.7.2.apk", "note": "组卷支持 AI 去笔迹" }
+{ "versionCode": 33, "versionName": "1.7.3", "apkUrl": "https://cdn.jsdelivr.net/gh/2020-GIF/cuotiben-vip-releases@v1.7.3/cuotiben-vip-v1.7.3.apk", "note": "模型自动降级：2.5失败自动用2.0-flash重试" }
