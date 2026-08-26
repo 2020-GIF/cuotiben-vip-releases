@@ -1,1 +1,1 @@
-{ "versionCode": 35, "versionName": "1.7.5", "apkUrl": "https://cdn.jsdelivr.net/gh/2020-GIF/cuotiben-vip-releases@v1.7.5/cuotiben-vip-v1.7.5.apk", "note": "默认模型2.0-flash；识别输出8192防截断；批量每批2张并发" }
+{ "versionCode": 36, "versionName": "1.7.6", "apkUrl": "https://cdn.jsdelivr.net/gh/2020-GIF/cuotiben-vip-releases@v1.7.6/cuotiben-vip-v1.7.6.apk", "note": "API切换到官方agnes hub，识图提速" }
