@@ -1,1 +1,1 @@
-{"note":"AI 去笔迹按官方文档修正请求格式（extra_body.image/b64_json），尺寸档位+原图比例，大图2K保印刷清晰","apkUrl":"https://cdn.jsdelivr.net/gh/2020-GIF/cuotiben-vip-releases@v1.7.9/cuotiben-vip-v1.7.9.apk","versionName":"1.7.9","versionCode":39}
+{"apkUrl":"https://cdn.jsdelivr.net/gh/2020-GIF/cuotiben-vip-releases@v1.8.0/cuotiben-vip-v1.8.0.apk","note":"识图提速：识别结果先展示、速解解析后台逐题填充；多题解析2并发，时间约减半","versionName":"1.8.0","versionCode":40}
