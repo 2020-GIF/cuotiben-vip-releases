@@ -1,1 +1,1 @@
-{"versionCode":43,"versionName":"1.8.3","note":"修复识别模型选择不保存：切换即自动保存并提示","apkUrl":"https://cdn.jsdelivr.net/gh/2020-GIF/cuotiben-vip-releases@v1.8.3/cuotiben-vip-v1.8.3.apk"}
+{"versionName":"1.8.4","versionCode":44,"note":"修复并发请求超时：原生桥回调按请求ID分发；2.0模式加2.5兜底竞速，单请求超时放宽到120秒","apkUrl":"https://cdn.jsdelivr.net/gh/2020-GIF/cuotiben-vip-releases@v1.8.4/cuotiben-vip-v1.8.4.apk"}
