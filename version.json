@@ -1,1 +1,1 @@
-{"note":"录入提速：识别输出上限自适应+截断补跑；解析只发对应模块提示词（减半以上）、3并发、输出上限2560","versionName":"1.8.1","versionCode":41,"apkUrl":"https://cdn.jsdelivr.net/gh/2020-GIF/cuotiben-vip-releases@v1.8.1/cuotiben-vip-v1.8.1.apk"}
+{"versionCode":42,"note":"抗服务端波动：设置新增识别模型切换（2.5精细/2.0快速）；2.5超25秒自动用2.0抢答兜底；解析2.0兜底输出上限提到6000","apkUrl":"https://cdn.jsdelivr.net/gh/2020-GIF/cuotiben-vip-releases@v1.8.2/cuotiben-vip-v1.8.2.apk","versionName":"1.8.2"}
