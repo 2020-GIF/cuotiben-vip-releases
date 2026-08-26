@@ -1,1 +1,1 @@
-{"apkUrl":"https://cdn.jsdelivr.net/gh/2020-GIF/cuotiben-vip-releases@v1.8.0/cuotiben-vip-v1.8.0.apk","note":"识图提速：识别结果先展示、速解解析后台逐题填充；多题解析2并发，时间约减半","versionName":"1.8.0","versionCode":40}
+{"note":"录入提速：识别输出上限自适应+截断补跑；解析只发对应模块提示词（减半以上）、3并发、输出上限2560","versionName":"1.8.1","versionCode":41,"apkUrl":"https://cdn.jsdelivr.net/gh/2020-GIF/cuotiben-vip-releases@v1.8.1/cuotiben-vip-v1.8.1.apk"}
