@@ -1,1 +1,1 @@
-{"versionCode":48,"versionName":"1.8.8","note":"修复检查更新失效：改为读jsdelivr版本列表取最新tag再读version.json，不再命中@main旧缓存","apkUrl":"https://cdn.jsdelivr.net/gh/2020-GIF/cuotiben-vip-releases@v1.8.8/cuotiben-vip-v1.8.8.apk"}
+{"note":"修复导入JSON一直报格式错误：读取方式改为纯文本，兼容BOM和直接导入数组","versionCode":49,"versionName":"1.8.9","apkUrl":"https://cdn.jsdelivr.net/gh/2020-GIF/cuotiben-vip-releases@v1.8.9/cuotiben-vip-v1.8.9.apk"}
