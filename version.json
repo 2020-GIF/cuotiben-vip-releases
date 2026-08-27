@@ -1,1 +1,1 @@
-{"versionName":"1.9.7","note":"修复查重弹窗按钮全失灵：弹窗动态创建晚于按钮绑定，改内联事件，保留第一条/关闭/背景关闭恢复可用","apkUrl":"https://cdn.jsdelivr.net/gh/2020-GIF/cuotiben-vip-releases@v1.9.7/cuotiben-vip-v1.9.7.apk","versionCode":57}
+{"versionCode":58,"versionName":"1.10.0","note":"新用户识图额度15→100次，老用户自动补足到100，全量文案同步","apkUrl":"https://cdn.jsdelivr.net/gh/2020-GIF/cuotiben-vip-releases@v1.10.0/cuotiben-vip-v1.10.0.apk"}
