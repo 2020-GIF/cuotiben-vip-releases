@@ -1,1 +1,1 @@
-{"versionCode":52,"apkUrl":"https://cdn.jsdelivr.net/gh/2020-GIF/cuotiben-vip-releases@v1.9.2/cuotiben-vip-v1.9.2.apk","versionName":"1.9.2","note":"修复确认弹窗不弹出：补原生onJsConfirm/onJsAlert，查重批量删除、导入/清空确认等恢复可用"}
+{"versionName":"1.9.3","apkUrl":"https://cdn.jsdelivr.net/gh/2020-GIF/cuotiben-vip-releases@v1.9.3/cuotiben-vip-v1.9.3.apk","versionCode":53,"note":"检查更新再修复：多来源取最大版本号（GitHub最新release+jsdelivr列表兜底），请求加硬超时"}
