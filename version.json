@@ -1,1 +1,1 @@
-{"apkUrl":"https://cdn.jsdelivr.net/gh/2020-GIF/cuotiben-vip-releases@v1.9.1/cuotiben-vip-v1.9.1.apk","versionCode":51,"note":"新增重复题目查重（逐条删除/保留每组第一条），导入自动跳过重复，保存后提示疑似重复","versionName":"1.9.1"}
+{"versionCode":52,"apkUrl":"https://cdn.jsdelivr.net/gh/2020-GIF/cuotiben-vip-releases@v1.9.2/cuotiben-vip-v1.9.2.apk","versionName":"1.9.2","note":"修复确认弹窗不弹出：补原生onJsConfirm/onJsAlert，查重批量删除、导入/清空确认等恢复可用"}
