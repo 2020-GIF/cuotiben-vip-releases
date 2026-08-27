@@ -1,1 +1,1 @@
-{"note":"导入兼容旧版自动备份格式（items字段），自动补齐缺失字段并显示导入进度","apkUrl":"https://cdn.jsdelivr.net/gh/2020-GIF/cuotiben-vip-releases@v1.9.0/cuotiben-vip-v1.9.0.apk","versionCode":50,"versionName":"1.9.0"}
+{"apkUrl":"https://cdn.jsdelivr.net/gh/2020-GIF/cuotiben-vip-releases@v1.9.1/cuotiben-vip-v1.9.1.apk","versionCode":51,"note":"新增重复题目查重（逐条删除/保留每组第一条），导入自动跳过重复，保存后提示疑似重复","versionName":"1.9.1"}
