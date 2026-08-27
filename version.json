@@ -1,1 +1,1 @@
-{"versionCode":62,"versionName":"1.10.4","apkUrl":"https://cdn.jsdelivr.net/gh/2020-GIF/cuotiben-vip-releases@v1.10.4/cuotiben-vip-v1.10.4.apk","note":"新增拼接识图：跨页/截断的题可上下或左右拼成一张再识别"}
+{"versionCode":63,"versionName":"1.10.5","apkUrl":"https://cdn.jsdelivr.net/gh/2020-GIF/cuotiben-vip-releases@v1.10.5/cuotiben-vip-v1.10.5.apk","note":"修复拼接识图失败：拼接长图保持足够分辨率再识别，识别更稳"}
