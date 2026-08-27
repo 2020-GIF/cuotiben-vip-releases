@@ -1,1 +1,1 @@
-{"apkUrl":"https://cdn.jsdelivr.net/gh/2020-GIF/cuotiben-vip-releases@v1.9.6/cuotiben-vip-v1.9.6.apk","versionCode":56,"versionName":"1.9.6","note":"查重算法放宽：跨模块、相似度阈值降到0.85，能查出更多OCR差异大的重复"}
+{"versionName":"1.9.7","note":"修复查重弹窗按钮全失灵：弹窗动态创建晚于按钮绑定，改内联事件，保留第一条/关闭/背景关闭恢复可用","apkUrl":"https://cdn.jsdelivr.net/gh/2020-GIF/cuotiben-vip-releases@v1.9.7/cuotiben-vip-v1.9.7.apk","versionCode":57}
