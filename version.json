@@ -1,1 +1,1 @@
-{"versionName":"1.9.3","apkUrl":"https://cdn.jsdelivr.net/gh/2020-GIF/cuotiben-vip-releases@v1.9.3/cuotiben-vip-v1.9.3.apk","versionCode":53,"note":"检查更新再修复：多来源取最大版本号（GitHub最新release+jsdelivr列表兜底），请求加硬超时"}
+{"note":"修复查重保留第一条删除无效（回调误用共享变量），并修复弹窗背景点击关闭","versionCode":54,"apkUrl":"https://cdn.jsdelivr.net/gh/2020-GIF/cuotiben-vip-releases@v1.9.4/cuotiben-vip-v1.9.4.apk","versionName":"1.9.4"}
