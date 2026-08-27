@@ -1,1 +1,1 @@
-{"note":"查重优化：无重复时隐藏保留按钮并提示；清理结果提示更明确","versionName":"1.9.5","apkUrl":"https://cdn.jsdelivr.net/gh/2020-GIF/cuotiben-vip-releases@v1.9.5/cuotiben-vip-v1.9.5.apk","versionCode":55}
+{"apkUrl":"https://cdn.jsdelivr.net/gh/2020-GIF/cuotiben-vip-releases@v1.9.6/cuotiben-vip-v1.9.6.apk","versionCode":56,"versionName":"1.9.6","note":"查重算法放宽：跨模块、相似度阈值降到0.85，能查出更多OCR差异大的重复"}
