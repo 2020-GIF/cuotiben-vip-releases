@@ -1,1 +1,1 @@
-{"note":"修复导入JSON一直报格式错误：读取方式改为纯文本，兼容BOM和直接导入数组","versionCode":49,"versionName":"1.8.9","apkUrl":"https://cdn.jsdelivr.net/gh/2020-GIF/cuotiben-vip-releases@v1.8.9/cuotiben-vip-v1.8.9.apk"}
+{"note":"导入兼容旧版自动备份格式（items字段），自动补齐缺失字段并显示导入进度","apkUrl":"https://cdn.jsdelivr.net/gh/2020-GIF/cuotiben-vip-releases@v1.9.0/cuotiben-vip-v1.9.0.apk","versionCode":50,"versionName":"1.9.0"}
