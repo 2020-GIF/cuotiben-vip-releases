@@ -1,1 +1,1 @@
-{"note":"修复查重保留第一条删除无效（回调误用共享变量），并修复弹窗背景点击关闭","versionCode":54,"apkUrl":"https://cdn.jsdelivr.net/gh/2020-GIF/cuotiben-vip-releases@v1.9.4/cuotiben-vip-v1.9.4.apk","versionName":"1.9.4"}
+{"note":"查重优化：无重复时隐藏保留按钮并提示；清理结果提示更明确","versionName":"1.9.5","apkUrl":"https://cdn.jsdelivr.net/gh/2020-GIF/cuotiben-vip-releases@v1.9.5/cuotiben-vip-v1.9.5.apk","versionCode":55}
