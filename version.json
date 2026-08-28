@@ -1,1 +1,1 @@
-{"versionCode":63,"versionName":"1.10.5","apkUrl":"https://cdn.jsdelivr.net/gh/2020-GIF/cuotiben-vip-releases@v1.10.5/cuotiben-vip-v1.10.5.apk","note":"修复拼接识图失败：拼接长图保持足够分辨率再识别，识别更稳"}
+{"versionCode":64,"versionName":"1.10.6","apkUrl":"https://cdn.jsdelivr.net/gh/2020-GIF/cuotiben-vip-releases@v1.10.6/cuotiben-vip-v1.10.6.apk","note":"批量识图更可靠：失败图片自动降并发重试，仍失败会明确提示是哪几张"}
