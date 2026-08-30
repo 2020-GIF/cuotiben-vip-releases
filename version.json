@@ -1,6 +1,6 @@
 {
-  "versionCode": 89,
-  "versionName": "1.10.31",
-  "apkUrl": "https://cdn.jsdelivr.net/gh/2020-GIF/cuotiben-vip-releases@v1.10.31/cuotiben-vip-v1.10.31.apk",
-  "note": "识图新增统一进度条（阶段/百分比/已用时间/预估剩余）"
+  "versionCode": 90,
+  "versionName": "1.10.32",
+  "apkUrl": "https://cdn.jsdelivr.net/gh/2020-GIF/cuotiben-vip-releases@v1.10.32/cuotiben-vip-v1.10.32.apk",
+  "note": "识图进度条更准：按实际耗时估算剩余时间"
 }
