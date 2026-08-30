@@ -1,6 +1,6 @@
 {
-  "versionCode": 90,
-  "versionName": "1.10.32",
-  "apkUrl": "https://cdn.jsdelivr.net/gh/2020-GIF/cuotiben-vip-releases@v1.10.32/cuotiben-vip-v1.10.32.apk",
-  "note": "识图进度条更准：按实际耗时估算剩余时间"
+  "versionCode": 91,
+  "versionName": "1.10.33",
+  "apkUrl": "https://cdn.jsdelivr.net/gh/2020-GIF/cuotiben-vip-releases@v1.10.33/cuotiben-vip-v1.10.33.apk",
+  "note": "更新提醒优化：取消后3天再提醒、失败自动重试、新版本红点提示"
 }
