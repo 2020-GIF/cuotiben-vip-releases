@@ -1,1 +1,6 @@
-{"versionCode":86,"versionName":"1.10.28","apkUrl":"https://cdn.jsdelivr.net/gh/2020-GIF/cuotiben-vip-releases@v1.10.28/cuotiben-vip-v1.10.28.apk","note":"判断推理解析模型升级（系统讲义导图）"}
+{
+  "versionCode": 87,
+  "versionName": "1.10.29",
+  "apkUrl": "https://cdn.jsdelivr.net/gh/2020-GIF/cuotiben-vip-releases@v1.10.29/cuotiben-vip-v1.10.29.apk",
+  "note": "AI 助手提问不再消耗识图额度"
+}
