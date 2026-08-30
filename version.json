@@ -1,6 +1,6 @@
 {
-  "versionCode": 87,
-  "versionName": "1.10.29",
-  "apkUrl": "https://cdn.jsdelivr.net/gh/2020-GIF/cuotiben-vip-releases@v1.10.29/cuotiben-vip-v1.10.29.apk",
-  "note": "AI 助手提问不再消耗识图额度"
+  "versionCode": 89,
+  "versionName": "1.10.31",
+  "apkUrl": "https://cdn.jsdelivr.net/gh/2020-GIF/cuotiben-vip-releases@v1.10.31/cuotiben-vip-v1.10.31.apk",
+  "note": "识图新增统一进度条（阶段/百分比/已用时间/预估剩余）"
 }
