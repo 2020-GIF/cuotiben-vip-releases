@@ -1,6 +1,6 @@
 {
-  "versionCode": 92,
-  "versionName": "1.10.34",
-  "apkUrl": "https://cdn.jsdelivr.net/gh/2020-GIF/cuotiben-vip-releases@v1.10.34/cuotiben-vip-v1.10.34.apk",
-  "note": "识图考点标签可编辑：AI 自动给考点后可自行修改或自创分类"
+  "versionCode": 93,
+  "versionName": "1.10.35",
+  "apkUrl": "https://cdn.jsdelivr.net/gh/2020-GIF/cuotiben-vip-releases@v1.10.35/cuotiben-vip-v1.10.35.apk",
+  "note": "图片识别失败不扣额度；申论识图空结果不再扣费"
 }
