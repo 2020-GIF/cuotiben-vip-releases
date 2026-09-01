@@ -1,6 +1,6 @@
 {
-  "versionCode": 99,
-  "versionName": "1.10.41",
-  "apkUrl": "https://cdn.jsdelivr.net/gh/2020-GIF/cuotiben-vip-releases@v1.10.41/cuotiben-vip-v1.10.41.apk",
-  "note": "去笔迹不再扣额度；简洁录入支持批量图片一起保存"
+  "versionCode": 100,
+  "versionName": "1.10.42",
+  "apkUrl": "https://cdn.jsdelivr.net/gh/2020-GIF/cuotiben-vip-releases@v1.10.42/cuotiben-vip-v1.10.42.apk",
+  "note": "简洁录入逐个模式：保存一张自动进入下一张"
 }
