@@ -1,6 +1,6 @@
 {
-  "versionCode": 93,
-  "versionName": "1.10.35",
-  "apkUrl": "https://cdn.jsdelivr.net/gh/2020-GIF/cuotiben-vip-releases@v1.10.35/cuotiben-vip-v1.10.35.apk",
-  "note": "图片识别失败不扣额度；申论识图空结果不再扣费"
+  "versionCode": 94,
+  "versionName": "1.10.36",
+  "apkUrl": "https://cdn.jsdelivr.net/gh/2020-GIF/cuotiben-vip-releases@v1.10.36/cuotiben-vip-v1.10.36.apk",
+  "note": "AI 去笔迹升级：更干净、更稳定"
 }
