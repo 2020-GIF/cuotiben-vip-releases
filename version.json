@@ -1,6 +1,6 @@
 {
-  "versionCode": 96,
-  "versionName": "1.10.38",
-  "apkUrl": "https://cdn.jsdelivr.net/gh/2020-GIF/cuotiben-vip-releases@v1.10.38/cuotiben-vip-v1.10.38.apk",
-  "note": "录入三模式一键切换；简洁录入直接存图；拼接顺序修复；裁剪支持调整与旋转"
+  "versionCode": 97,
+  "versionName": "1.10.39",
+  "apkUrl": "https://cdn.jsdelivr.net/gh/2020-GIF/cuotiben-vip-releases@v1.10.39/cuotiben-vip-v1.10.39.apk",
+  "note": "拍完自动弹裁剪；本地去笔迹增强；三模式用途说明"
 }
