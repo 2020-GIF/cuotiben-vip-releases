@@ -1,6 +1,6 @@
 {
-  "versionCode": 94,
-  "versionName": "1.10.36",
-  "apkUrl": "https://cdn.jsdelivr.net/gh/2020-GIF/cuotiben-vip-releases@v1.10.36/cuotiben-vip-v1.10.36.apk",
-  "note": "AI 去笔迹升级：更干净、更稳定"
+  "versionCode": 95,
+  "versionName": "1.10.37",
+  "apkUrl": "https://cdn.jsdelivr.net/gh/2020-GIF/cuotiben-vip-releases@v1.10.37/cuotiben-vip-v1.10.37.apk",
+  "note": "识别兼容性升级：快速模式与自动兜底改用新一代模型"
 }
