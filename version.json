@@ -1,6 +1,6 @@
 {
-  "versionCode": 97,
-  "versionName": "1.10.39",
-  "apkUrl": "https://cdn.jsdelivr.net/gh/2020-GIF/cuotiben-vip-releases@v1.10.39/cuotiben-vip-v1.10.39.apk",
-  "note": "拍完自动弹裁剪；本地去笔迹增强；三模式用途说明"
+  "versionCode": 98,
+  "versionName": "1.10.40",
+  "apkUrl": "https://cdn.jsdelivr.net/gh/2020-GIF/cuotiben-vip-releases@v1.10.40/cuotiben-vip-v1.10.40.apk",
+  "note": "去笔迹增强：底色更准、更抓浅红暗红；简洁模式与 AI 去笔迹可搭配"
 }
