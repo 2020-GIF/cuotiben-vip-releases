@@ -1,6 +1,6 @@
 {
-  "versionCode": 100,
-  "versionName": "1.10.42",
-  "apkUrl": "https://cdn.jsdelivr.net/gh/2020-GIF/cuotiben-vip-releases@v1.10.42/cuotiben-vip-v1.10.42.apk",
-  "note": "简洁录入逐个模式：保存一张自动进入下一张"
+  "versionCode": 101,
+  "versionName": "1.10.43",
+  "apkUrl": "https://cdn.jsdelivr.net/gh/2020-GIF/cuotiben-vip-releases@v1.10.43/cuotiben-vip-v1.10.43.apk",
+  "note": "修复保存提示显示 0 题的问题"
 }
