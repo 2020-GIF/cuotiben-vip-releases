@@ -1,6 +1,6 @@
 {
-  "versionCode": 103,
-  "versionName": "1.10.45",
-  "apkUrl": "https://cdn.jsdelivr.net/gh/2020-GIF/cuotiben-vip-releases@v1.10.45/cuotiben-vip-v1.10.45.apk",
-  "note": "每日免费 AI 额度提升至 500 次"
+  "versionCode": 104,
+  "versionName": "1.10.46",
+  "apkUrl": "https://cdn.jsdelivr.net/gh/2020-GIF/cuotiben-vip-releases@v1.10.46/cuotiben-vip-v1.10.46.apk",
+  "note": "新增行测速算模块（技巧速查/练习/AI答疑）"
 }
