@@ -1,6 +1,6 @@
 {
-  "versionCode": 106,
-  "versionName": "1.10.48",
-  "apkUrl": "https://cdn.jsdelivr.net/gh/2020-GIF/cuotiben-vip-releases@v1.10.48/cuotiben-vip-v1.10.48.apk",
-  "note": "备份节流 + 自动清理旧备份，省空间"
+  "versionCode": 107,
+  "versionName": "1.10.49",
+  "apkUrl": "https://cdn.jsdelivr.net/gh/2020-GIF/cuotiben-vip-releases@v1.10.49/cuotiben-vip-v1.10.49.apk",
+  "note": "修复底部导航错位：宽屏居中、等宽对齐"
 }
