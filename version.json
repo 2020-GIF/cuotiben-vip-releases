@@ -1,6 +1,6 @@
 {
-  "versionCode": 105,
-  "versionName": "1.10.47",
-  "apkUrl": "https://cdn.jsdelivr.net/gh/2020-GIF/cuotiben-vip-releases@v1.10.47/cuotiben-vip-v1.10.47.apk",
-  "note": "数据保护升级：更新/清空前自动备份；异常清空提示恢复"
+  "versionCode": 106,
+  "versionName": "1.10.48",
+  "apkUrl": "https://cdn.jsdelivr.net/gh/2020-GIF/cuotiben-vip-releases@v1.10.48/cuotiben-vip-v1.10.48.apk",
+  "note": "备份节流 + 自动清理旧备份，省空间"
 }
