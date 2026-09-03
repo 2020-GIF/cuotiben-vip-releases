@@ -1,6 +1,6 @@
 {
-  "versionCode": 104,
-  "versionName": "1.10.46",
-  "apkUrl": "https://cdn.jsdelivr.net/gh/2020-GIF/cuotiben-vip-releases@v1.10.46/cuotiben-vip-v1.10.46.apk",
-  "note": "新增行测速算模块（技巧速查/练习/AI答疑）"
+  "versionCode": 105,
+  "versionName": "1.10.47",
+  "apkUrl": "https://cdn.jsdelivr.net/gh/2020-GIF/cuotiben-vip-releases@v1.10.47/cuotiben-vip-v1.10.47.apk",
+  "note": "数据保护升级：更新/清空前自动备份；异常清空提示恢复"
 }
