@@ -1,6 +1,6 @@
 {
-  "versionCode": 111,
-  "versionName": "1.10.53",
-  "apkUrl": "https://cdn.jsdelivr.net/gh/2020-GIF/cuotiben-vip-releases@v1.10.53/cuotiben-vip-v1.10.53.apk",
-  "note": "体验优化"
+  "versionCode": 112,
+  "versionName": "1.10.54",
+  "apkUrl": "https://cdn.jsdelivr.net/gh/2020-GIF/cuotiben-vip-releases@v1.10.54/cuotiben-vip-v1.10.54.apk",
+  "note": "体验优化（云同步图片独立存储，多设备都有图）"
 }
