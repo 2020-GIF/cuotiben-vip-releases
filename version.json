@@ -1,6 +1,6 @@
 {
-  "versionCode": 114,
-  "versionName": "1.10.56",
-  "apkUrl": "https://github.com/2020-GIF/cuotiben-vip-releases/releases/download/v1.10.56/cuotiben-vip-v1.10.56.apk",
-  "note": "识别引擎升级；新增公共基础知识板块；修复额度显示不同步"
+  "versionCode": 115,
+  "versionName": "1.10.57",
+  "apkUrl": "https://github.com/2020-GIF/cuotiben-vip-releases/releases/download/v1.10.57/cuotiben-vip-v1.10.57.apk",
+  "note": "去笔迹后同时保留原图；详情/复习可对照"
 }
