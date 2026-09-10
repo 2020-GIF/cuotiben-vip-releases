@@ -1,6 +1,6 @@
 {
-  "versionCode": 120,
-  "versionName": "1.10.62",
-  "apkUrl": "https://cdn.jsdelivr.net/gh/2020-GIF/cuotiben-web@master/cuotiben-vip-v1.10.62.apk",
-  "note": "修复裁剪界面按钮显示（旋转、重选、自由恢复正常且更清晰）；安装后系统里显示的版本号与设置里一致；跨天统计异常，新的一天自动从零开始计算"
+  "versionCode": 121,
+  "versionName": "1.10.63",
+  "apkUrl": "https://cdn.jsdelivr.net/gh/2020-GIF/cuotiben-web@master/cuotiben-vip-v1.10.63.apk",
+  "note": "去笔迹的对照图更实用：保留的是「裁剪后、还没去笔迹」的那张（和错题区域一致，不再是整张照片），详情页/复习页可一键隐藏，设置里也能长期关闭"
 }
