@@ -1,6 +1,6 @@
 {
-  "versionCode": 119,
-  "versionName": "1.10.61",
-  "apkUrl": "https://cdn.jsdelivr.net/gh/2020-GIF/cuotiben-web@master/cuotiben-vip-v1.10.61.apk",
-  "note": "激活码支持点击复制并自动填入，提供复制全部"
+  "versionCode": 120,
+  "versionName": "1.10.62",
+  "apkUrl": "https://cdn.jsdelivr.net/gh/2020-GIF/cuotiben-web@master/cuotiben-vip-v1.10.62.apk",
+  "note": "修复裁剪界面按钮显示（旋转、重选、自由恢复正常且更清晰）；安装后系统里显示的版本号与设置里一致；跨天统计异常，新的一天自动从零开始计算"
 }
