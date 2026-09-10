@@ -1,6 +1,6 @@
 {
-  "versionCode": 117,
-  "versionName": "1.10.59",
-  "apkUrl": "https://cdn.jsdelivr.net/gh/2020-GIF/cuotiben-web@master/cuotiben-vip-v1.10.59.apk",
-  "note": "界面优化（日间模式按钮更清晰、裁剪旋转按钮更醒目）；AI 去笔迹提示与提示词收紧"
+  "versionCode": 118,
+  "versionName": "1.10.60",
+  "apkUrl": "https://cdn.jsdelivr.net/gh/2020-GIF/cuotiben-web@master/cuotiben-vip-v1.10.60.apk",
+  "note": "兼容旧版次数包激活码；AI去笔迹提示与提示词收紧；日间模式按钮更清晰"
 }
