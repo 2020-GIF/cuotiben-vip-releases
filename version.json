@@ -1,6 +1,6 @@
 {
-  "versionCode": 116,
-  "versionName": "1.10.58",
-  "apkUrl": "https://cdn.jsdelivr.net/gh/2020-GIF/cuotiben-web@master/cuotiben-vip-v1.10.58.apk",
-  "note": "修复检查更新下载失败：安装包改走高速下载线路"
+  "versionCode": 117,
+  "versionName": "1.10.59",
+  "apkUrl": "https://cdn.jsdelivr.net/gh/2020-GIF/cuotiben-web@master/cuotiben-vip-v1.10.59.apk",
+  "note": "界面优化（日间模式按钮更清晰、裁剪旋转按钮更醒目）；AI 去笔迹提示与提示词收紧"
 }
