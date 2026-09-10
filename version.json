@@ -1,6 +1,6 @@
 {
-  "versionCode": 115,
-  "versionName": "1.10.57",
-  "apkUrl": "https://github.com/2020-GIF/cuotiben-vip-releases/releases/download/v1.10.57/cuotiben-vip-v1.10.57.apk",
-  "note": "去笔迹后同时保留原图；详情/复习可对照"
+  "versionCode": 116,
+  "versionName": "1.10.58",
+  "apkUrl": "https://cdn.jsdelivr.net/gh/2020-GIF/cuotiben-web@master/cuotiben-vip-v1.10.58.apk",
+  "note": "修复检查更新下载失败：安装包改走高速下载线路"
 }
