@@ -1,6 +1,6 @@
 {
-  "versionCode": 121,
-  "versionName": "1.10.63",
-  "apkUrl": "https://cdn.jsdelivr.net/gh/2020-GIF/cuotiben-web@master/cuotiben-vip-v1.10.63.apk",
-  "note": "去笔迹的对照图更实用：保留的是「裁剪后、还没去笔迹」的那张（和错题区域一致，不再是整张照片），详情页/复习页可一键隐藏，设置里也能长期关闭"
+  "versionCode": 122,
+  "versionName": "1.10.64",
+  "apkUrl": "https://cdn.jsdelivr.net/gh/2020-GIF/cuotiben-web@master/cuotiben-vip-v1.10.64.apk",
+  "note": "修复简洁录入偶发「提示已保存、题库里却没有」的问题：图片过大或手机空间不足时会明确提示并可直接重试，保存前也会自动压缩图片"
 }
