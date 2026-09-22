@@ -1,6 +1,6 @@
 {
-    "apkUrl":  "https://cdn.jsdelivr.net/gh/2020-GIF/cuotiben-web@master/cuotiben-vip-v1.10.70.apk",
-    "versionCode":  128,
-    "versionName":  "1.10.70",
-    "note":  "图表配图可云同步：图形推理的图形、资料分析的表格图表会跟着同步到平板和电脑，换设备也能看图做题；同步数据更轻更稳"
+    "apkUrl":  "https://cdn.jsdelivr.net/gh/2020-GIF/cuotiben-web@master/cuotiben-vip-v1.10.71.apk",
+    "versionCode":  129,
+    "versionName":  "1.10.71",
+    "note":  "PDF 导入识别更完整：一页多题会逐题全部识别，失败的页自动多轮重试，并在结果里列出没识别成功的页码，方便补录"
 }
