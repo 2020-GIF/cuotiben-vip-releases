@@ -1,6 +1,6 @@
 {
-    "apkUrl":  "https://cdn.jsdelivr.net/gh/2020-GIF/cuotiben-web@master/cuotiben-vip-v1.10.66.apk",
-    "versionCode":  124,
-    "versionName":  "1.10.66",
-    "note":  "新增 PDF 整卷导入：发一份试卷 PDF 进来，按页自动识别并录入错题，一份卷子一次录完；同时优化导入过程的进度显示与失败提示"
+    "apkUrl":  "https://cdn.jsdelivr.net/gh/2020-GIF/cuotiben-web@master/cuotiben-vip-v1.10.67.apk",
+    "versionCode":  125,
+    "versionName":  "1.10.67",
+    "note":  "解析重点上色：技巧、考点、注意、易错、结论等要点自动用不同颜色标出，关键步骤一眼看清"
 }
