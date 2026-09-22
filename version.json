@@ -1,6 +1,6 @@
 {
-  "versionCode": 122,
-  "versionName": "1.10.64",
-  "apkUrl": "https://cdn.jsdelivr.net/gh/2020-GIF/cuotiben-web@master/cuotiben-vip-v1.10.64.apk",
-  "note": "修复简洁录入偶发「提示已保存、题库里却没有」的问题：图片过大或手机空间不足时会明确提示并可直接重试，保存前也会自动压缩图片"
+    "apkUrl":  "https://cdn.jsdelivr.net/gh/2020-GIF/cuotiben-web@master/cuotiben-vip-v1.10.65.apk",
+    "versionCode":  123,
+    "versionName":  "1.10.65",
+    "note":  "新增 PDF 整卷导入：发一份试卷 PDF 进来，按页自动识别并录入错题，一份卷子一次录完；同时优化导入过程的进度显示与失败提示"
 }
