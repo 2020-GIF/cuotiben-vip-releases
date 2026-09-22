@@ -1,6 +1,6 @@
 {
-    "apkUrl":  "https://cdn.jsdelivr.net/gh/2020-GIF/cuotiben-web@master/cuotiben-vip-v1.10.72.apk",
-    "versionCode":  130,
-    "versionName":  "1.10.72",
-    "note":  "识别更完整更省时：一页多题逐题全部识别（实测一页6题全部识别），资料分析的表格图表会自动单独存档并在复习/组卷时显示；PDF 整页识别改用单次长等待，不再重复发两个请求空等"
+    "apkUrl":  "https://cdn.jsdelivr.net/gh/2020-GIF/cuotiben-web@master/cuotiben-vip-v1.10.73.apk",
+    "versionCode":  131,
+    "versionName":  "1.10.73",
+    "note":  "修复图形推理跨页拆题：题干在上一页、图形在下一页时，自动把下一页顶部的图形并回原题，不再多出一道没有题干的空题；图形推理的图形会单独存档"
 }
