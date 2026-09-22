@@ -1,6 +1,6 @@
 {
-    "apkUrl":  "https://cdn.jsdelivr.net/gh/2020-GIF/cuotiben-web@master/cuotiben-vip-v1.10.67.apk",
-    "versionCode":  125,
-    "versionName":  "1.10.67",
-    "note":  "解析重点上色：技巧、考点、注意、易错、结论等要点自动用不同颜色标出，关键步骤一眼看清"
+    "apkUrl":  "https://cdn.jsdelivr.net/gh/2020-GIF/cuotiben-web@master/cuotiben-vip-v1.10.68.apk",
+    "versionCode":  126,
+    "versionName":  "1.10.68",
+    "note":  "PDF 导入上限提升到 120 页，改为分批转换与分批识别，整本错题集也能一次导入；解析新增重点上色，技巧、考点、注意、易错、结论一眼看清"
 }
