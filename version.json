@@ -1,6 +1,6 @@
 {
-    "apkUrl":  "https://cdn.jsdelivr.net/gh/2020-GIF/cuotiben-web@master/cuotiben-vip-v1.10.73.apk",
-    "versionCode":  131,
-    "versionName":  "1.10.73",
-    "note":  "修复图形推理跨页拆题：题干在上一页、图形在下一页时，自动把下一页顶部的图形并回原题，不再多出一道没有题干的空题；图形推理的图形会单独存档"
+    "apkUrl":  "https://cdn.jsdelivr.net/gh/2020-GIF/cuotiben-web@master/cuotiben-vip-v1.10.74.apk",
+    "versionCode":  132,
+    "versionName":  "1.10.74",
+    "note":  "修复图形推理、资料分析不存原图的问题：题目截图和图表截图现在都会保存，复习和组卷时直接看图做题"
 }
