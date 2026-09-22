@@ -1,6 +1,6 @@
 {
-    "apkUrl":  "https://cdn.jsdelivr.net/gh/2020-GIF/cuotiben-web@master/cuotiben-vip-v1.10.71.apk",
-    "versionCode":  129,
-    "versionName":  "1.10.71",
-    "note":  "PDF 导入识别更完整：一页多题会逐题全部识别，失败的页自动多轮重试，并在结果里列出没识别成功的页码，方便补录"
+    "apkUrl":  "https://cdn.jsdelivr.net/gh/2020-GIF/cuotiben-web@master/cuotiben-vip-v1.10.72.apk",
+    "versionCode":  130,
+    "versionName":  "1.10.72",
+    "note":  "识别更完整更省时：一页多题逐题全部识别（实测一页6题全部识别），资料分析的表格图表会自动单独存档并在复习/组卷时显示；PDF 整页识别改用单次长等待，不再重复发两个请求空等"
 }
