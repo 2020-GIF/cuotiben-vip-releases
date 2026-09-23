@@ -1,6 +1,6 @@
 {
-    "apkUrl":  "https://cdn.jsdelivr.net/gh/2020-GIF/cuotiben-web@master/cuotiben-vip-v1.10.74.apk",
-    "versionCode":  132,
-    "versionName":  "1.10.74",
-    "note":  "修复图形推理、资料分析不存原图的问题：题目截图和图表截图现在都会保存，复习和组卷时直接看图做题"
+    "apkUrl":  "https://cdn.jsdelivr.net/gh/2020-GIF/cuotiben-web@master/cuotiben-vip-v1.10.75.apk",
+    "versionCode":  133,
+    "versionName":  "1.10.75",
+    "note":  "录入页新增「本次识别不生成解析」开关：题目和题图照常识别保存，只跳过耗时的逐题解析，导入大批题目不用久等，解析可稍后单题生成"
 }
