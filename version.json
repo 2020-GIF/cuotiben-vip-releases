@@ -1,6 +1,6 @@
 {
-    "apkUrl":  "https://cdn.jsdelivr.net/gh/2020-GIF/cuotiben-web@master/cuotiben-vip-v1.10.75.apk",
-    "versionCode":  133,
-    "versionName":  "1.10.75",
-    "note":  "录入页新增「本次识别不生成解析」开关：题目和题图照常识别保存，只跳过耗时的逐题解析，导入大批题目不用久等，解析可稍后单题生成"
+    "apkUrl":  "https://cdn.jsdelivr.net/gh/2020-GIF/cuotiben-web@master/cuotiben-vip-v1.10.76.apk",
+    "versionCode":  134,
+    "versionName":  "1.10.76",
+    "note":  "修复「本次识别不生成解析」开关没有显示出来的问题，现在它就在录入—拍照识别页、模式按钮的下方"
 }
